@@ -123,6 +123,10 @@
               "devServerTarget": "put-plan:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

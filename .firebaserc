@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "put-plan": {
+      "hosting": {
+        "put-plan": [
+          "put-plan"
+        ]
+      }
+    }
+  }
+}
