@@ -1,5 +1,5 @@
 import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+// import { AngularFirestore } from '@angular/fire/firestore';
 import { Lesson } from 'src/app/models/lesson';
 import { ModalService } from '../modal/modal.service';
 import data from './classes.json';
@@ -16,7 +16,10 @@ export class TimetableComponent {
 
   selectedClass: Lesson = { name: '', short_name: '', info: '', place: '', lecturer: '', class: '', occurs: [], obligatory: false };
 
-  constructor(private firestore: AngularFirestore, private modalService: ModalService) {
+  constructor(
+    // private firestore: AngularFirestore,
+    private modalService: ModalService
+    ) {
     // this.firestore.collection<Lesson>('lessons').valueChanges().subscribe({
     //   next: res => {
     //     this.items = res;
@@ -70,17 +73,17 @@ export class TimetableComponent {
   }
 
   onSubmit() {
-    const lessons: Lesson[] = data as Lesson[];
-    this.firestore.collection<Lesson>('lessons').get().subscribe({
-      next: res => {
-        res.docs.map(x => x.id).forEach(x => {
-          this.firestore.collection('lessons').doc(x).delete();
-        });
-      }
-    });
-    lessons.forEach(lesson => {
-      this.firestore.collection<Lesson>('lessons').add(lesson).then(res => console.log, err => console.log);
-    });
+    // const lessons: Lesson[] = data as Lesson[];
+    // this.firestore.collection<Lesson>('lessons').get().subscribe({
+    //   next: res => {
+    //     res.docs.map(x => x.id).forEach(x => {
+    //       this.firestore.collection('lessons').doc(x).delete();
+    //     });
+    //   }
+    // });
+    // lessons.forEach(lesson => {
+    //   this.firestore.collection<Lesson>('lessons').add(lesson).then(res => console.log, err => console.log);
+    // });
   }
 
   @ViewChild('classDetailsTemplate') classDetailsTemplate!: TemplateRef<any>;
