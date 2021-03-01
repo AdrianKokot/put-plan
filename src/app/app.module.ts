@@ -19,8 +19,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ],
   imports: [
     BrowserModule,
-    // AngularFireModule.initializeApp(environment.firebase),
-    // AngularFireAnalyticsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
     FormsModule,
     NgSelectModule,
     // AngularFirestoreModule,
