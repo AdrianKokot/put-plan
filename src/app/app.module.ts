@@ -9,6 +9,7 @@ import { TimetableComponent } from './components/timetable/timetable.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
     FormsModule,
+    NgSelectModule,
     AngularFirestoreModule,
     BrowserAnimationsModule
   ],

@@ -43,22 +43,16 @@
 
     <label class="block mb-6">
       <p class="text-sm mb-2">Grupa dziekańska</p>
-      <select name=""
-              [(ngModel)]="selectedGroup">
-        <option value="i3.1">i3.1</option>
-        <option value="i3.2">i3.2</option>
-      </select>
+      <ng-select [items]="groups"
+                 [(ngModel)]="selectedGroup">
+      </ng-select>
     </label>
 
     <label>
       <p class="text-sm mb-2">Przedmioty obieralne</p>
-      <select name=""
-              multiple
-              [(ngModel)]="obligatory">
-        <option value="Algorytmy i struktury danych">Algorytmy i struktury danych</option>
-        <option value="Prawo dla informatyków">Prawo dla informatyków</option>
-        <option value="Metody probabilistyczne">Metody probabilistyczne</option>
-      </select>
+      <ng-select [items]="obligs"
+                 [(ngModel)]="obligatory"
+                 [multiple]="true"></ng-select>
     </label>
   </div>
 

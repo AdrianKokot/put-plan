@@ -7,6 +7,15 @@ import { ModalService } from './components/modal/modal.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
+  groups = [
+    'i3.1',
+    'i3.2'
+  ];
+  obligs = [
+    "Algorytmy i struktury danych",
+    "Prawo dla informatyków",
+    "Metody probabilistyczne"
+  ];
   isEvenWeek: boolean;
   weekTypeCorrect = false;
   selectedGroup: string = localStorage.getItem('selectedGroup') || '';
@@ -21,13 +30,13 @@ export class AppComponent implements AfterViewInit {
 
   currId: number | null = null;
   ngAfterViewInit(): void {
-    if(this.selectedGroup === '') {
+    if (this.selectedGroup === '') {
       this.openSettingsModal();
     }
   }
 
   savePreferences() {
-    if(this.currId != null) {
+    if (this.currId != null) {
       localStorage.setItem('selectedGroup', this.selectedGroup);
       localStorage.setItem('obligatory', this.obligatory.join(':'));
       this.modalService.close(this.currId);
@@ -42,7 +51,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   openSettingsModal($event: { preventDefault: () => void; } | null = null) {
-    if($event) {
+    if ($event) {
       $event.preventDefault();
     }
     this.currId = this.modalService.open(this.templateRef);
