@@ -1,6 +1,14 @@
 import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
 import { ModalService } from './components/modal/modal.service';
 
+function getWeekNumber(d: any = new Date()) {
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+  const yearStart: any = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  const weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+  return weekNo;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,17 +27,13 @@ export class AppComponent implements AfterViewInit {
     'Algorytmika Praktyczna',
     'Metodologia nauk dla inżynierów'
   ];
-  isEvenWeek: boolean;
   weekTypeCorrect = false;
+  isEvenWeek: boolean = (getWeekNumber() % 2 == 0 ) === this.weekTypeCorrect;
   selectedGroup: string = localStorage.getItem('selectedGroup') || '';
   obligatory: string[] = localStorage.getItem('obligatory')?.split(':') || [];
 
   @ViewChild('selectGroupTemplate') templateRef!: TemplateRef<any>;
-  constructor(private modalService: ModalService) {
-    const now = new Date();
-    const date = new Date(now.getFullYear(), 0, 1);
-    this.isEvenWeek = (Math.ceil(((new Date(now.getFullYear(), now.getMonth(), now.getDate() - date.getDate()).getTime() / 86400000) + date.getDay() + 1) / 7) % 2 == 0) === this.weekTypeCorrect;
-  }
+  constructor(private modalService: ModalService) { }
 
   currId: number | null = null;
   ngAfterViewInit(): void {
