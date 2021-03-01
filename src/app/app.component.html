@@ -2,7 +2,7 @@
   <header class="max-w-sm mx-auto mb-8">
     <h1 class="px-4 border-b border-gray-200 dark:border-gray-700 text-2xl flex items-center justify-center">
       <a href="/"
-        (click)="changeWeek($event)"
+         (click)="changeWeek($event)"
          [ngClass]="{'text-blue-500 dark:text-blue-500': isEvenWeek, 'text-purple-500 dark:text-purple-400': !isEvenWeek}"
          title="Zmień tydzień"
          class="select-none">
@@ -21,5 +21,24 @@
     </h1>
     <p class="text-center mt-1 text-sm">Plan zajęć - tydzień {{isEvenWeek ? 'parzysty' : 'nieparzysty'}}</p>
   </header>
-  <app-timetable [isWeekEven]="isEvenWeek"></app-timetable>
+  <app-timetable [isWeekEven]="isEvenWeek"
+                 [selectedGroup]="selectedGroup"
+                 [obligatory]="obligatory"></app-timetable>
 </main>
+<app-modal></app-modal>
+
+<ng-template #selectGroupTemplate let-modal>
+  <h1>Wybierz swoją grupę:</h1>
+  <select name="" [(ngModel)]="selectedGroup">
+    <option value="i3.1">i3.1</option>
+    <option value="i3.2">i3.2</option>
+  </select>
+  <h1>Wybierz swoje przedmioty obieralne:</h1>
+  <select name="" multiple [(ngModel)]="obligatory">
+    <option value="Algorytmy i struktury danych">Algorytmy i struktury danych</option>
+    <option value="Prawo dla informatyków">Prawo dla informatyków</option>
+    <option value="Metody probabilistyczne">Metody probabilistyczne</option>
+  </select>
+  <button (click)="modal.close()">Zamknij</button>
+  <button (click)="savePreferences()">Zapisz moje preferencje</button>
+</ng-template>

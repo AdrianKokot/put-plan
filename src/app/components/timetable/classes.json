@@ -1,0 +1,344 @@
+[
+  {
+    "name": "Systemy operacyjne",
+    "obligatory": false,
+    "short_name": "SO",
+    "place": "",
+    "class": "bg-yellow-500 dark:bg-yellow-600 text-white",
+    "occurs": [
+      {
+        "isBoth": true,
+        "isEven": false,
+        "lesson_number": 1,
+        "day_number": 1,
+        "info": "wykład",
+        "lecturer": "dr inż. Dariusz Wawrzyniak",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ]
+      },
+      {
+        "isBoth": true,
+        "isEven": false,
+        "lesson_number": 5,
+        "day_number": 5,
+        "info": "lab",
+        "lecturer": "K. Bucholc",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Algorytmy i struktury danych",
+    "obligatory": true,
+    "short_name": "AiSD",
+    "class": "bg-blue-500 dark:bg-blue-700 text-white",
+    "occurs": [
+      {
+        "isBoth": true,
+        "isEven": false,
+        "lesson_number": 2,
+        "day_number": 1,
+        "info": "wykład",
+        "lecturer": "prof. dr hab. inż. Jacek Błażewicz",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "place": ""
+      },
+      {
+        "isBoth": true,
+        "isEven": false,
+        "lesson_number": 5,
+        "day_number": 3,
+        "info": "lab",
+        "lecturer": "M. Szachniuk",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "place": "lab. 2.6.21"
+      }
+    ]
+  },
+  {
+    "name": "Prawo dla informatyków",
+    "obligatory": true,
+    "short_name": "Prawo",
+    "place": "",
+    "lecturer": "dr inż. Tomasz Bilski",
+    "class": "bg-pink-500 text-white dark:bg-pink-600",
+    "occurs": [
+      {
+        "lesson_number": 6,
+        "day_number": 1,
+        "info": "wykład",
+        "isBoth": true,
+        "isEven": false,
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ]
+      },
+      {
+        "lesson_number": 1,
+        "day_number": 4,
+        "isEven": true,
+        "info": "ćwiczenia",
+        "isBoth": false,
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Wychowanie fizyczne",
+    "obligatory": false,
+    "short_name": "WF",
+    "info": "",
+    "place": "CSPP",
+    "lecturer": "",
+    "class": "bg-yellow-300 text-white dark:bg-yellow-400",
+    "occurs": [
+      {
+        "isBoth": true,
+        "isEven": false,
+        "lesson_number": 1,
+        "day_number": 2,
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ]
+      },
+      {
+        "isBoth": true,
+        "isEven": false,
+        "lesson_number": 2,
+        "day_number": 2,
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Język angielski",
+    "obligatory": false,
+    "short_name": "Ang",
+    "info": "",
+    "place": "CJiKP",
+    "lecturer": "",
+    "class": "bg-purple-300 text-white dark:bg-purple-400",
+    "occurs": [
+      {
+        "isBoth": true,
+        "isEven": false,
+        "lesson_number": 3,
+        "day_number": 2,
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ]
+      },
+      {
+        "isBoth": true,
+        "isEven": false,
+        "lesson_number": 4,
+        "day_number": 4,
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ]
+      },
+      {
+        "isBoth": true,
+        "isEven": false,
+        "lesson_number": 5,
+        "day_number": 4,
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Podstawy elektroniki",
+    "obligatory": false,
+    "short_name": "PE",
+    "info": "",
+    "place": "",
+    "class": "bg-gray-500 dark:bg-gray-600 text-white",
+    "occurs": [
+      {
+        "isBoth": true,
+        "isEven": false,
+        "lecturer": "M. Melosik",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "info": "lab",
+        "lesson_number": 6,
+        "day_number": 2
+      },
+      {
+        "isBoth": false,
+        "isEven": false,
+        "lecturer": "dr hab. inż. Paweł Śniatała",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "info": "wykład",
+        "lesson_number": 3,
+        "day_number": 4
+      }
+    ]
+  },
+  {
+    "name": "Programowanie deklaratywne",
+    "obligatory": false,
+    "short_name": "PD",
+    "info": "",
+    "place": "",
+    "class": "bg-purple-500 dark:bg-purple-600 text-white",
+    "occurs": [
+      {
+        "isBoth": false,
+        "isEven": false,
+        "lecturer": "dr inż. Artur Michalski",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "info": "wykład",
+        "place": "",
+        "lesson_number": 1,
+        "day_number": 4
+      },
+      {
+        "isBoth": false,
+        "isEven": false,
+        "lecturer": "dr inż. Artur Michalski",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "info": "lab",
+        "place": "lab. P6",
+        "lesson_number": 3,
+        "day_number": 3
+      }
+    ]
+  },
+  {
+    "name": "Metody probabilistyczne",
+    "obligatory": true,
+    "short_name": "MP",
+    "place": "",
+    "class": "bg-green-700 dark:bg-green-600 text-white",
+    "occurs": [
+      {
+        "isBoth": true,
+        "isEven": false,
+        "info": "wykład",
+        "lecturer": "dr hab. inż. Wojciech Kotłowski",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "lesson_number": 5,
+        "day_number": 2
+      },
+      {
+        "isBoth": true,
+        "isEven": false,
+        "info": "ćwiczenia",
+        "lecturer": "dr inż. Jędrzej Potoniec",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "lesson_number": 2,
+        "day_number": 5
+      }
+    ]
+  },
+  {
+    "name": "Fizyka dla informatyków",
+    "obligatory": false,
+    "short_name": "FdI",
+    "place": "",
+    "class": "bg-red-300 dark:bg-red-400 text-white",
+    "occurs": [
+      {
+        "info": "wykład",
+        "lecturer": "dr Krzysztof Łapsa",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "lesson_number": 2,
+        "day_number": 4,
+        "isBoth": true,
+        "isEven": false
+      },
+      {
+        "info": "ćwiczenia",
+        "lecturer": "dr Andrzej Jarosz",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "lesson_number": 1,
+        "day_number": 5,
+        "isBoth": false,
+        "isEven": false
+      }
+    ]
+  },
+  {
+    "name": "Programowanie niskopoziomowe",
+    "obligatory": false,
+    "short_name": "C",
+    "place": "",
+    "class": " bg-red-600 dark:bg-red-800 text-white",
+    "occurs": [
+      {
+        "info": "wykład",
+        "lecturer": "dr inż. Marcin radom",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "lesson_number": 3,
+        "day_number": 4,
+        "place": "",
+        "isBoth": false,
+        "isEven": true
+      },
+      {
+        "info": "lab",
+        "lecturer": "A. Urbański",
+        "groups": [
+          "i3.2",
+          "i3.1"
+        ],
+        "lesson_number": 3,
+        "day_number": 5,
+        "place": "",
+        "isBoth": false,
+        "isEven": true
+      }
+    ]
+  }
+]
