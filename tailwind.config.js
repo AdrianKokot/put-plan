@@ -5,6 +5,7 @@ module.exports = {
     './src/**/*.html',
     './src/**/*.scss',
     './src/**/*.ts',
+    './src/**/*.json',
   ],
   presets: [],
   darkMode: 'media', // or 'media' or 'class'
