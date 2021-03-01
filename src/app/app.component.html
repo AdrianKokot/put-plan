@@ -45,6 +45,12 @@
       <p class="text-sm mb-2">Grupa dziekańska</p>
       <ng-select [items]="groups"
                  [(ngModel)]="selectedGroup">
+        <ng-template ng-notfound-tmp
+                     let-searchTerm="searchTerm">
+          <div class="ng-option disabled">
+            Nie znaleziono podanej grupy
+          </div>
+        </ng-template>
       </ng-select>
     </label>
 
@@ -52,16 +58,26 @@
       <p class="text-sm mb-2">Przedmioty obieralne</p>
       <ng-select [items]="obligs"
                  [(ngModel)]="obligatory"
-                 [multiple]="true"></ng-select>
+                 [multiple]="true">
+        <ng-template ng-notfound-tmp
+                     let-searchTerm="searchTerm">
+          <div class="ng-option disabled">
+            Nie znaleziono podanego przedmiotu obieralnego
+          </div>
+        </ng-template>
+      </ng-select>
     </label>
   </div>
 
   <div class="border-t border-gray-200 dark:border-gray-700 px-2 flex items-center mt-8 pt-6 justify-end">
 
     <button (click)="modal.close()"
-            class="mr-2 px-3 py-2 rounded-md focus:outline-none focus:shadow text-gray-300 bg-gray-600 hover:bg-gray-700 transition-colors duration-300">Zamknij</button>
+            class="mr-2 px-3 py-2 rounded-md focus:outline-none focus:shadow bg-gray-300 hover:bg-gray-400 dark:text-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 transition-colors duration-300">
+      Zamknij
+    </button>
     <button (click)="savePreferences()"
-            class=" px-3 py-2 rounded-md focus:outline-none focus:shadow text-gray-300 bg-blue-800 hover:bg-blue-900 transition-colors duration-300">Zapisz
-      moje preferencje</button>
+            class="px-3 py-2 rounded-md focus:outline-none focus:shadow text-gray-100 bg-blue-500 hover:bg-blue-600 dark:text-gray-300 dark:bg-blue-800 dark:hover:bg-blue-900 transition-colors duration-300">
+      Zapisz moje preferencje
+    </button>
   </div>
 </ng-template>

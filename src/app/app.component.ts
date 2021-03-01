@@ -12,9 +12,12 @@ export class AppComponent implements AfterViewInit {
     'i3.2'
   ];
   obligs = [
-    "Algorytmy i struktury danych",
-    "Prawo dla informatyków",
-    "Metody probabilistyczne"
+    'Algorytmy i struktury danych',
+    'Prawo dla informatyków',
+    'Metody probabilistyczne',
+    'Elementy analizy numerycznej',
+    'Algorytmika Praktyczna',
+    'Metodologia nauk dla inżynierów'
   ];
   isEvenWeek: boolean;
   weekTypeCorrect = false;
