@@ -22,7 +22,7 @@ export class AppComponent implements AfterViewInit {
   currId: number | null = null;
   ngAfterViewInit(): void {
     if(this.selectedGroup === '') {
-      this.currId = this.modalService.open(this.templateRef);
+      this.openSettingsModal();
     }
   }
 
@@ -39,5 +39,12 @@ export class AppComponent implements AfterViewInit {
       $e.preventDefault();
     }
     this.isEvenWeek = !this.isEvenWeek;
+  }
+
+  openSettingsModal($event: { preventDefault: () => void; } | null = null) {
+    if($event) {
+      $event.preventDefault();
+    }
+    this.currId = this.modalService.open(this.templateRef);
   }
 }

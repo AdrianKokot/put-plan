@@ -14,8 +14,10 @@
         <th class="truncate">{{hour}}</th>
         <td *ngFor="let item of getItems(i+1)">
           <div class="p-4 m-1 my-1.5"
+                [ngClass]="{'cursor-pointer': item.name != ''}"
                [class]="item.class"
-               [title]="item.name + '\n' + item.lecturer + '\n' + item.place">
+               [title]="item.name + '\n' + item.lecturer + '\n' + item.place"
+               (click)="item.name != '' ? openClassDetailsModal(item) : null">
             <p class="text-sm font-medium mb-2 h-5">
               {{ item.short_name ? item.short_name : item.name }}
             </p>
@@ -26,3 +28,38 @@
     </tbody>
   </table>
 </div>
+
+
+<ng-template #classDetailsTemplate
+             let-modal>
+  <h1 class="text-2xl font-semibold pb-2 border-b px-2 mb-6 border-gray-200 dark:border-gray-700">
+    {{selectedClass.name}}
+  </h1>
+  <div class="px-2">
+    <p class="mb-4">Szczegóły przedmiotu</p>
+    <div *ngIf="selectedClass.lecturer" class="mb-4">
+      <p class="text-xs">Prowadzący</p>
+      <p class="font-medium">{{selectedClass.lecturer}}</p>
+    </div>
+    <div *ngIf="selectedClass.place" class="mb-4">
+      <p class="text-xs">Sala</p>
+      <p class="font-medium">{{selectedClass.place}}</p>
+    </div>
+    <div *ngIf="selectedClass.info" class="mb-4">
+      <p class="text-xs">Typ zajęć</p>
+      <p class="font-medium">{{selectedClass.info}}</p>
+    </div>
+    <div *ngIf="selectedClass?.groups" class="mb-4">
+      <p class="text-xs">Grupy mające te zajęcia w tym czasie</p>
+      <p class="font-medium uppercase">{{selectedClass?.groups?.join(', ')}}</p>
+    </div>
+    <div *ngIf="selectedClass.obligatory" class="mb-4">
+      <p>Ten przedmiot jest obieralny</p>
+    </div>
+  </div>
+
+  <div class="border-t border-gray-200 dark:border-gray-700 px-2 flex items-center mt-8 pt-6 justify-end">
+    <button (click)="modal.close()"
+            class="mr-2 px-3 py-2 rounded-md focus:outline-none focus:shadow text-gray-300 bg-gray-600 hover:bg-gray-700 transition-colors duration-300">Zamknij</button>
+  </div>
+</ng-template>

@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Lesson } from 'src/app/models/lesson';
+import { ModalService } from '../modal/modal.service';
 import data from './classes.json';
 
 @Component({
@@ -13,7 +14,9 @@ export class TimetableComponent {
   @Input() selectedGroup = 'i3.2';
   @Input() obligatory: string[] = [];
 
-  constructor(private firestore: AngularFirestore) {
+  selectedClass: Lesson = { name: '', short_name: '', info: '', place: '', lecturer: '', class: '', occurs: [], obligatory: false };
+
+  constructor(private firestore: AngularFirestore, private modalService: ModalService) {
     // this.firestore.collection<Lesson>('lessons').valueChanges().subscribe({
     //   next: res => {
     //     this.items = res;
@@ -78,5 +81,11 @@ export class TimetableComponent {
     lessons.forEach(lesson => {
       this.firestore.collection<Lesson>('lessons').add(lesson).then(res => console.log, err => console.log);
     });
+  }
+
+  @ViewChild('classDetailsTemplate') classDetailsTemplate!: TemplateRef<any>;
+  public openClassDetailsModal(lesson: Lesson) {
+    this.selectedClass = lesson;
+    this.modalService.open(this.classDetailsTemplate);
   }
 }

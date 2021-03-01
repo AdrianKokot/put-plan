@@ -8,5 +8,6 @@ export interface Lesson {
   lecturer: string;
   class: string;
   obligatory: boolean;
+  groups?: string[];
   occurs: DayTime[];
 }
