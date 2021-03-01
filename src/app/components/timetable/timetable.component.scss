@@ -1,0 +1,27 @@
+table {
+  min-width: 800px;
+  thead {
+    th {
+      @apply px-4;
+      @apply py-2;
+      @apply w-40;
+      @apply font-bold;
+    }
+  }
+
+  th:first-child {
+    @apply font-medium;
+    @apply left-0;
+    @apply sticky;
+    @apply bg-gray-100;
+    @apply dark:bg-gray-800;
+  }
+
+  th,
+  td {
+    @apply text-center;
+    @apply border-b-2;
+    @apply border-gray-200;
+    @apply dark:border-gray-700;
+  }
+}
