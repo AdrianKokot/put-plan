@@ -10,4 +10,6 @@ export interface Lesson {
   obligatory: boolean;
   groups?: string[];
   occurs: DayTime[];
+  additional_info?: string;
+  links: {name: string; link: string;}[];
 }

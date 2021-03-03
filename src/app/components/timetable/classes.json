@@ -11,6 +11,8 @@
         "day_number": 1,
         "info": "wykład",
         "lecturer": "dr inż. Dariusz Wawrzyniak",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -23,6 +25,8 @@
         "day_number": 5,
         "info": "lab",
         "lecturer": "K. Bucholc",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2"
         ]
@@ -34,6 +38,8 @@
         "day_number": 5,
         "info": "lab",
         "lecturer": "K. Bucholc",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.1"
         ]
@@ -52,6 +58,8 @@
         "day_number": 1,
         "info": "wykład",
         "lecturer": "prof. dr hab. inż. Jacek Błażewicz",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -61,10 +69,12 @@
       {
         "isBoth": true,
         "isEven": false,
-        "lesson_number": 5,
+        "lesson_number": 2,
         "day_number": 3,
         "info": "lab",
-        "lecturer": "M. Szachniuk",
+        "lecturer": "Marta Szachniuk",
+        "additional_info": "Zajęcia przeniesione z 15:10 - 16:40 dopóki są zdalnie.",
+        "links": [{"name": "Zoom", "link": "https://us02web.zoom.us/j/88118678593?pwd=ZmhoN2d4ZURzaW4xTk1hOTBGQldsdz09"}],
         "groups": [
           "i3.2"
         ],
@@ -77,6 +87,8 @@
         "day_number": 3,
         "info": "lab",
         "lecturer": "M. Machowiak",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.1"
         ],
@@ -96,6 +108,8 @@
         "day_number": 1,
         "info": "wykład",
         "lecturer": "prof. dr hab. Andrzej Marciniak",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -109,6 +123,8 @@
         "day_number": 1,
         "info": "ćwiczenia",
         "lecturer": "prof. dr hab. Andrzej Marciniak",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -129,6 +145,8 @@
         "day_number": 1,
         "info": "wykład",
         "lecturer": "mgr inż. Artur Laskowski",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -142,6 +160,8 @@
         "day_number": 4,
         "info": "laboratoria",
         "lecturer": "mgr inż. Artur Laskowski",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -162,6 +182,8 @@
         "day_number": 2,
         "info": "wykład",
         "lecturer": "dr Radosław Kot",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -175,6 +197,8 @@
         "day_number": 5,
         "info": "ćwiczenia",
         "lecturer": "mgr M. Wojciechowski",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -196,6 +220,8 @@
         "info": "wykład",
         "isBoth": true,
         "isEven": false,
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -207,6 +233,8 @@
         "isEven": true,
         "info": "ćwiczenia",
         "isBoth": false,
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -227,6 +255,8 @@
         "isEven": false,
         "lesson_number": 1,
         "day_number": 2,
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -237,6 +267,8 @@
         "isEven": false,
         "lesson_number": 2,
         "day_number": 2,
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -257,6 +289,8 @@
         "isEven": false,
         "lesson_number": 3,
         "day_number": 2,
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -267,6 +301,8 @@
         "isEven": false,
         "lesson_number": 4,
         "day_number": 4,
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -277,6 +313,8 @@
         "isEven": false,
         "lesson_number": 5,
         "day_number": 4,
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -295,6 +333,8 @@
         "isBoth": true,
         "isEven": false,
         "lecturer": "M. Melosik",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2"
         ],
@@ -306,6 +346,8 @@
         "isBoth": true,
         "isEven": false,
         "lecturer": "Sz. Szczęsny",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.1"
         ],
@@ -317,6 +359,8 @@
         "isBoth": false,
         "isEven": false,
         "lecturer": "dr hab. inż. Paweł Śniatała",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -338,6 +382,8 @@
         "isBoth": false,
         "isEven": false,
         "lecturer": "dr inż. Artur Michalski",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -351,6 +397,8 @@
         "isBoth": false,
         "isEven": false,
         "lecturer": "dr inż. Artur Michalski",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2"
         ],
@@ -363,6 +411,8 @@
         "isBoth": false,
         "isEven": true,
         "lecturer": "dr inż. Artur Michalski",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.1"
         ],
@@ -384,6 +434,8 @@
         "isEven": false,
         "info": "wykład",
         "lecturer": "dr hab. inż. Wojciech Kotłowski",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -396,6 +448,8 @@
         "isEven": false,
         "info": "ćwiczenia",
         "lecturer": "dr inż. Jędrzej Potoniec",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -414,6 +468,8 @@
     "occurs": [{
         "info": "wykład",
         "lecturer": "dr Krzysztof Łapsa",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -426,6 +482,8 @@
       {
         "info": "ćwiczenia",
         "lecturer": "dr Andrzej Jarosz",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -446,6 +504,8 @@
     "occurs": [{
         "info": "wykład",
         "lecturer": "dr inż. Marcin radom",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -459,6 +519,8 @@
       {
         "info": "lab",
         "lecturer": "A. Urbański",
+        "additional_info": "",
+        "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2",
           "i3.1"

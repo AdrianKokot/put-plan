@@ -14,7 +14,7 @@ export class TimetableComponent {
   @Input() selectedGroup = 'i3.2';
   @Input() obligatory: string[] = [];
 
-  selectedClass: Lesson = { name: '', short_name: '', info: '', place: '', lecturer: '', class: '', occurs: [], obligatory: false };
+  selectedClass: Lesson = { name: '', short_name: '', info: '', place: '', lecturer: '', class: '', occurs: [], obligatory: false, links: [], additional_info: '' };
 
   constructor(
     // private firestore: AngularFirestore,
@@ -69,7 +69,7 @@ export class TimetableComponent {
       return null;
     }).filter(x => x != null);
 
-    return filtered[0] || { name: '', short_name: '', info: '', place: '', lecturer: '', class: '', occurs: [], obligatory: false };
+    return filtered[0] || { name: '', short_name: '', info: '', place: '', lecturer: '', class: '', occurs: [], links:[], additional_info: '', obligatory: false };
   }
 
   onSubmit() {

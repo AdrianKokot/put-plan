@@ -7,4 +7,6 @@ export interface DayTime {
   isBoth: boolean;
   isEven: boolean;
   groups: string[];
+  additional_info: string;
+  links: {name: string; link: string;}[];
 }

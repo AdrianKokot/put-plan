@@ -56,6 +56,16 @@
     <div *ngIf="selectedClass.obligatory" class="mb-4">
       <p>Ten przedmiot jest obieralny</p>
     </div>
+    <div *ngIf="selectedClass?.additional_info != ''" class="mb-4">
+      <p class="text-xs">Dodatkowe informacje</p>
+      <p class="font-medium">{{selectedClass.additional_info}}</p>
+    </div>
+    <div *ngIf="selectedClass.links.length > 0 && (selectedClass.links[0].link != '')" class="mb-4">
+      <p class="text-xs">Linki</p>
+      <div class="font-medium">
+        <p *ngFor="let link of selectedClass?.links"><a [href]="link.link" class="duration-300 transition-colors hover:text-blue-500">{{link.name}}</a></p>
+      </div>
+    </div>
   </div>
 
   <div class="border-t border-gray-200 dark:border-gray-700 px-2 flex items-center mt-8 pt-6 justify-end flex-col md:flex-row">
