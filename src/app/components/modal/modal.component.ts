@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
-import { ModalService } from './modal.service';
+import { Component, Inject, Renderer2 } from '@angular/core';
 import { animate, group, style, transition, trigger } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
+import { ModalService } from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -29,6 +29,7 @@ export class ModalComponent {
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
   ) {
+
     this.modalService.total$.subscribe({
       next: (val) => {
         if (val === 0) {
@@ -37,7 +38,8 @@ export class ModalComponent {
           this.renderer.addClass(this.document.body, 'overflow-y-hidden');
         }
       }
-    })
+    });
+
   }
 
   public close(id: number) {

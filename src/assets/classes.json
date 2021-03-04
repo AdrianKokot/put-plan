@@ -1,6 +1,6 @@
 [{
     "name": "Systemy operacyjne",
-    "obligatory": false,
+    "isOptional": false,
     "short_name": "SO",
     "place": "",
     "class": "bg-yellow-500 dark:bg-yellow-600 text-white",
@@ -48,7 +48,7 @@
   },
   {
     "name": "Algorytmy i struktury danych",
-    "obligatory": true,
+    "isOptional": true,
     "short_name": "AiSD",
     "class": "bg-blue-500 dark:bg-blue-700 text-white",
     "occurs": [{
@@ -98,7 +98,7 @@
   },
   {
     "name": "Elementy analizy numerycznej",
-    "obligatory": true,
+    "isOptional": true,
     "short_name": "EAN",
     "class": "bg-green-700 dark:bg-green-600 text-white",
     "occurs": [{
@@ -135,7 +135,7 @@
   },
   {
     "name": "Algorytmika Praktyczna",
-    "obligatory": true,
+    "isOptional": true,
     "short_name": "AP",
     "class": "bg-blue-800 dark:bg-blue-700 text-white",
     "occurs": [{
@@ -172,7 +172,7 @@
   },
   {
     "name": "Metodologia nauk dla inżynierów",
-    "obligatory": true,
+    "isOptional": true,
     "short_name": "MET",
     "class": "bg-red-800 dark:bg-red-700 text-white",
     "occurs": [{
@@ -209,7 +209,7 @@
   },
   {
     "name": "Prawo dla informatyków",
-    "obligatory": true,
+    "isOptional": true,
     "short_name": "Prawo",
     "place": "",
     "lecturer": "dr inż. Tomasz Bilski",
@@ -244,7 +244,7 @@
   },
   {
     "name": "Wychowanie fizyczne",
-    "obligatory": false,
+    "isOptional": false,
     "short_name": "WF",
     "info": "",
     "place": "CSPP",
@@ -278,7 +278,7 @@
   },
   {
     "name": "Język angielski",
-    "obligatory": false,
+    "isOptional": false,
     "short_name": "Ang",
     "info": "",
     "place": "CJiKP",
@@ -324,7 +324,7 @@
   },
   {
     "name": "Podstawy elektroniki",
-    "obligatory": false,
+    "isOptional": false,
     "short_name": "PE",
     "info": "",
     "place": "",
@@ -373,7 +373,7 @@
   },
   {
     "name": "Programowanie deklaratywne",
-    "obligatory": false,
+    "isOptional": false,
     "short_name": "PD",
     "info": "",
     "place": "",
@@ -425,7 +425,7 @@
   },
   {
     "name": "Metody probabilistyczne",
-    "obligatory": true,
+    "isOptional": true,
     "short_name": "MP",
     "place": "",
     "class": "bg-green-700 dark:bg-green-600 text-white",
@@ -461,7 +461,7 @@
   },
   {
     "name": "Fizyka dla informatyków",
-    "obligatory": false,
+    "isOptional": false,
     "short_name": "FdI",
     "place": "",
     "class": "bg-red-300 dark:bg-red-400 text-white",
@@ -469,7 +469,7 @@
         "info": "wykład",
         "lecturer": "dr Krzysztof Łapsa",
         "additional_info": "",
-        "links": [{"name": "eKursy", "link": "https://ekursy.put.poznan.pl/course/view.php?id=12853"}],
+        "links": [{"name": "eKursy", "link": "https://ekursy.put.poznan.pl/mod/bigbluebuttonbn/view.php?id=794294"}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -497,7 +497,7 @@
   },
   {
     "name": "Programowanie niskopoziomowe",
-    "obligatory": false,
+    "isOptional": false,
     "short_name": "C",
     "place": "",
     "class": " bg-red-600 dark:bg-red-800 text-white",

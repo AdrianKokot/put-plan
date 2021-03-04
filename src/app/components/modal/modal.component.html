@@ -3,10 +3,14 @@
          [ngClass]="{'z-10': m.lvl == 0, 'z-20': m.lvl == 1, 'z-30': m.lvl == 2, 'z-40': m.lvl == 3, 'z-50': m.lvl == 5}"
          (click)="close(m.id)"
          [@modalAnimation]>
+
   <div class="bg-gray-100 dark:bg-gray-800 dark:text-gray-400 text-gray-700 px-12 pt-12 pb-8 rounded-lg overflow-y-auto max-w-3xl mx-auto"
        style="max-height: calc(100vh - 70px);"
        (click)="$event.stopPropagation()">
+
     <ng-template *ngTemplateOutlet="m.template; context: {$implicit: {close: close.bind(this, m.id), id: m.id}}">
     </ng-template>
+
   </div>
+
 </section>

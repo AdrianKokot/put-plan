@@ -1,15 +1,25 @@
-import { DayTime } from "./day-time";
+export interface LessonOccurance {
+  lesson_number: number;
+  day_number: number;
+  info: string;
+  lecturer: string;
+  place: string;
+  isBoth: boolean;
+  isEven: boolean;
+  groups: string[];
+  additional_info: string;
+  links: Link[];
+}
 
-export interface Lesson {
+export interface Link {
+  name: string;
+  link: string;
+}
+
+export interface Lesson extends LessonOccurance {
   name: string;
   short_name: string;
-  info: string;
-  place: string;
-  lecturer: string;
   class: string;
-  obligatory: boolean;
-  groups?: string[];
-  occurs: DayTime[];
-  additional_info?: string;
-  links: {name: string; link: string;}[];
+  isOptional: boolean;
+  occurs: LessonOccurance[];
 }
