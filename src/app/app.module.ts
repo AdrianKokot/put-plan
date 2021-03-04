@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { firebaseConfig } from 'src/environments/firebase';
 import { LessonDetailsComponent } from './components/lesson-details/lesson-details.component';
 import { PreferencesFormComponent } from './components/preferences-form/preferences-form.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PreferencesFormComponent } from './components/preferences-form/preferen
     TimetableComponent,
     ModalComponent,
     LessonDetailsComponent,
-    PreferencesFormComponent
+    PreferencesFormComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
