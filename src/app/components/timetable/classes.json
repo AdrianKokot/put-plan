@@ -23,8 +23,8 @@
         "isEven": false,
         "lesson_number": 5,
         "day_number": 5,
-        "info": "lab",
-        "lecturer": "K. Bucholc",
+        "info": "laboratoria",
+        "lecturer": "dr inż. Krzysztof Bucholc",
         "additional_info": "",
         "links": [{"name": "", "link": ""}],
         "groups": [
@@ -36,8 +36,8 @@
         "isEven": false,
         "lesson_number": 4,
         "day_number": 5,
-        "info": "lab",
-        "lecturer": "K. Bucholc",
+        "info": "laboratoria",
+        "lecturer": "dr inż. Krzysztof Bucholc",
         "additional_info": "",
         "links": [{"name": "", "link": ""}],
         "groups": [
@@ -71,10 +71,10 @@
         "isEven": false,
         "lesson_number": 2,
         "day_number": 3,
-        "info": "lab",
-        "lecturer": "Marta Szachniuk",
+        "info": "laboratoria",
+        "lecturer": "prof. dr hab. inż. Marta Szachniuk",
         "additional_info": "Zajęcia przeniesione z 15:10 - 16:40 dopóki są zdalnie.",
-        "links": [{"name": "Zoom", "link": "https://us02web.zoom.us/j/88118678593?pwd=ZmhoN2d4ZURzaW4xTk1hOTBGQldsdz09"}],
+        "links": [{"name": "Zoom", "link": "https://us02web.zoom.us/j/88118678593?pwd=ZmhoN2d4ZURzaW4xTk1hOTBGQldsdz09"}, {"name": "Strona przedmiotu", "link": "https://www.cs.put.poznan.pl/mszachniuk/site/teaching/algorytmy-i-struktury-danych/"}],
         "groups": [
           "i3.2"
         ],
@@ -85,8 +85,8 @@
         "isEven": false,
         "lesson_number": 4,
         "day_number": 3,
-        "info": "lab",
-        "lecturer": "M. Machowiak",
+        "info": "laboratoria",
+        "lecturer": "dr Maciej Machowiak",
         "additional_info": "",
         "links": [{"name": "", "link": ""}],
         "groups": [
@@ -220,8 +220,8 @@
         "info": "wykład",
         "isBoth": true,
         "isEven": false,
-        "additional_info": "",
-        "links": [{"name": "", "link": ""}],
+        "additional_info": "Hasło do eMeeting: 262791",
+        "links": [{"name": "eMeeting", "link": "https://emeeting.put.poznan.pl/eMeeting/tom-1dx-mjb"}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -233,8 +233,8 @@
         "isEven": true,
         "info": "ćwiczenia",
         "isBoth": false,
-        "additional_info": "",
-        "links": [{"name": "", "link": ""}],
+        "additional_info": "Hasło do eMeeting: 262791",
+        "links": [{"name": "eMeeting", "link": "https://emeeting.put.poznan.pl/eMeeting/tom-1dx-mjb"}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -332,26 +332,26 @@
     "occurs": [{
         "isBoth": true,
         "isEven": false,
-        "lecturer": "M. Melosik",
+        "lecturer": "dr inż. Michał Melosik",
         "additional_info": "",
         "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.2"
         ],
-        "info": "lab",
+        "info": "laboratoria",
         "lesson_number": 6,
         "day_number": 2
       },
       {
         "isBoth": true,
         "isEven": false,
-        "lecturer": "Sz. Szczęsny",
+        "lecturer": "dr hab. inż. Szymon Szczęsny",
         "additional_info": "",
         "links": [{"name": "", "link": ""}],
         "groups": [
           "i3.1"
         ],
-        "info": "lab",
+        "info": "laboratoria",
         "lesson_number": 7,
         "day_number": 2
       },
@@ -402,7 +402,7 @@
         "groups": [
           "i3.2"
         ],
-        "info": "lab",
+        "info": "laboratoria",
         "place": "lab. P6",
         "lesson_number": 3,
         "day_number": 3
@@ -416,7 +416,7 @@
         "groups": [
           "i3.1"
         ],
-        "info": "lab",
+        "info": "laboratoria",
         "place": "lab. P6",
         "lesson_number": 5,
         "day_number": 3
@@ -469,7 +469,7 @@
         "info": "wykład",
         "lecturer": "dr Krzysztof Łapsa",
         "additional_info": "",
-        "links": [{"name": "", "link": ""}],
+        "links": [{"name": "eKursy", "link": "https://ekursy.put.poznan.pl/course/view.php?id=12853"}],
         "groups": [
           "i3.2",
           "i3.1"
@@ -517,8 +517,8 @@
         "isEven": true
       },
       {
-        "info": "lab",
-        "lecturer": "A. Urbański",
+        "info": "laboratoria",
+        "lecturer": "dr inż. Andrzej Urbański",
         "additional_info": "",
         "links": [{"name": "", "link": ""}],
         "groups": [
