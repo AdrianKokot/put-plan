@@ -1,5 +1,5 @@
+import { ModalService } from 'src/app/services/modal/modal.service';
 import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
-import { ModalService } from './components/modal/modal.service';
 
 function getWeekNumber(d: any = new Date()) {
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));

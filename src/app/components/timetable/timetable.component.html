@@ -1,6 +1,7 @@
 <div class="overflow-y-auto">
   <table class="max-w-4xl mx-auto"
          *ngIf="items">
+
     <thead>
       <th>&nbsp;</th>
       <th>Poniedziałek</th>
@@ -9,67 +10,44 @@
       <th>Czwartek</th>
       <th>Piątek</th>
     </thead>
+
     <tbody>
       <tr *ngFor="let hour of hours; let i = index">
+
         <th class="truncate">{{hour}}</th>
+
         <td *ngFor="let item of getItems(i+1)">
+
           <div class="p-4 m-1 my-1.5"
-                [ngClass]="{'cursor-pointer': item.name != ''}"
+               [ngClass]="{'cursor-pointer': item.name}"
                [class]="item.class"
                [title]="item.name + '\n' + item.lecturer + '\n' + item.place"
-               (click)="item.name != '' ? openClassDetailsModal(item) : null">
+               (click)="item.name ? openClassDetailsModal(item) : null">
+
             <p class="text-sm font-medium mb-2 h-5">
               {{ item.short_name ? item.short_name : item.name }}
             </p>
-            <p class="text-xs h-4">{{ item.info }}</p>
+
+            <p class="text-xs h-4">
+              {{ item.info }}
+            </p>
+
           </div>
+
         </td>
+
       </tr>
     </tbody>
+
   </table>
 </div>
 
 
 <ng-template #classDetailsTemplate
              let-modal>
-  <h1 class="text-2xl font-semibold pb-2 border-b px-2 mb-6 border-gray-200 dark:border-gray-700">
-    {{selectedClass.name}}
-  </h1>
-  <div class="px-2">
-    <p class="mb-4">Szczegóły przedmiotu</p>
-    <div *ngIf="selectedClass.lecturer" class="mb-4">
-      <p class="text-xs">Prowadzący</p>
-      <p class="font-medium">{{selectedClass.lecturer}}</p>
-    </div>
-    <div *ngIf="selectedClass.place" class="mb-4">
-      <p class="text-xs">Sala</p>
-      <p class="font-medium">{{selectedClass.place}}</p>
-    </div>
-    <div *ngIf="selectedClass.info" class="mb-4">
-      <p class="text-xs">Typ zajęć</p>
-      <p class="font-medium">{{selectedClass.info}}</p>
-    </div>
-    <div *ngIf="selectedClass?.groups" class="mb-4">
-      <p class="text-xs">Grupy mające te zajęcia w tym czasie</p>
-      <p class="font-medium uppercase">{{selectedClass?.groups?.join(', ')}}</p>
-    </div>
-    <div *ngIf="selectedClass.obligatory" class="mb-4">
-      <p>Ten przedmiot jest obieralny</p>
-    </div>
-    <div *ngIf="selectedClass?.additional_info != ''" class="mb-4">
-      <p class="text-xs">Dodatkowe informacje</p>
-      <p class="font-medium">{{selectedClass.additional_info}}</p>
-    </div>
-    <div *ngIf="selectedClass.links.length > 0 && (selectedClass.links[0].link != '')" class="mb-4">
-      <p class="text-xs">Linki</p>
-      <div class="font-medium">
-        <p *ngFor="let link of selectedClass?.links"><a [href]="link.link" class="duration-300 transition-colors hover:text-blue-500">{{link.name}}</a></p>
-      </div>
-    </div>
-  </div>
 
-  <div class="border-t border-gray-200 dark:border-gray-700 px-2 flex items-center mt-8 pt-6 justify-end flex-col md:flex-row">
-    <button (click)="modal.close()"
-            class="w-full mb-2 md:w-auto md:mb-0 md:mr-2 px-3 py-2 rounded-md focus:outline-none focus:shadow bg-gray-300 hover:bg-gray-400 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">Zamknij</button>
-  </div>
+  <app-lesson-details [modal]="modal"
+                      [selectedClass]="selectedClass">
+  </app-lesson-details>
+
 </ng-template>
