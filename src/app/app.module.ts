@@ -13,6 +13,8 @@ import { firebaseConfig } from 'src/environments/firebase';
 import { LessonDetailsComponent } from './components/lesson-details/lesson-details.component';
 import { PreferencesFormComponent } from './components/preferences-form/preferences-form.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { HeaderComponent } from './components/header/header.component';
     NgSelectModule,
     HttpClientModule,
     // AngularFirestoreModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
