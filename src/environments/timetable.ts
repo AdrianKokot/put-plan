@@ -1,0 +1,2 @@
+
+export const isWeekParityReversed = true;

@@ -1,52 +1,23 @@
+import { LessonService } from 'src/app/services/lesson/lesson.service';
 import { ModalService } from 'src/app/services/modal/modal.service';
 import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
-
-function getWeekNumber(d: any = new Date()) {
-  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
-  const yearStart: any = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-  const weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
-  return weekNo;
-}
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styles: ['']
 })
 export class AppComponent implements AfterViewInit {
-  groups = [
-    'i3.1',
-    'i3.2'
-  ];
-  obligs = [
-    'Algorytmy i struktury danych',
-    'Prawo dla informatyków',
-    'Metody probabilistyczne',
-    'Elementy analizy numerycznej',
-    'Algorytmika Praktyczna',
-    'Metodologia nauk dla inżynierów'
-  ];
-  weekTypeCorrect = false;
-  isEvenWeek: boolean = (getWeekNumber() % 2 == 0 ) === this.weekTypeCorrect;
-  selectedGroup: string = localStorage.getItem('selectedGroup') || '';
-  obligatory: string[] = localStorage.getItem('obligatory')?.split(':') || [];
-
   @ViewChild('selectGroupTemplate') templateRef!: TemplateRef<any>;
-  constructor(private modalService: ModalService) { }
+  constructor(
+    private modalService: ModalService,
+    public lessonService: LessonService
+  ) { }
 
   currId: number | null = null;
   ngAfterViewInit(): void {
-    if (this.selectedGroup === '') {
+    if (this.lessonService.preferences.selectedGroup === '') {
       this.openSettingsModal();
-    }
-  }
-
-  savePreferences() {
-    if (this.currId != null) {
-      localStorage.setItem('selectedGroup', this.selectedGroup);
-      localStorage.setItem('obligatory', this.obligatory.join(':'));
-      this.modalService.close(this.currId);
     }
   }
 
@@ -54,7 +25,7 @@ export class AppComponent implements AfterViewInit {
     if ($e != null) {
       $e.preventDefault();
     }
-    this.isEvenWeek = !this.isEvenWeek;
+    this.lessonService.isWeekEven = !this.lessonService.isWeekEven;
   }
 
   openSettingsModal($event: { preventDefault: () => void; } | null = null) {

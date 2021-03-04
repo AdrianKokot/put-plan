@@ -11,13 +11,15 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule } from '@angular/common/http';
 import { firebaseConfig } from 'src/environments/firebase';
 import { LessonDetailsComponent } from './components/lesson-details/lesson-details.component';
+import { PreferencesFormComponent } from './components/preferences-form/preferences-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TimetableComponent,
     ModalComponent,
-    LessonDetailsComponent
+    LessonDetailsComponent,
+    PreferencesFormComponent
   ],
   imports: [
     BrowserModule,
