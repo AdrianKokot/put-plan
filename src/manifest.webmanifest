@@ -1,8 +1,8 @@
 {
   "name": "put-plan",
   "short_name": "put-plan",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#202837",
+  "background_color": "#202837",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
