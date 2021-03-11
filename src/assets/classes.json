@@ -11,10 +11,13 @@
         "day_number": 1,
         "info": "wykład",
         "lecturer": "dr inż. Dariusz Wawrzyniak",
-        "additional_info": "",
+        "additional_info": "Obecność do zaznaczenia na eKursach!",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=3694"
+        }, {
+          "name": "Zoom",
+          "link": "https://us02web.zoom.us/j/89055644174?pwd=Tkd6cTZNVDJEblQxU1V4MFJJU2hkUT09"
         }],
         "groups": [
           "i3.2",
@@ -30,8 +33,11 @@
         "lecturer": "dr inż. Krzysztof Bucholc",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=9359"
+        }, {
+          "name": "Zoom",
+          "link": "https://us02web.zoom.us/j/7568320275?pwd=K1BER21mRDRXT3VQTlo1U3NIb3VnZz09"
         }],
         "groups": [
           "i3.2"
@@ -69,8 +75,11 @@
         "lecturer": "prof. dr hab. inż. Jacek Błażewicz",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=11154"
+        }, {
+          "name": "Zoom",
+          "link": "https://us02web.zoom.us/j/84858303197?pwd=YVhXVmRJZldvNlBhT1paaGdjWjJ5dz09"
         }],
         "groups": [
           "i3.2",
@@ -92,6 +101,9 @@
         }, {
           "name": "Strona przedmiotu",
           "link": "https://www.cs.put.poznan.pl/mszachniuk/site/teaching/algorytmy-i-struktury-danych/"
+        }, {
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=3430"
         }],
         "groups": [
           "i3.2"
@@ -107,8 +119,8 @@
         "lecturer": "dr Maciej Machowiak",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=3430"
         }],
         "groups": [
           "i3.1"
@@ -294,7 +306,7 @@
     "info": "",
     "place": "CSPP",
     "lecturer": "",
-    "class": "bg-yellow-300 text-white dark:bg-yellow-400",
+    "class": "text-white bg-yellow-400",
     "occurs": [{
         "isBoth": true,
         "isEven": false,
@@ -334,7 +346,7 @@
     "info": "",
     "place": "CJiKP",
     "lecturer": "",
-    "class": "bg-purple-300 text-white dark:bg-purple-400",
+    "class": "text-white bg-purple-400",
     "occurs": [{
         "isBoth": true,
         "isEven": false,
@@ -346,8 +358,7 @@
           "link": ""
         }],
         "groups": [
-          "i3.2",
-          "i3.1"
+          "Ang_Tuesday_11:45-13:15"
         ]
       },
       {
@@ -361,8 +372,7 @@
           "link": ""
         }],
         "groups": [
-          "i3.2",
-          "i3.1"
+          "Ang_Thursday_13:30-15:00"
         ]
       },
       {
@@ -376,8 +386,7 @@
           "link": ""
         }],
         "groups": [
-          "i3.2",
-          "i3.1"
+          "Ang_Thursday_15:10-16:40"
         ]
       }
     ]
@@ -395,8 +404,8 @@
         "lecturer": "dr inż. Michał Melosik",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=3449"
         }],
         "groups": [
           "i3.2"
@@ -411,8 +420,8 @@
         "lecturer": "dr hab. inż. Szymon Szczęsny",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=3449"
         }],
         "groups": [
           "i3.1"
@@ -427,8 +436,11 @@
         "lecturer": "dr hab. inż. Paweł Śniatała",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=13970"
+        }, {
+          "name": "Zoom",
+          "link": "https://us02web.zoom.us/j/88311053032?pwd=QWRIL3dxZmZYWk5nZlB3Y2FTTG02QT09"
         }],
         "groups": [
           "i3.2",
@@ -453,8 +465,11 @@
         "lecturer": "dr inż. Artur Michalski",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=3478"
+        }, {
+          "name": "Zoom",
+          "link": "https://us02web.zoom.us/j/2732874617?pwd=RWxGcWZpZzhicTZDakNnWk13czVQQT09"
         }],
         "groups": [
           "i3.2",
@@ -471,8 +486,8 @@
         "lecturer": "dr inż. Artur Michalski",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=12727"
         }],
         "groups": [
           "i3.2"
@@ -506,7 +521,7 @@
     "isOptional": true,
     "short_name": "MP",
     "place": "",
-    "class": "bg-green-700 dark:bg-green-600 text-white",
+    "class": "bg-green-600 text-white",
     "occurs": [{
         "isBoth": true,
         "isEven": false,
@@ -514,8 +529,11 @@
         "lecturer": "dr hab. inż. Wojciech Kotłowski",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=3609"
+        }, {
+          "name": "Zoom",
+          "link": "https://us02web.zoom.us/j/87579840201?pwd=MHBrTnBZYUdVR3Q1dUZoZ21zU0NtZz09"
         }],
         "groups": [
           "i3.2",
@@ -531,8 +549,8 @@
         "lecturer": "dr inż. Jędrzej Potoniec",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=3609"
         }],
         "groups": [
           "i3.2",
@@ -548,7 +566,7 @@
     "isOptional": false,
     "short_name": "FdI",
     "place": "",
-    "class": "bg-red-300 dark:bg-red-400 text-white",
+    "class": "bg-red-400 text-white",
     "occurs": [{
         "info": "wykład",
         "lecturer": "dr Krzysztof Łapsa",
@@ -571,8 +589,8 @@
         "lecturer": "dr Andrzej Jarosz",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=13383"
         }],
         "groups": [
           "i3.2",
@@ -596,8 +614,14 @@
         "lecturer": "dr inż. Marcin radom",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "Strona prowadzącego",
+          "link": "http://www.cs.put.poznan.pl/mradom/"
+        }, {
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=3485"
+        }, {
+          "name": "Zoom",
+          "link": "https://us02web.zoom.us/j/89494558217?pwd=QmlkYnd5dWU2RFNtVndaU2xWaFVnUT09"
         }],
         "groups": [
           "i3.2",
@@ -614,8 +638,8 @@
         "lecturer": "dr inż. Andrzej Urbański",
         "additional_info": "",
         "links": [{
-          "name": "",
-          "link": ""
+          "name": "eKursy",
+          "link": "https://ekursy.put.poznan.pl/course/view.php?id=3485"
         }],
         "groups": [
           "i3.2"

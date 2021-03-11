@@ -15,7 +15,7 @@
     </ng-select>
   </label>
 
-  <label>
+  <label class="block mb-6">
     <p class="text-sm mb-2">Przedmioty obieralne</p>
     <ng-select [items]="(optionalClasses$ | async) || []"
                (change)="onChange()"
@@ -30,13 +30,32 @@
       </ng-template>
     </ng-select>
   </label>
+
+  <label class="block mb-6">
+    <p class="text-sm mb-2">Język</p>
+    <ng-select [items]="(languageClasses$ | async) || []"
+               (change)="onChange()"
+               [(ngModel)]="selectedLanguageClass">
+      <ng-template ng-label-tmp
+                   ng-option-tmp
+                   let-item="item">
+        {{item.replaceAll('_', ' ').replace('-', ' - ')}}
+      </ng-template>
+      <ng-template ng-notfound-tmp
+                   let-searchTerm="searchTerm">
+        <div class="ng-option disabled">
+          Nie znaleziono podanego przedmiotu obieralnego
+        </div>
+      </ng-template>
+    </ng-select>
+  </label>
 </div>
 
 <div class="border-t border-gray-200 dark:border-gray-700 px-2 flex items-center mt-8 pt-6 justify-end flex-col md:flex-row"
      *ngIf="modal">
 
   <button (click)="close()"
-          class="w-full mb-2 md:w-auto md:mb-0 md:mr-2 px-3 py-2 rounded-md focus:outline-none focus:shadow bg-gray-300 hover:bg-gray-400 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">
+          class="w-full mb-2 md:w-auto md:mb-0 md:mr-2 px-3 py-2 rounded-md focus:outline-none focus:shadow bg-gray-200 hover:bg-gray-300 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">
     Zamknij
   </button>
   <button (click)="savePreferences()"

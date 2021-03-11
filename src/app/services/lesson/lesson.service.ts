@@ -7,6 +7,8 @@ import classes from 'src/assets/classes.json';
 import groups from 'src/assets/groups.json';
 import optionalClasses from 'src/assets/optional.json';
 import hours from 'src/assets/hours.json';
+import languageClasses from 'src/assets/language-classes.json';
+
 
 function getWeekNumber(d: any = new Date()) {
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
@@ -23,18 +25,21 @@ export class LessonService {
   private classes = new BehaviorSubject<Lesson[]>(classes as Lesson[]);
   private groups = new BehaviorSubject<string[]>(groups);
   private optionalClasses = new BehaviorSubject<string[]>(optionalClasses);
+  private languageClasses = new BehaviorSubject<string[]>(languageClasses);
   private hours = hours;
   public isWeekEven = (getWeekNumber() % 2 == 0) === !isWeekParityReversed;
 
   public preferences: Preferences = {
     selectedGroup: localStorage.getItem('selectedGroup') || '',
-    selectedOptionalClasses: localStorage.getItem('selectedOptionalClasses')?.split(':') || []
+    selectedOptionalClasses: localStorage.getItem('selectedOptionalClasses')?.split(':') || [],
+    selectedLanguageClass: localStorage.getItem('selectedLanguageClass') || ''
   };
 
   public savePreferencesInStorage() {
-    const { selectedGroup, selectedOptionalClasses } = this.preferences;
+    const { selectedGroup, selectedOptionalClasses, selectedLanguageClass } = this.preferences;
     localStorage.setItem('selectedGroup', selectedGroup);
     localStorage.setItem('selectedOptionalClasses', selectedOptionalClasses.join(':'));
+    localStorage.setItem('selectedLanguageClass', selectedLanguageClass);
   }
 
   public getAll(): Observable<Lesson[]> {
@@ -43,6 +48,10 @@ export class LessonService {
 
   public getGroups(): Observable<string[]> {
     return this.groups.asObservable();
+  }
+
+  public getLanguagesClasses(): Observable<string[]> {
+    return this.languageClasses.asObservable();
   }
 
   public getOptionalClasses(): Observable<string[]> {
@@ -61,7 +70,7 @@ export class LessonService {
         }
       }
       const occur = x.occurs.find(y => {
-        if (y.day_number === day_number && y.lesson_number === lesson_number && y.groups.includes(this.preferences.selectedGroup)) {
+        if (y.day_number === day_number && y.lesson_number === lesson_number && (y.groups.includes(this.preferences.selectedGroup) || y.groups.includes(this.preferences.selectedLanguageClass))) {
           return (y.isEven === this.isWeekEven) || y.isBoth;
         }
         return false;
