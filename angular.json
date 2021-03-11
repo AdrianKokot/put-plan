@@ -46,7 +46,6 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "extractCss": true,
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
