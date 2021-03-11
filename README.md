@@ -20,8 +20,8 @@ Feel free to make pull requests, but don't overdo it, it's simple app.
 
 ## Planned functionality
 
- - [ ] PWA
- - [ ] Possibility to select your English classes period
+ - [x] PWA
+ - [x] Possibility to select your English classes period
  - [ ] Move 'database' (json files in assets folder) to actual database
  - [ ] Remove/redo light theme - it's ugly
  - [ ] Add data for the whole department
