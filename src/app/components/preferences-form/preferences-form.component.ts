@@ -11,9 +11,11 @@ export class PreferencesFormComponent {
   @Input() modal: { close: () => {} } | null = null;
   selectedGroup: string = this.lessonService.preferences.selectedGroup;
   selectedOptionalClasses: string[] = this.lessonService.preferences.selectedOptionalClasses;
+  selectedLanguageClass: string = this.lessonService.preferences.selectedLanguageClass;
 
   groups$: Observable<string[]> = this.lessonService.getGroups();
   optionalClasses$: Observable<string[]> = this.lessonService.getOptionalClasses();
+  languageClasses$: Observable<string[]> = this.lessonService.getLanguagesClasses();
 
   constructor(private lessonService: LessonService) { }
 
@@ -25,7 +27,8 @@ export class PreferencesFormComponent {
   onChange() {
     this.lessonService.preferences = {
       selectedGroup: this.selectedGroup,
-      selectedOptionalClasses: this.selectedOptionalClasses
+      selectedOptionalClasses: this.selectedOptionalClasses,
+      selectedLanguageClass: this.selectedLanguageClass
     };
   }
 
