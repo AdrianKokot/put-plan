@@ -21,7 +21,7 @@
           <div class="p-4 m-1 my-1.5"
                [ngClass]="{'cursor-pointer': item.name}"
                [class]="item.class"
-               [title]="item.name + '\n' + item.lecturer + '\n' + item.place"
+               [title]="item.name ? (item.name + '\n' + item.lecturer + '\n' + item.place) : ''"
                (click)="item.name ? openClassDetailsModal(item) : null">
 
             <p class="text-sm font-medium mb-2 h-5">
