@@ -60,7 +60,8 @@
     <div class="font-medium">
       <p *ngFor="let link of selectedClass?.links">
         <a [href]="link.link"
-           class="duration-300 transition-colors hover:text-blue-500">
+           class="duration-300 transition-colors hover:text-blue-500"
+           target="_blank">
           {{link.name}}
         </a>
       </p>
