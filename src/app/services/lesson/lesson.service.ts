@@ -27,7 +27,8 @@ export class LessonService {
   private groups = new BehaviorSubject<string[]>(this.storageData.groups);
   private optionalClasses = new BehaviorSubject<string[]>(this.storageData.optionalClasses);
   private languageClasses = new BehaviorSubject<string[]>(this.storageData.languageClasses);
-  private hours = hours;
+  private lastChange = new BehaviorSubject<string>(this.storageData.lastChange);
+  private hours = this.storageData.hours || hours;
   public isWeekEven = (getWeekNumber() % 2 === 0) === !isWeekParityReversed;
 
   public preferences: Preferences = {
@@ -56,7 +57,6 @@ export class LessonService {
     this.database.database.goOnline();
     this.database.database.ref().get().then(x => {
       this.storageData = x.val();
-      console.log(this.storageData);
       localStorage.setItem('put-plan-data', JSON.stringify(this.storageData));
 
       this.classes.next(this.storageData.classes);
@@ -93,6 +93,10 @@ export class LessonService {
 
   public getHours(): string[] {
     return this.hours;
+  }
+
+  public getDataVersion(): Observable<string> {
+    return this.lastChange.asObservable();
   }
 
   public getLesson(dayNumber: number, lessonNumber: number): Lesson {
