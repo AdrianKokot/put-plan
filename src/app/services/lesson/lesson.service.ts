@@ -3,14 +3,10 @@ import { Preferences } from 'src/app/models/preferences';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Lesson } from 'src/app/models/lesson';
-import classes from 'src/assets/classes.json';
-import groups from 'src/assets/groups.json';
-import optionalClasses from 'src/assets/optional.json';
-import hours from 'src/assets/hours.json';
-import languageClasses from 'src/assets/language-classes.json';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 
-function getWeekNumber(d: any = new Date()) {
+function getWeekNumber(d: any = new Date()): number {
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
   d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
   const yearStart: any = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
@@ -22,12 +18,16 @@ function getWeekNumber(d: any = new Date()) {
   providedIn: 'root'
 })
 export class LessonService {
-  private classes = new BehaviorSubject<Lesson[]>(classes as Lesson[]);
-  private groups = new BehaviorSubject<string[]>(groups);
-  private optionalClasses = new BehaviorSubject<string[]>(optionalClasses);
-  private languageClasses = new BehaviorSubject<string[]>(languageClasses);
-  private hours = hours;
-  public isWeekEven = (getWeekNumber() % 2 == 0) === !isWeekParityReversed;
+  private storageData:
+    { classes: Lesson[], groups: string[], optionalClasses: string[], languageClasses: string[], hours: string[], last_change: string }
+    = JSON.parse((localStorage.getItem('put-plan-data') || '{}'));
+
+  private classes = new BehaviorSubject<Lesson[]>(this.storageData.classes as Lesson[]);
+  private groups = new BehaviorSubject<string[]>(this.storageData.groups);
+  private optionalClasses = new BehaviorSubject<string[]>(this.storageData.optionalClasses);
+  private languageClasses = new BehaviorSubject<string[]>(this.storageData.languageClasses);
+  private hours = this.storageData.hours;
+  public isWeekEven = (getWeekNumber() % 2 === 0) === !isWeekParityReversed;
 
   public preferences: Preferences = {
     selectedGroup: localStorage.getItem('selectedGroup') || '',
@@ -35,7 +35,40 @@ export class LessonService {
     selectedLanguageClass: localStorage.getItem('selectedLanguageClass') || ''
   };
 
-  public savePreferencesInStorage() {
+  constructor(private database: AngularFireDatabase) {
+    this.database.database.goOffline();
+    console.log(this.storageData);
+    if (this.storageData.classes) {
+      this.database.database.goOnline();
+      this.database.database.ref('last_change').get().then(x => {
+        this.database.database.goOffline();
+        if (x.val() !== this.storageData.last_change) {
+          this.getDataFromFirebaseDatabase();
+        }
+      });
+    } else {
+      this.getDataFromFirebaseDatabase();
+    }
+  }
+
+  private getDataFromFirebaseDatabase(): void {
+    this.database.database.goOnline();
+    this.database.database.ref().get().then(x => {
+      this.storageData = x.val();
+      console.log(this.storageData);
+      localStorage.setItem('put-plan-data', JSON.stringify(this.storageData));
+
+      this.classes.next(this.storageData.classes);
+      this.groups.next(this.storageData.groups);
+      this.optionalClasses.next(this.storageData.optionalClasses);
+      this.languageClasses.next(this.storageData.languageClasses);
+      this.hours = this.storageData.hours;
+
+      this.database.database.goOffline();
+    });
+  }
+
+  public savePreferencesInStorage(): void {
     const { selectedGroup, selectedOptionalClasses, selectedLanguageClass } = this.preferences;
     localStorage.setItem('selectedGroup', selectedGroup);
     localStorage.setItem('selectedOptionalClasses', selectedOptionalClasses.join(':'));
@@ -62,15 +95,22 @@ export class LessonService {
     return this.hours;
   }
 
-  public getLesson(day_number: number, lesson_number: number): Lesson {
-    let filtered = this.classes.value.map(x => {
+  public getLesson(dayNumber: number, lessonNumber: number): Lesson {
+    const filtered = this.classes.value.map(x => {
       if (x.isOptional) {
         if (!this.preferences.selectedOptionalClasses.includes(x.name)) {
           return null;
         }
       }
       const occur = x.occurs.find(y => {
-        if (y.day_number === day_number && y.lesson_number === lesson_number && (y.groups.includes(this.preferences.selectedGroup) || y.groups.includes(this.preferences.selectedLanguageClass))) {
+        if (
+          y.day_number === dayNumber
+          && y.lesson_number === lessonNumber
+          && (
+            y.groups.includes(this.preferences.selectedGroup)
+            || y.groups.includes(this.preferences.selectedLanguageClass)
+          )
+        ) {
           return (y.isEven === this.isWeekEven) || y.isBoth;
         }
         return false;

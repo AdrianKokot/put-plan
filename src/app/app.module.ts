@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { TimetableComponent } from './components/timetable/timetable.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,10 +30,10 @@ import { environment } from '../environments/environment';
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAnalyticsModule,
+    AngularFireDatabaseModule,
     FormsModule,
     NgSelectModule,
     HttpClientModule,
-    // AngularFirestoreModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
