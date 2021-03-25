@@ -10,4 +10,8 @@ export class FooterComponent {
   lastUpdate = this.lessonService.getDataVersion();
 
   constructor(private lessonService: LessonService) { }
+
+  public refresh(): void {
+    window.location.reload();
+  }
 }

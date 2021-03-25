@@ -38,7 +38,6 @@ export class LessonService {
   };
 
   constructor(private database: AngularFireDatabase) {
-    console.log('Last database update: ' + this.storageData.lastChange);
     this.database.database.goOffline();
     if (this.storageData.classes) {
       this.database.database.goOnline();

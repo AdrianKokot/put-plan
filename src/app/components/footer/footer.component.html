@@ -1,3 +1,17 @@
 <footer class="mt-6 text-gray-200 dark:text-gray-700 text-center">
-  v{{lastUpdate|async}} &copy; <a href="https://github.com/AdrianKokot">Adrian Kokot</a>
+  <span (click)="refresh()"
+        class="cursor-pointer hover:text-blue-500 duration-300 transition-colors"
+        title="Sprawdź aktualizację">
+    v{{lastUpdate|async}}
+  </span>
+  <span>
+    &copy;
+  </span>
+  <span>
+    <a href="https://github.com/AdrianKokot"
+       target="_blank"
+       class="hover:text-blue-500 duration-300 transition-colors">
+      Adrian Kokot
+    </a>
+  </span>
 </footer>
