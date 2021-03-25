@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Lesson } from 'src/app/models/lesson';
 import { AngularFireDatabase } from '@angular/fire/database';
+import hours from 'src/assets/hours.json';
 
 
 function getWeekNumber(d: any = new Date()): number {
@@ -19,14 +20,14 @@ function getWeekNumber(d: any = new Date()): number {
 })
 export class LessonService {
   private storageData:
-    { classes: Lesson[], groups: string[], optionalClasses: string[], languageClasses: string[], hours: string[], last_change: string }
+    { classes: Lesson[], groups: string[], optionalClasses: string[], languageClasses: string[], hours: string[], lastChange: string }
     = JSON.parse((localStorage.getItem('put-plan-data') || '{}'));
 
   private classes = new BehaviorSubject<Lesson[]>(this.storageData.classes as Lesson[]);
   private groups = new BehaviorSubject<string[]>(this.storageData.groups);
   private optionalClasses = new BehaviorSubject<string[]>(this.storageData.optionalClasses);
   private languageClasses = new BehaviorSubject<string[]>(this.storageData.languageClasses);
-  private hours = this.storageData.hours;
+  private hours = hours;
   public isWeekEven = (getWeekNumber() % 2 === 0) === !isWeekParityReversed;
 
   public preferences: Preferences = {
@@ -36,13 +37,13 @@ export class LessonService {
   };
 
   constructor(private database: AngularFireDatabase) {
+    console.log('Last database update: ' + this.storageData.lastChange);
     this.database.database.goOffline();
-    console.log(this.storageData);
     if (this.storageData.classes) {
       this.database.database.goOnline();
-      this.database.database.ref('last_change').get().then(x => {
+      this.database.database.ref('lastChange').get().then(x => {
         this.database.database.goOffline();
-        if (x.val() !== this.storageData.last_change) {
+        if (x.val() !== this.storageData.lastChange) {
           this.getDataFromFirebaseDatabase();
         }
       });
@@ -62,7 +63,6 @@ export class LessonService {
       this.groups.next(this.storageData.groups);
       this.optionalClasses.next(this.storageData.optionalClasses);
       this.languageClasses.next(this.storageData.languageClasses);
-      this.hours = this.storageData.hours;
 
       this.database.database.goOffline();
     });

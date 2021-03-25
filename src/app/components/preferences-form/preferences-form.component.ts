@@ -19,12 +19,12 @@ export class PreferencesFormComponent {
 
   constructor(private lessonService: LessonService) { }
 
-  savePreferences() {
+  savePreferences(): void {
     this.lessonService.savePreferencesInStorage();
     this.close();
   }
 
-  onChange() {
+  onChange(): void {
     this.lessonService.preferences = {
       selectedGroup: this.selectedGroup,
       selectedOptionalClasses: this.selectedOptionalClasses,
@@ -32,7 +32,7 @@ export class PreferencesFormComponent {
     };
   }
 
-  close() {
+  close(): void {
     if (this.modal != null) {
       this.modal.close();
     }
