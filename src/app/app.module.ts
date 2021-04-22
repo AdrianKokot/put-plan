@@ -37,7 +37,12 @@ import { FooterComponent } from './components/footer/footer.component';
     NgSelectModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js',
+      {
+        enabled: environment.production,
+        registrationStrategy: 'registerImmediately'
+      }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
