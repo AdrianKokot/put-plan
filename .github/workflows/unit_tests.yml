@@ -9,7 +9,10 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest    
+        
     steps:
     - uses: actions/checkout@v2
-    - run: 'npm ci && npm run prod:test'
+    - name: Setup node.js
+    - run: 'npm ci'
+    - run: 'npm run test:prod'
   
