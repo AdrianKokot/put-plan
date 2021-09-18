@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
-import { SettingsComponent } from "../../../modules/settings/components/settings/settings.component";
+import { Component } from "@angular/core";
+
+@Component({selector: 'app-settings', template: ''})
+class SettingsStubComponent {
+}
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,7 +12,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HeaderComponent, SettingsComponent],
+      declarations: [HeaderComponent, SettingsStubComponent]
     })
       .compileComponents();
   });
