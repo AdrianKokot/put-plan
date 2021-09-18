@@ -9,7 +9,7 @@
       </div>
 
       <button *ngFor="let weekDay of weekDays"
-              class="px-4 py-3 duration-300 transition-colors border-b-2 border-transparent font-medium text-center capitalize md:cursor-default "
+              class="px-4 py-3 duration-300 transition-colors border-b-2 border-transparent font-medium text-center text-sm md:text-base capitalize md:cursor-default "
               (click)="isMobile ? selectedWeekDay = weekDay : null"
               [ngClass]="{'!border-blue-500 text-blue-500': selectedWeekDay === weekDay}">
         {{weekDay}}
