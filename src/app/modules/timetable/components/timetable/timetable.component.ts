@@ -2,6 +2,8 @@ import { LessonService } from 'src/app/shared/services/lesson/lesson.service';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ModalService } from "../../../../shared/modules/modal/services/modal.service";
 import { Lesson } from "../../../../shared/models/lesson";
+import { fromEvent } from "rxjs";
+import { debounceTime, map, tap } from "rxjs/operators";
 
 @Component({
   selector: 'app-timetable',
@@ -19,6 +21,8 @@ export class TimetableComponent {
     private lessonService: LessonService,
     private modalService: ModalService
   ) {
+    this.isMobile$.subscribe();
+
     this.lessonService.getAll().subscribe({
       next: (res) => {
         this.items = res;
@@ -26,8 +30,7 @@ export class TimetableComponent {
     });
 
     const monday = new Date();
-    const todayIndex = ((monday.getDay() || 7) - 1);
-    monday.setHours(-24 * todayIndex);
+    monday.setHours(-24 * ((monday.getDay() || 7) - 1));
 
     for (let i = 0; i < 5; i++) {
       this.weekDays.push(
@@ -36,15 +39,34 @@ export class TimetableComponent {
       monday.setHours(+24);
     }
 
+    this.selectCurrentWeekDay();
+  }
+
+  private selectCurrentWeekDay(): void {
+    const todayIndex = (((new Date()).getDay() || 7) - 1);
     this.selectedWeekDay = this.weekDays[todayIndex >= this.weekDays.length ? 0 : todayIndex];
   }
+
+  public isMobile: boolean = window.innerWidth < 768;
+
+  public isMobile$ = fromEvent(window, 'resize')
+    .pipe(
+      debounceTime(50),
+      map(() => window.innerWidth < 768),
+      tap(x => {
+        console.log('resize!');
+        this.isMobile = x;
+        this.selectCurrentWeekDay();
+      })
+    );
+
 
   public getItems(weekDay: string): Lesson[] {
     const day = this.weekDays.findIndex(x => x === weekDay) + 1;
 
     let res = [];
 
-    for(let lesson_number = 1; lesson_number <= this.hours.length; lesson_number++){
+    for (let lesson_number = 1; lesson_number <= this.hours.length; lesson_number++) {
       res.push(this.lessonService.getLesson(day, lesson_number))
     }
 
@@ -57,5 +79,18 @@ export class TimetableComponent {
   }
 
   public weekDays: string[] = [];
-  public selectedWeekDay: string = '';
+  // public selectedWeekDay: string = '';
+
+  private _selectedWeedDay: string = '';
+
+  public get selectedWeekDay(): string {
+    return this._selectedWeedDay;
+  }
+
+  public set selectedWeekDay(value: string) {
+    this._selectedWeedDay = value;
+    this.selectedWeekDayIndex = this.weekDays.findIndex(x => x === value);
+  }
+
+  public selectedWeekDayIndex: number = 0;
 }

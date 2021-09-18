@@ -2,9 +2,11 @@
 
   <ng-container *ngFor="let item of items;">
 
-    <div class="flex items-center justify-center font-medium h-20">
+    <div class="flex flex-col md:flex-row md:space-x-1 space-y-4 md:space-y-0 items-center text-center mx-2 justify-center font-medium h-20">
 
-      {{item}}
+      <span *ngFor="let time of item.split(' ')" class="even:hidden even:md:block">
+        {{time}}
+      </span>
 
     </div>
 
