@@ -5,10 +5,13 @@ import { FormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { HttpClientModule } from "@angular/common/http";
 import { IconModule } from "./modules/icon/icon.module";
+import { SwipeDirective } from './directives/swipe/swipe.directive';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SwipeDirective
+  ],
   imports: [
     CommonModule,
     ModalModule,
@@ -23,7 +26,8 @@ import { IconModule } from "./modules/icon/icon.module";
     FormsModule,
     NgSelectModule,
     HttpClientModule,
-    IconModule
+    IconModule,
+    SwipeDirective
   ]
 })
 export class SharedModule {

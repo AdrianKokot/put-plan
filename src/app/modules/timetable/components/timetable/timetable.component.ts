@@ -4,6 +4,7 @@ import { ModalService } from "../../../../shared/modules/modal/services/modal.se
 import { Lesson } from "../../../../shared/models/lesson";
 import { fromEvent } from "rxjs";
 import { debounceTime, map, tap } from "rxjs/operators";
+import { SwipeEvent } from "../../../../shared/directives/swipe/swipe";
 
 @Component({
   selector: 'app-timetable',
@@ -93,4 +94,8 @@ export class TimetableComponent {
   }
 
   public selectedWeekDayIndex: number = 0;
+
+  public swipe(event: SwipeEvent): void {
+    console.log(event);
+  }
 }
