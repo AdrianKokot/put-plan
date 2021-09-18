@@ -1,9 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { TimetableComponent } from './components/timetable/timetable.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +14,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FooterComponent } from './components/footer/footer.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
+import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 
 @NgModule({
   declarations: [
@@ -42,9 +42,14 @@ import { FooterComponent } from './components/footer/footer.component';
         enabled: environment.production,
         registrationStrategy: 'registerImmediately'
       }
-    )
+    ),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

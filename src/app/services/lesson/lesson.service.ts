@@ -3,8 +3,9 @@ import { Preferences } from 'src/app/models/preferences';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Lesson } from 'src/app/models/lesson';
-import { AngularFireDatabase } from '@angular/fire/database';
+// @ts-ignore
 import hours from 'src/assets/hours.json';
+import { AngularFireDatabase } from "@angular/fire/compat/database";
 
 
 function getWeekNumber(d: any = new Date()): number {
@@ -41,6 +42,7 @@ export class LessonService {
     this.database.database.goOffline();
     if (this.storageData.classes) {
       this.database.database.goOnline();
+      // @ts-ignore
       this.database.database.ref('lastChange').get().then(x => {
         this.database.database.goOffline();
         if (x.val() !== this.storageData.lastChange) {
@@ -54,6 +56,7 @@ export class LessonService {
 
   private getDataFromFirebaseDatabase(): void {
     this.database.database.goOnline();
+    // @ts-ignore
     this.database.database.ref().get().then(x => {
       this.storageData = x.val();
       localStorage.setItem('put-plan-data', JSON.stringify(this.storageData));
@@ -68,7 +71,7 @@ export class LessonService {
   }
 
   public savePreferencesInStorage(): void {
-    const { selectedGroup, selectedOptionalClasses, selectedLanguageClass } = this.preferences;
+    const {selectedGroup, selectedOptionalClasses, selectedLanguageClass} = this.preferences;
     localStorage.setItem('selectedGroup', selectedGroup);
     localStorage.setItem('selectedOptionalClasses', selectedOptionalClasses.join(':'));
     localStorage.setItem('selectedLanguageClass', selectedLanguageClass);
@@ -120,7 +123,7 @@ export class LessonService {
       });
 
       if (occur != null) {
-        x = { ...x, ...occur };
+        x = {...x, ...occur};
         return x;
       }
       return null;
