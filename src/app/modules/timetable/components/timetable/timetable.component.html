@@ -1,18 +1,18 @@
-<div class="sticky top-0 left-0 right-0 border-b-2 border-gray-200 z-10 bg-gray-100 pt-1 px-4 md:px-0">
+<div class="sticky top-0 left-0 right-0 border-b-2 border-gray-200 z-10 bg-gray-100 pt-1 px-4 md:px-0 select-none">
 
   <div class="w-full overflow-x-auto overflow-y-overlay z-20 mb-[-2px]">
     <div
       class="flex overflow-y-overlay md:grid md:grid-cols-6 items-center w-full z-20 md:gap-x-1 space-x-2 md:space-x-0">
 
-      <div class=" px-6 py-3 duration-300 transition-colors border-b-2 border-transparent font-medium text-center">
+      <div class="hidden md:block px-6 py-3 duration-300 transition-colors border-b-2 border-transparent font-medium">
 
       </div>
 
-      <button *ngFor="let weekday of weekDays"
-              class=" block px-4 py-3 duration-300 transition-colors border-b-2 border-transparent font-medium text-center capitalize min-w-min"
-              (click)="selectedWeekDay = weekday"
-              [ngClass]="{'!border-blue-500 text-blue-500': selectedWeekDay === weekday}">
-        {{weekday}}
+      <button *ngFor="let weekDay of weekDays"
+              class="px-4 py-3 duration-300 transition-colors border-b-2 border-transparent font-medium text-center capitalize min-w-min"
+              (click)="selectedWeekDay = weekDay"
+              [ngClass]="{'!border-blue-500 text-blue-500': selectedWeekDay === weekDay}">
+        {{weekDay}}
       </button>
 
     </div>
@@ -20,52 +20,22 @@
 
 </div>
 
-<div class="overflow-y-auto">
-  <table class="max-w-4xl mx-auto"
-         *ngIf="items">
+<div class=" px-6 py-2 md:px-0 select-none">
 
-    <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-    </thead>
+  <div class="flex md:grid md:grid-cols-6 overflow-y-auto">
 
-    <tbody>
-    <tr *ngFor="let hour of hours; let i = index">
+    <app-timetable-column string class="flex-shrink-0 w-screen md:w-auto"
+                          [items]="hours">
+    </app-timetable-column>
 
-      <th class="truncate">{{hour}}</th>
+    <app-timetable-column *ngFor="let weekDay of weekDays" class="flex-shrink-0 w-screen md:w-auto"
+                          [items]="getItems(weekDay)"
+                          (openItemModal)="openClassDetailsModal($event)">
+    </app-timetable-column>
 
-      <td *ngFor="let item of getItems(i+1)">
+  </div>
 
-        <div class="p-4 m-1 my-1.5"
-             [ngClass]="{'cursor-pointer': item.name}"
-             [class]="item.class"
-             [title]="item.name ? (item.name + '\n' + item.lecturer + '\n' + item.place) : ''"
-             (click)="item.name ? openClassDetailsModal(item) : null">
-
-          <p class="text-sm font-medium mb-2 h-5">
-            {{ item.short_name ? item.short_name : item.name }}
-          </p>
-
-          <p class="text-xs h-4">
-            {{ item.info }}
-          </p>
-
-        </div>
-
-      </td>
-
-    </tr>
-    </tbody>
-
-  </table>
 </div>
-
 
 <ng-template #classDetailsTemplate
              let-modal>

@@ -1,0 +1,25 @@
+<div class="grid grid-cols-1 gap-y-2">
+
+  <ng-container *ngFor="let item of items; let i = index">
+
+    <div class="p-4 text-center mx-1 h-20"
+         [ngClass]="{'cursor-pointer': item.name}"
+         [class]="item.class"
+         [title]="item.name ? (item.name + '\n' + item.lecturer + '\n' + item.place) : ''"
+         (click)="item.name ? openClassDetailsModal(item) : null">
+
+      <div class="text-sm font-medium mb-2">
+        {{ item.short_name ? item.short_name : item.name }}
+      </div>
+
+      <div class="text-xs font-medium">
+        {{ item.info }}
+      </div>
+
+    </div>
+
+    <hr class="border-t-2">
+
+  </ng-container>
+
+</div>

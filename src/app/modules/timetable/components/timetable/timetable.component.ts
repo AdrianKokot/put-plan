@@ -36,15 +36,18 @@ export class TimetableComponent {
       monday.setHours(+24);
     }
 
-    console.log(todayIndex);
     this.selectedWeekDay = this.weekDays[todayIndex >= this.weekDays.length ? 0 : todayIndex];
   }
 
-  public getItems(lesson_number: number): Lesson[] {
+  public getItems(weekDay: string): Lesson[] {
+    const day = this.weekDays.findIndex(x => x === weekDay) + 1;
+
     let res = [];
-    for (const day of [1, 2, 3, 4, 5]) {
+
+    for(let lesson_number = 1; lesson_number <= this.hours.length; lesson_number++){
       res.push(this.lessonService.getLesson(day, lesson_number))
     }
+
     return res;
   }
 
