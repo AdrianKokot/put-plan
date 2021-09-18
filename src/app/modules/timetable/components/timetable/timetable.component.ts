@@ -24,6 +24,20 @@ export class TimetableComponent {
         this.items = res;
       }
     });
+
+    const monday = new Date();
+    const todayIndex = ((monday.getDay() || 7) - 1);
+    monday.setHours(-24 * todayIndex);
+
+    for (let i = 0; i < 5; i++) {
+      this.weekDays.push(
+        monday.toLocaleString('pl-PL', {weekday: 'long'})
+      );
+      monday.setHours(+24);
+    }
+
+    console.log(todayIndex);
+    this.selectedWeekDay = this.weekDays[todayIndex >= this.weekDays.length ? 0 : todayIndex];
   }
 
   public getItems(lesson_number: number): Lesson[] {
@@ -38,4 +52,7 @@ export class TimetableComponent {
     this.selectedClass = lesson;
     this.modalService.open(this.classDetailsTemplate);
   }
+
+  public weekDays: string[] = [];
+  public selectedWeekDay: string = '';
 }

@@ -1,42 +1,66 @@
+<div class="sticky top-0 left-0 right-0 border-b-2 border-gray-200 z-10 bg-gray-100 pt-1 px-4 md:px-0">
+
+  <div class="w-full overflow-x-auto overflow-y-overlay z-20 mb-[-2px]">
+    <div
+      class="flex overflow-y-overlay md:grid md:grid-cols-6 items-center w-full z-20 md:gap-x-1 space-x-2 md:space-x-0">
+
+      <div class=" px-6 py-3 duration-300 transition-colors border-b-2 border-transparent font-medium text-center">
+
+      </div>
+
+      <button *ngFor="let weekday of weekDays"
+              class=" block px-4 py-3 duration-300 transition-colors border-b-2 border-transparent font-medium text-center capitalize min-w-min"
+              (click)="selectedWeekDay = weekday"
+              [ngClass]="{'!border-blue-500 text-blue-500': selectedWeekDay === weekday}">
+        {{weekday}}
+      </button>
+
+    </div>
+  </div>
+
+</div>
+
 <div class="overflow-y-auto">
   <table class="max-w-4xl mx-auto"
          *ngIf="items">
 
     <thead>
-      <th>&nbsp;</th>
-      <th>Poniedziałek</th>
-      <th>Wtorek</th>
-      <th>Środa</th>
-      <th>Czwartek</th>
-      <th>Piątek</th>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let hour of hours; let i = index">
+    <tr *ngFor="let hour of hours; let i = index">
 
-        <th class="truncate">{{hour}}</th>
+      <th class="truncate">{{hour}}</th>
 
-        <td *ngFor="let item of getItems(i+1)">
+      <td *ngFor="let item of getItems(i+1)">
 
-          <div class="p-4 m-1 my-1.5"
-               [ngClass]="{'cursor-pointer': item.name}"
-               [class]="item.class"
-               [title]="item.name ? (item.name + '\n' + item.lecturer + '\n' + item.place) : ''"
-               (click)="item.name ? openClassDetailsModal(item) : null">
+        <div class="p-4 m-1 my-1.5"
+             [ngClass]="{'cursor-pointer': item.name}"
+             [class]="item.class"
+             [title]="item.name ? (item.name + '\n' + item.lecturer + '\n' + item.place) : ''"
+             (click)="item.name ? openClassDetailsModal(item) : null">
 
-            <p class="text-sm font-medium mb-2 h-5">
-              {{ item.short_name ? item.short_name : item.name }}
-            </p>
+          <p class="text-sm font-medium mb-2 h-5">
+            {{ item.short_name ? item.short_name : item.name }}
+          </p>
 
-            <p class="text-xs h-4">
-              {{ item.info }}
-            </p>
+          <p class="text-xs h-4">
+            {{ item.info }}
+          </p>
 
-          </div>
+        </div>
 
-        </td>
+      </td>
 
-      </tr>
+    </tr>
     </tbody>
 
   </table>

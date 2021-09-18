@@ -4,6 +4,7 @@ import { ModalModule } from "./modules/modal/modal.module";
 import { FormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { HttpClientModule } from "@angular/common/http";
+import { IconModule } from "./modules/icon/icon.module";
 
 
 @NgModule({
@@ -13,14 +14,16 @@ import { HttpClientModule } from "@angular/common/http";
     ModalModule,
     FormsModule,
     NgSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    IconModule
   ],
   exports: [
     CommonModule,
     ModalModule,
     FormsModule,
     NgSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    IconModule
   ]
 })
 export class SharedModule {

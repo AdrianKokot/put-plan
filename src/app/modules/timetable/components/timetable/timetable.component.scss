@@ -25,3 +25,7 @@ table {
     @apply dark:border-gray-700;
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

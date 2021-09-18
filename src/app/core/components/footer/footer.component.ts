@@ -7,11 +7,11 @@ import { LessonService } from 'src/app/shared/services/lesson/lesson.service';
   styles: []
 })
 export class FooterComponent {
-  lastUpdate = this.lessonService.getDataVersion();
-
-  constructor(private lessonService: LessonService) { }
-
-  public refresh(): void {
-    window.location.reload();
-  }
+  // lastUpdate = this.lessonService.getDataVersion();
+  //
+  // constructor(private lessonService: LessonService) { }
+  //
+  // public refresh(): void {
+  //   window.location.reload();
+  // }
 }

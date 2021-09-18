@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-preferences-form',
   templateUrl: './preferences-form.component.html',
-  styles: ['']
+  styles: []
 })
 export class PreferencesFormComponent {
   @Input() modal: { close: () => {} } | null = null;

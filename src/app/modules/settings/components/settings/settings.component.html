@@ -1,0 +1,11 @@
+<div
+  (click)="openSettingsModal($event)"
+  title="Zmień ustawienia"
+  class="select-none flex items-center h-full cursor-pointer duration-300 transition-color hover:text-blue-500">
+  <app-icon icon="settings"></app-icon>
+</div>
+
+<ng-template #selectGroupTemplate
+             let-modal>
+  <app-preferences-form [modal]="modal"></app-preferences-form>
+</ng-template>
