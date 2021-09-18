@@ -27,7 +27,7 @@
   </app-timetable-column>
 
   <div class="overflow-x-hidden col-span-4 md:col-span-5"
-       (swipeLeft)="swipe($event)" appSwipe>
+       (swipeMove)="swipe($event)" appSwipe>
 
     <div class="grid grid-cols-5 w-[500%] md:w-full md:!translate-x-0 duration-300 transition-transform"
          [ngStyle]="{transform: 'translateX(calc(' + selectedWeekDayIndex + ' / 5 * -100%))'}">

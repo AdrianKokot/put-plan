@@ -1,17 +1,23 @@
 import { Directive, ElementRef, EventEmitter, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
 import { Swipe, SwipeCoordinates, SwipeAxis, SwipeEvent, SwipeVector } from "./swipe";
-import { elementAt, filter, map, switchMap, take, takeUntil, takeWhile, tap } from "rxjs/operators";
+import {
+  debounceTime,
+  elementAt,
+  filter,
+  map,
+  switchMap,
+  take,
+  takeUntil,
+  takeWhile,
+  tap,
+  throttleTime
+} from "rxjs/operators";
 import { fromEvent, Observable } from "rxjs";
 
 @Directive({
   selector: '[appSwipe]'
 })
 export class SwipeDirective implements OnInit, OnDestroy {
-
-  @Output() swipeRight: EventEmitter<SwipeEvent> = new EventEmitter<SwipeEvent>();
-  @Output() swipeLeft: EventEmitter<SwipeEvent> = new EventEmitter<SwipeEvent>();
-  @Output() swipeDown: EventEmitter<SwipeEvent> = new EventEmitter<SwipeEvent>();
-  @Output() swipeUp: EventEmitter<SwipeEvent> = new EventEmitter<SwipeEvent>();
 
   @Output() swipeMove: EventEmitter<SwipeEvent> = new EventEmitter<SwipeEvent>();
   @Output() swipeEnd: EventEmitter<SwipeEvent> = new EventEmitter<SwipeEvent>();
@@ -27,7 +33,11 @@ export class SwipeDirective implements OnInit, OnDestroy {
 
   private fromTouchEvent(eventName: string): Observable<SwipeCoordinates> {
     return fromEvent<TouchEvent>(this.elementRef.nativeElement, eventName)
-      .pipe(map(Swipe.getCoordinatesFromTouchEvent));
+      .pipe(
+        throttleTime(10),
+        debounceTime(5),
+        map(Swipe.getCoordinatesFromTouchEvent)
+      );
   }
 
   ngOnInit() {
@@ -85,19 +95,11 @@ export class SwipeDirective implements OnInit, OnDestroy {
     this.isSwipeable = false;
   }
 
-
   private emitSwipeMoveEvent(vector: SwipeVector, axis: SwipeAxis) {
     this.swipeMove.emit(new SwipeEvent(vector, axis));
   }
 
   private emitSwipeEndEvent(vector: SwipeVector, axis: SwipeAxis) {
-    const swipeEvent = new SwipeEvent(vector, axis, true);
-
-    const emitter = swipeEvent.axis === 'y'
-      ? (swipeEvent.direction === 'down' ? this.swipeDown : this.swipeUp)
-      : (swipeEvent.direction === 'left' ? this.swipeLeft : this.swipeRight);
-
-    emitter.emit(swipeEvent);
-    this.swipeEnd.emit(swipeEvent);
+    this.swipeEnd.emit(new SwipeEvent(vector, axis));
   }
 }

@@ -20,8 +20,7 @@ export class SwipeEvent {
 
   constructor(
     private vector: SwipeVector,
-    public axis: SwipeAxis,
-    public finished = false
+    public axis: SwipeAxis
   ) {
     this.direction = axis === 'y' ? (vector.y < 0 ? 'down' : 'up') : (vector.x < 0 ? 'right' : 'left');
     this.distance = Math.abs(vector[axis]);
