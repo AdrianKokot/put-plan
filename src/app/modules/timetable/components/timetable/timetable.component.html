@@ -20,17 +20,17 @@
 
 </div>
 
-<div class="px-6 py-2 md:px-0 select-none grid grid-cols-5 md:grid-cols-6">
+<div class="px-6 py-2 md:px-0 select-none grid grid-cols-5 md:grid-cols-6" (swipeMove)="swipeMove($event)"
+     (swipeEnd)="swipeEnd($event)" appSwipe>
 
   <app-timetable-column string class="flex-shrink-0 md:w-auto"
                         [items]="hours">
   </app-timetable-column>
 
-  <div class="overflow-x-hidden col-span-4 md:col-span-5"
-       (swipeMove)="swipe($event)" appSwipe>
+  <div class="overflow-x-hidden col-span-4 md:col-span-5">
 
-    <div class="grid grid-cols-5 w-[500%] md:w-full md:!translate-x-0 duration-300 transition-transform"
-         [ngStyle]="{transform: 'translateX(calc(' + selectedWeekDayIndex + ' / 5 * -100%))'}">
+    <div class="grid grid-cols-5 w-[500%] md:w-full md:!translate-x-0"
+         #swipeTransformElement id="swipeTransformElement">
 
       <app-timetable-column *ngFor="let weekDay of weekDays" class=""
                             [items]="getItems(weekDay)"

@@ -17,13 +17,15 @@ export type SwipeDirection = 'down' | 'up' | 'left' | 'right';
 export class SwipeEvent {
   public direction: SwipeDirection;
   public distance: number;
+  public delta: number;
 
   constructor(
-    private vector: SwipeVector,
+    vector: SwipeVector,
     public axis: SwipeAxis
   ) {
     this.direction = axis === 'y' ? (vector.y < 0 ? 'down' : 'up') : (vector.x < 0 ? 'right' : 'left');
     this.distance = Math.abs(vector[axis]);
+    this.delta = vector[axis];
   }
 
 }

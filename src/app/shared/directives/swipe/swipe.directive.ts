@@ -34,8 +34,8 @@ export class SwipeDirective implements OnInit, OnDestroy {
   private fromTouchEvent(eventName: string): Observable<SwipeCoordinates> {
     return fromEvent<TouchEvent>(this.elementRef.nativeElement, eventName)
       .pipe(
-        throttleTime(10),
-        debounceTime(5),
+        // throttleTime(10),
+        // debounceTime(5),
         map(Swipe.getCoordinatesFromTouchEvent)
       );
   }

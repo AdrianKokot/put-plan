@@ -1,31 +1,22 @@
-table {
-  min-width: 800px;
-  thead {
-    th {
-      @apply px-4;
-      @apply py-2;
-      @apply w-40;
-      @apply font-bold;
+:host {
+  --selected-weekday-index: 0;
+  --touch-transform: 0px;
+  --touch-transformed: 1;
+
+  ::-webkit-scrollbar {
+    @apply hidden;
+  }
+
+  #swipeTransformElement {
+    transform: translateX(calc(var(--selected-weekday-index, 0) / 5 * -100% + var(--touch-transform, 0px)));
+    transition: transform .1s;
+  }
+
+  &.touch-smooth-transition {
+
+    #swipeTransformElement {
+      transition: transform calc(var(--touch-transformed, 1) * .3s) ease-out;
     }
   }
-
-  th:first-child {
-    @apply font-medium;
-    @apply left-0;
-    @apply sticky;
-    @apply bg-gray-100;
-    @apply dark:bg-gray-800;
-  }
-
-  th,
-  td {
-    @apply text-center;
-    @apply border-b-2;
-    @apply border-gray-200;
-    @apply dark:border-gray-700;
-  }
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
