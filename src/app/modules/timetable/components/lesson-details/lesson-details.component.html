@@ -1,15 +1,15 @@
-<h1 class="text-2xl font-semibold pb-2 border-b px-2 mb-6 border-gray-200 dark:border-gray-700">
+<h1 class="font-semibold text-lg sm:text-2xl pb-2 border-b px-2 mb-4 border-gray-200 dark:border-gray-700">
   {{selectedClass.name}}
 </h1>
 
 <div class="px-2">
 
-  <p class="mb-4">Szczegóły przedmiotu</p>
+<!--  <p class="mb-4">Szczegóły przedmiotu</p>-->
 
   <div *ngIf="selectedClass.lecturer"
        class="mb-4">
 
-    <p class="text-xs">Prowadzący</p>
+    <p class="text-sm">Prowadzący</p>
     <p class="font-medium">{{selectedClass.lecturer}}</p>
 
   </div>
@@ -17,7 +17,7 @@
   <div *ngIf="selectedClass.place"
        class="mb-4">
 
-    <p class="text-xs">Sala</p>
+    <p class="text-sm">Sala</p>
     <p class="font-medium">{{selectedClass.place}}</p>
 
   </div>
@@ -25,7 +25,7 @@
   <div *ngIf="selectedClass.info"
        class="mb-4">
 
-    <p class="text-xs">Typ zajęć</p>
+    <p class="text-sm">Typ zajęć</p>
     <p class="font-medium">{{selectedClass.info}}</p>
 
   </div>
@@ -33,7 +33,7 @@
   <div *ngIf="selectedClass?.groups"
        class="mb-4">
 
-    <p class="text-xs">Grupy mające te zajęcia w tym czasie</p>
+    <p class="text-sm">Grupy mające te zajęcia w tym czasie</p>
     <p class="font-medium uppercase">{{selectedClass?.groups?.join(', ')}}</p>
 
   </div>
@@ -48,7 +48,7 @@
   <div *ngIf="selectedClass?.additional_info != ''"
        class="mb-4">
 
-    <p class="text-xs">Dodatkowe informacje</p>
+    <p class="text-sm">Dodatkowe informacje</p>
     <p class="font-medium">{{selectedClass.additional_info}}</p>
 
   </div>
@@ -56,7 +56,7 @@
   <div *ngIf="selectedClass.links.length > 0 && (selectedClass.links[0].link != '')"
        class="mb-4">
 
-    <p class="text-xs">Linki</p>
+    <p class="text-sm">Linki</p>
     <div class="font-medium">
       <p *ngFor="let link of selectedClass?.links">
         <a [href]="link.link"

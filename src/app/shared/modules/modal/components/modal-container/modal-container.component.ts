@@ -1,22 +1,36 @@
-import { Component, Inject, Renderer2 } from '@angular/core';
-import { DOCUMENT } from "@angular/common";
+import { Component } from '@angular/core';
 import { ModalService } from "../../services/modal.service";
 import { tap } from "rxjs/operators";
-import { animate, group, style, transition, trigger } from "@angular/animations";
+import { animate, animateChild, group, query, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: 'app-modal-container',
   templateUrl: './modal-container.component.html',
   styles: [],
   animations: [
-    trigger('modalAnimation', [
+    trigger('containerAnimation', [
       transition('* => void', [
-        animate('.25s ease', style({opacity: 0})),
+        group([
+          query("@modalAnimation", animateChild()),
+          animate('.3s ease', style({opacity: 0})),
+        ])
       ]),
       transition('void => *', [
         style({opacity: '0'}),
         group([
-          animate('.25s ease', style({opacity: 1}))
+          query("@modalAnimation", animateChild()),
+          animate('.3s ease', style({opacity: 1}))
+        ])
+      ])
+    ]),
+    trigger('modalAnimation', [
+      transition('* => void', [
+        animate('.3s ease', style({opacity: 0, transform: 'translateY(80%)'})),
+      ]),
+      transition('void => *', [
+        style({opacity: 0, transform: 'translateY(80%)'}),
+        group([
+          animate('.3s ease', style({opacity: 1, transform: 'translateY(0)'}))
         ])
       ])
     ])
@@ -28,14 +42,12 @@ export class ModalContainerComponent {
     .modals$
     .pipe(
       tap((modals) => {
-
+        window.document.body.classList.toggle('overflow-y-hidden', modals.length > 0);
       })
     )
 
   constructor(
-    private modalService: ModalService,
-    @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2,
+    private modalService: ModalService
   ) {
   }
 

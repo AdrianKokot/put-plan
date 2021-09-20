@@ -11,13 +11,13 @@ export class ModalService {
   private currId = 0;
   private currLvl = 0;
 
-  public open(template: TemplateRef<any>, htmlClass: string = ''): number {
+  public open(template: TemplateRef<any>): number {
     const id = this.currId++;
     const lvl = this.currLvl++;
 
     this.modals$.next(
       [...this.modals$.value, {
-        id, template, lvl, class: htmlClass
+        id, template, lvl
       }]
     );
 

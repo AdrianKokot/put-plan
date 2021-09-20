@@ -4,5 +4,4 @@ export interface Modal {
   id: number;
   lvl: number;
   template: TemplateRef<any>;
-  class: string;
 }
