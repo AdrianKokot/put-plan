@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener} from '@angular/core';
 import { ModalService } from "../../services/modal.service";
 import { tap } from "rxjs/operators";
 import { animate, animateChild, group, query, style, transition, trigger } from "@angular/animations";
@@ -37,6 +37,12 @@ import { animate, animateChild, group, query, style, transition, trigger } from 
   ]
 })
 export class ModalContainerComponent {
+  @HostListener("window:popstate")
+  onBackButton(): void {
+    if (this.modalService.modals$.value.length > 0) {
+      this.closeNewest();
+    }
+  }
 
   public modals$ = this.modalService
     .modals$

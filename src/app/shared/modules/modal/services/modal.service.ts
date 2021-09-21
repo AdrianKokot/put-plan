@@ -6,14 +6,25 @@ import { Modal } from "../../../models/modal";
   providedIn: 'root'
 })
 export class ModalService {
+
   public modals$ = new BehaviorSubject<Modal[]>([]);
 
   private currId = 0;
   private currLvl = 0;
+  private pushStateCount = 0;
+
+  constructor() {
+    window.addEventListener('popstate', () => {
+      this.pushStateCount--;
+    });
+  }
 
   public open(template: TemplateRef<any>): number {
     const id = this.currId++;
     const lvl = this.currLvl++;
+
+    window.history.pushState({}, '');
+    this.pushStateCount++;
 
     this.modals$.next(
       [...this.modals$.value, {
@@ -27,6 +38,10 @@ export class ModalService {
   public close(id: number): void {
     this.modals$.next(this.modals$.value.filter(x => x.id !== id));
     this.currLvl--;
+
+    if (this.pushStateCount > 0) {
+      window.history.back();
+    }
   }
 
   public closeAll(): void {

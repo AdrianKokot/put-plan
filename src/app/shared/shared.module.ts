@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalModule } from "./modules/modal/modal.module";
 import { FormsModule } from "@angular/forms";
