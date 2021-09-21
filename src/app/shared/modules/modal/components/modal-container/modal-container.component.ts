@@ -38,6 +38,7 @@ import { animate, animateChild, group, query, style, transition, trigger } from 
 })
 export class ModalContainerComponent {
   @HostListener("window:popstate")
+  @HostListener('document:keydown.escape')
   onBackButton(): void {
     if (this.modalService.modals$.value.length > 0) {
       this.closeNewest();
