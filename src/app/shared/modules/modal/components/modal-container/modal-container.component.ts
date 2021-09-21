@@ -65,8 +65,8 @@ export class ModalContainerComponent {
     fromEvent(window, 'resize')
       .pipe(
         filter(() => window.innerWidth < 768),
-        throttleTime(50),
-        debounceTime(10),
+        // throttleTime(10),
+        // debounceTime(5),
         startWith({})
       )
       .subscribe(() => {
