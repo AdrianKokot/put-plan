@@ -1,0 +1,22 @@
+import { Component } from '@angular/core';
+import { Timetable } from "./timetable";
+
+@Component({
+  selector: 'app-timetable',
+  templateUrl: './timetable.component.html',
+  styles: []
+})
+export class TimetableComponent {
+  private _selectedWeekDayIndex: number = Timetable.getCurrentDayIndex();
+
+  public get selectedWeekDayIndex(): number {
+    return this._selectedWeekDayIndex;
+  }
+
+  public set selectedWeekDayIndex(index: number) {
+    if (window.innerWidth < 768) {
+      this._selectedWeekDayIndex = index;
+    }
+  }
+
+}

@@ -44,6 +44,16 @@
 
 @import 'tailwindcss/utilities';
 
+@layer utilities {
+  .scrollbar-hidden::-webkit-scrollbar {
+    @apply hidden;
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+}
+
 // ng-select
 $ng-select-highlight: #3B82F6 !default;
 $ng-select-primary-text: #374151 !default;

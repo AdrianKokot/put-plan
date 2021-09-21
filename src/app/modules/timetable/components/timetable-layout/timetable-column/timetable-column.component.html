@@ -2,11 +2,11 @@
 
   <ng-container *ngFor="let item of items; let i = index">
 
-    <div class="p-4 text-center mx-1 h-20"
+    <div class="p-4 text-center mx-1 h-[4.75rem]"
          [ngClass]="{'cursor-pointer': item.name}"
          [class]="item.class"
          [title]="item.name ? (item.name + '\n' + item.lecturer + '\n' + item.place) : ''"
-         (click)="item.name ? openClassDetailsModal(item) : null">
+         (click)="item.name ? openClassDetails(item) : null">
 
       <div class="text-sm font-medium mb-2">
         {{ item.short_name ? item.short_name : item.name }}

@@ -1,0 +1,20 @@
+<div class="px-6 py-2 md:px-0 select-none grid grid-cols-5 md:grid-cols-6">
+
+  <app-timetable-column string class="flex-shrink-0 md:w-auto"
+                        [items]="hours">
+  </app-timetable-column>
+
+  <div class="overflow-x-hidden col-span-4 md:col-span-5 md:grid md:grid-cols-5 flex scroll-smooth"
+       #timetableColumnsContainer>
+
+    <app-timetable-column *ngFor="let weekDayIndex of [0,1,2,3,4]" class="w-full flex-shrink-0"
+                          [items]="getClassesForWeekDay(weekDayIndex)"
+                          (showModelDetails)="selectedItem = $event">
+    </app-timetable-column>
+
+  </div>
+
+</div>
+
+<app-timetable-entry-details [selectedItem]="selectedItem">
+</app-timetable-entry-details>

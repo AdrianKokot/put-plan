@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
 import { ModalService } from "../../../../shared/modules/modal/services/modal.service";
 import { LessonService } from "../../../../shared/services/lesson/lesson.service";
 

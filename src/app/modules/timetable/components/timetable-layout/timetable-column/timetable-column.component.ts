@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Lesson } from "../../../../shared/models/lesson";
+import { Lesson } from "../../../../../shared/models/lesson";
 
 @Component({
   selector: 'app-timetable-column:not([string])',
@@ -8,10 +8,10 @@ import { Lesson } from "../../../../shared/models/lesson";
 })
 export class TimetableColumnComponent {
   @Input() items: Lesson[] = [];
-  @Output() openItemModal: EventEmitter<Lesson> = new EventEmitter<Lesson>();
+  @Output() showModelDetails: EventEmitter<Lesson> = new EventEmitter<Lesson>();
 
-  public openClassDetailsModal(lesson: Lesson): void {
-    this.openItemModal.emit(lesson);
+  public openClassDetails(lesson: Lesson): void {
+    this.showModelDetails.emit(lesson);
   }
 
 }
