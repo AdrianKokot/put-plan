@@ -14,9 +14,7 @@ export class TimetableComponent {
   }
 
   public set selectedWeekDayIndex(index: number) {
-    if (window.innerWidth < 768) {
-      this._selectedWeekDayIndex = index;
-    }
+    this._selectedWeekDayIndex = index;
   }
 
 }

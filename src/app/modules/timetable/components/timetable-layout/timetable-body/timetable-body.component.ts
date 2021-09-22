@@ -1,32 +1,41 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
-  EventEmitter, Inject,
-  Input, OnDestroy, Output, ViewChild
+  EventEmitter, HostListener, Inject,
+  Input, Output
 } from '@angular/core';
 import { Lesson } from "../../../../../shared/models/lesson";
 import { Timetable } from "../../../timetable";
 import { LessonService } from "../../../../../shared/services/lesson/lesson.service";
-import { fromEvent, Subscription } from "rxjs";
 import { DOCUMENT } from "@angular/common";
 
 @Component({
   selector: 'app-timetable-body',
   templateUrl: './timetable-body.component.html',
-  styles: []
+  styles: [`
+    #timetableColumnsContainer {
+      transform: translateX(calc(var(--selected-weekday-index, 0) / 5 * -100%));
+      transition: transform calc(var(--weekday-transition-multiplier, 0) * 0.35s) ease-in-out;
+    }`]
 })
-export class TimetableBodyComponent implements AfterViewInit, OnDestroy {
+export class TimetableBodyComponent {
+  private currentDayIndex = Timetable.getCurrentDayIndex();
 
-  @ViewChild('timetableColumnsContainer') columnsContainer!: ElementRef;
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    if (window.innerWidth > 768 && this.currentDayIndex !== this.selectedWeekDayIndex) {
+      this.selectedWeekDayIndexChange.emit(this.currentDayIndex);
+    }
+  }
 
   private _selectedWeekDayIndex!: number;
 
   @Input()
   public set selectedWeekDayIndex(index: number) {
+    this.document.body.style.setProperty('--weekday-transition-multiplier', '' + Math.log2(Math.abs(this.selectedWeekDayIndex - index) + 1));
+
     this._selectedWeekDayIndex = index;
 
-    this.columnsContainer && this.updateContainerScrollLeft();
+    this.document.body.style.setProperty('--selected-weekday-index', '' + this.selectedWeekDayIndex);
   }
 
   public get selectedWeekDayIndex(): number {
@@ -38,27 +47,9 @@ export class TimetableBodyComponent implements AfterViewInit, OnDestroy {
   public selectedItem: Lesson = {} as Lesson;
   public hours = Timetable.ClassesHours;
 
-  private HTMLColumnsContainerWidth: number = 0;
-  private HTMLColumnsContainer!: HTMLElement;
-
-  private resizeEventSubscription: Subscription = fromEvent(this.document, 'resize')
-    .subscribe(() => {
-      this.HTMLColumnsContainer && (this.HTMLColumnsContainerWidth = this.HTMLColumnsContainer.getBoundingClientRect().width);
-    });
-
   constructor(
     private lessonService: LessonService,
     @Inject(DOCUMENT) private document: Document) {
-  }
-
-  ngAfterViewInit(): void {
-    this.HTMLColumnsContainer = this.columnsContainer.nativeElement;
-    this.HTMLColumnsContainerWidth = this.HTMLColumnsContainer.getBoundingClientRect().width;
-    this.updateContainerScrollLeft(false);
-  }
-
-  ngOnDestroy(): void {
-    this.resizeEventSubscription.unsubscribe();
   }
 
   public getClassesForWeekDay(weekDayIndex: number): Lesson[] {
@@ -69,12 +60,6 @@ export class TimetableBodyComponent implements AfterViewInit, OnDestroy {
     }
 
     return res;
-  }
-
-  private updateContainerScrollLeft(displayAnimation = true): void {
-    displayAnimation || this.HTMLColumnsContainer.classList.toggle('scroll-smooth');
-    this.HTMLColumnsContainer.scrollLeft = this.selectedWeekDayIndex * this.HTMLColumnsContainerWidth;
-    displayAnimation || this.HTMLColumnsContainer.classList.toggle('scroll-smooth');
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { ModalService } from "../../services/modal.service";
-import { debounceTime, filter, startWith, tap, throttleTime } from "rxjs/operators";
+import { startWith, tap} from "rxjs/operators";
 import { animate, animateChild, group, query, style, transition, trigger } from "@angular/animations";
 import { fromEvent } from "rxjs";
 
@@ -64,8 +64,8 @@ export class ModalContainerComponent {
 
     fromEvent(window, 'resize')
       .pipe(
-        filter(() => window.innerWidth < 768),
-        // throttleTime(10),
+        // filter(() => window.innerWidth < 768),
+        // throttleTime(2),
         // debounceTime(5),
         startWith({})
       )
