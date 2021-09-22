@@ -25,6 +25,14 @@ export class TimetableEntryDetailsComponent {
     return this._selectedItem;
   }
 
+  public itemDetails: { key: 'lecturer' | 'place' | 'info' | 'groups' | 'additional_info', label: string }[] = [
+    {key: 'lecturer', label: 'Prowadzący'},
+    {key: 'place', label: 'Sala'},
+    {key: 'info', label: 'Typ zajęć'},
+    {key: 'groups', label: 'Grupy mające te zajęcia w tym czasie'},
+    {key: 'additional_info', label: 'Dodatkowe informacje'}
+  ]
+
   constructor(
     private modalService: ModalService
   ) {

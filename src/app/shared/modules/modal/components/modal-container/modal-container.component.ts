@@ -1,8 +1,7 @@
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ModalService } from "../../services/modal.service";
-import { startWith, tap} from "rxjs/operators";
+import { tap } from "rxjs/operators";
 import { animate, animateChild, group, query, style, transition, trigger } from "@angular/animations";
-import { fromEvent } from "rxjs";
 
 @Component({
   selector: 'app-modal-container',
@@ -54,25 +53,7 @@ export class ModalContainerComponent {
       })
     )
 
-  private HTMLElementRef!: HTMLElement;
-
-  constructor(
-    private modalService: ModalService,
-    elementRef: ElementRef
-  ) {
-    this.HTMLElementRef = elementRef.nativeElement;
-
-    fromEvent(window, 'resize')
-      .pipe(
-        // filter(() => window.innerWidth < 768),
-        // throttleTime(2),
-        // debounceTime(5),
-        startWith({})
-      )
-      .subscribe(() => {
-        this.HTMLElementRef.style.setProperty('--vh', window.innerHeight + 'px');
-      });
-  }
+  constructor(private modalService: ModalService) {}
 
   public close(id: number): void {
     this.modalService.close(id);

@@ -16,7 +16,6 @@ export class TimetableHeaderComponent {
   @Input()
   public set selectedWeekDayIndex(value: number) {
     this._selectedWeekDayIndex = value;
-    console.log("SET!");
   }
 
   @Output() public selectedWeekDayIndexChange = new EventEmitter<number>();

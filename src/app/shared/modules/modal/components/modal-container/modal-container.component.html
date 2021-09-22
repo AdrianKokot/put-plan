@@ -1,13 +1,12 @@
-<section class="fixed top-0 left-0 w-full right-0 bg-black/30 z-20 md:py-24 flex items-end md:block"
+<section class="fixed top-0 left-0 w-full bg-black/30 md:pb-24 flex items-end md:block pt-24 h-full"
          *ngFor="let m of (modals$ | async); trackBy: trackById"
          [ngClass]="{'z-20': m.lvl === 0, 'z-30': m.lvl === 1, 'z-40': m.lvl === 2, 'z-50': m.lvl === 3}"
          (click)="$event.target === modalsSection ? close(m.id) : null"
          #modalsSection
-         [@containerAnimation]
-         style="height: var(--vh, 100vh)">
+         [@containerAnimation]>
 
   <div
-    class="bg-gray-100 dark:bg-gray-900 px-6 md:px-8 py-6 rounded-xl max-h-full mx-auto max-w-4xl md:h-auto overflow-y-auto w-full"
+    class="bg-gray-50 p-6 pb-12 md:mb-6 rounded-xl rounded-b-none md:rounded-b-xl max-h-full md:max-w-2xl w-full mx-auto overflow-y-auto"
     [@modalAnimation]>
 
     <ng-template *ngTemplateOutlet="m.template; context: {$implicit: {close: close.bind(this, m.id), id: m.id}}">
