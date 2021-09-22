@@ -339,3 +339,20 @@ $ng-select-value-font-size: theme('fontSize.sm') !default;
     }
   }
 }
+
+// modal
+
+app-modal-template {
+  .border-t-2 {
+    button {
+      @apply inline-block;
+      @apply w-full;
+      @apply md:w-auto;
+      @apply px-4;
+      @apply py-2;
+      @apply rounded-md;
+      @apply transition-colors;
+      @apply duration-300;
+    }
+  }
+}

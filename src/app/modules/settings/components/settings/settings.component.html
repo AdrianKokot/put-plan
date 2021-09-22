@@ -1,75 +1,75 @@
 <div
-  (click)="openSettingsModal($event)"
+  (click)="openSettingsModal()"
   title="Zmień ustawienia"
   class="flex items-center h-full cursor-pointer duration-300 transition-color hover:text-blue-500">
   <app-icon icon="settings"></app-icon>
 </div>
 
-<ng-template #selectGroupTemplate
+<ng-template #appSettingsTemplate
              let-modal>
 
-  <app-modal-template [modal]="modal" title="Ustawienia">
+  <form (submit)="submit()" [formGroup]="form">
 
-    <label class="block mb-6">
-      <p class="text-sm mb-2">Grupa dziekańska</p>
-      <ng-select [items]="(groups$ | async) || []"
-                 (change)="onChange()"
-                 [(ngModel)]="selectedGroup">
-        <ng-template ng-notfound-tmp>
-          <div class="ng-option disabled">
-            Nie znaleziono podanej grupy
-          </div>
-        </ng-template>
-      </ng-select>
-    </label>
+    <app-modal-template [modal]="modal" title="Ustawienia">
 
-    <label class="block mb-6">
-      <p class="text-sm mb-2">Przedmioty obieralne</p>
-      <ng-select [items]="(optionalClasses$ | async) || []"
-                 (change)="onChange()"
-                 [(ngModel)]="selectedOptionalClasses"
-                 [multiple]="true"
-                 [hideSelected]="true">
-        <ng-template ng-notfound-tmp>
-          <div class="ng-option disabled">
-            Nie znaleziono podanego przedmiotu obieralnego
-          </div>
-        </ng-template>
-      </ng-select>
-    </label>
+      <label class="block mb-6">
+        <span class="text-sm mb-2 block">Grupa dziekańska</span>
+        <ng-select [items]="(groups$ | async) || []"
+                   formControlName="group"
+                   notFoundText="Nie znaleziono">
+        </ng-select>
+      </label>
 
-    <label class="block mb-6">
-      <p class="text-sm mb-2">Język</p>
-      <ng-select [items]="(languageClasses$ | async) || []"
-                 (change)="onChange()"
-                 [(ngModel)]="selectedLanguageClass">
-        <ng-template ng-label-tmp
-                     ng-option-tmp
-                     let-item="item">
-          {{item.replaceAll('_', ' ').replace('-', ' - ')}}
-        </ng-template>
-        <ng-template ng-notfound-tmp
-                     let-searchTerm="searchTerm">
-          <div class="ng-option disabled">
-            Nie znaleziono podanego przedmiotu obieralnego
-          </div>
-        </ng-template>
-      </ng-select>
-    </label>
+      <label class="block mb-6">
+        <span class="text-sm mb-2 block">Przedmioty obieralne</span>
+        <ng-select [items]="(optionalClasses$ | async) || []"
+                   formControlName="optionalClasses"
+                   [multiple]="true"
+                   [hideSelected]="true"
+                   notFoundText="Nie znaleziono">
+        </ng-select>
+      </label>
 
-    <ng-container ngProjectAs="[modal-buttons]">
+      <label class="block mb-6">
+        <span class="text-sm mb-2 block">Język</span>
+        <ng-select [items]="(languageClasses$ | async) || []"
+                   formControlName="languageClass"
+                   notFoundText="Nie znaleziono">
+        </ng-select>
+      </label>
 
-      <button (click)="modal.close()"
-              class="w-full mb-2 md:w-auto md:mb-0 md:mr-2 px-3 py-2 rounded-md focus:outline-none focus:shadow bg-gray-200 hover:bg-gray-300 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">
-        Zamknij
-      </button>
-      <button (click)="savePreferences()"
-              class="w-full mb-2 md:w-auto md:mb-0 px-3 py-2 rounded-md focus:outline-none focus:shadow text-gray-100 bg-blue-500 hover:bg-blue-600 dark:text-gray-300 dark:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-300">
-        Zapisz
-      </button>
+      <label class="block mb-6">
+        <span class="text-sm mb-2 block">Motyw aplikacji</span>
+        <ng-select [items]="(languageClasses$ | async) || []"
+                   formControlName="languageClass"
+                   notFoundText="Nie znaleziono">
+        </ng-select>
+      </label>
 
-    </ng-container>
+      <label class="block mb-6">
+        <span class="text-sm mb-2 block">Zachowanie planu w weekend</span>
+        <ng-select [items]="(languageClasses$ | async) || []"
+                   formControlName="languageClass"
+                   notFoundText="Nie znaleziono">
+        </ng-select>
+      </label>
 
-  </app-modal-template>
+      <ng-container ngProjectAs="[modal-buttons]">
+
+        <button (click)="modal.close()" type="button"
+                class="bg-gray-200 hover:bg-gray-300">
+          Zamknij
+        </button>
+
+        <button type="submit"
+                class="text-gray-100 bg-blue-500 hover:bg-blue-600">
+          Zapisz
+        </button>
+
+      </ng-container>
+
+    </app-modal-template>
+
+  </form>
 
 </ng-template>

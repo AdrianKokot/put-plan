@@ -43,6 +43,15 @@
 //   return hours;
 // }
 
+import { isWeekParityReversed } from "../../../environments/timetable";
+
+function getWeekNumber(d: any = new Date()): number {
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  const yearStart: any = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+  return weekNo;
+}
 
 export class Timetable {
   public static WeekDays: string[] = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek'];
@@ -61,6 +70,8 @@ export class Timetable {
   public static getCurrentDayIndex(): number {
     return (((new Date()).getDay() || 7) - 1);
   }
+
+  public static isCurrentWeekEven = (getWeekNumber() % 2 === 0) === !isWeekParityReversed;
 }
 
 

@@ -21,74 +21,74 @@
     <ng-container *ngFor="let detail of itemDetails">
 
       <div *ngIf="selectedItem[detail.key]" class="mb-6 md:mb-4">
-        <p class="text-xs text-gray-500 mb-0.5">{{detail.label}}</p>
+        <p class="text-sm text-gray-500 mb-0.5">{{detail.label}}</p>
         <p class="text-base">{{selectedItem[detail.key]}}</p>
       </div>
 
     </ng-container>
 
-<!--    <div *ngIf="selectedItem.lecturer"-->
-<!--         class="mb-4">-->
+    <!--    <div *ngIf="selectedItem.lecturer"-->
+    <!--         class="mb-4">-->
 
-<!--      <p class="text-xs font-medium">Prowadzący</p>-->
-<!--      <p>{{selectedItem.lecturer}}</p>-->
+    <!--      <p class="text-xs font-medium">Prowadzący</p>-->
+    <!--      <p>{{selectedItem.lecturer}}</p>-->
 
-<!--    </div>-->
+    <!--    </div>-->
 
-<!--    <div *ngIf="selectedItem.place"-->
-<!--         class="mb-4">-->
+    <!--    <div *ngIf="selectedItem.place"-->
+    <!--         class="mb-4">-->
 
-<!--      <p class="text-sm">Sala</p>-->
-<!--      <p class="font-medium">{{selectedItem.place}}</p>-->
+    <!--      <p class="text-sm">Sala</p>-->
+    <!--      <p class="font-medium">{{selectedItem.place}}</p>-->
 
-<!--    </div>-->
+    <!--    </div>-->
 
-<!--    <div *ngIf="selectedItem.info"-->
-<!--         class="mb-4">-->
+    <!--    <div *ngIf="selectedItem.info"-->
+    <!--         class="mb-4">-->
 
-<!--      <p class="text-sm">Typ zajęć</p>-->
-<!--      <p class="font-medium">{{selectedItem.info}}</p>-->
+    <!--      <p class="text-sm">Typ zajęć</p>-->
+    <!--      <p class="font-medium">{{selectedItem.info}}</p>-->
 
-<!--    </div>-->
+    <!--    </div>-->
 
-<!--    <div *ngIf="selectedItem?.groups"-->
-<!--         class="mb-4">-->
+    <!--    <div *ngIf="selectedItem?.groups"-->
+    <!--         class="mb-4">-->
 
-<!--      <p class="text-sm">Grupy mające te zajęcia w tym czasie</p>-->
-<!--      <p class="font-medium uppercase">{{selectedItem?.groups?.join(', ')}}</p>-->
+    <!--      <p class="text-sm">Grupy mające te zajęcia w tym czasie</p>-->
+    <!--      <p class="font-medium uppercase">{{selectedItem?.groups?.join(', ')}}</p>-->
 
-<!--    </div>-->
+    <!--    </div>-->
 
-<!--    <div *ngIf="selectedItem.isOptional"-->
-<!--         class="mb-4">-->
+    <!--    <div *ngIf="selectedItem.isOptional"-->
+    <!--         class="mb-4">-->
 
-<!--      <p>Ten przedmiot jest obieralny</p>-->
+    <!--      <p>Ten przedmiot jest obieralny</p>-->
 
-<!--    </div>-->
+    <!--    </div>-->
 
-<!--    <div *ngIf="selectedItem?.additional_info !== ''"-->
-<!--         class="mb-4">-->
+    <!--    <div *ngIf="selectedItem?.additional_info !== ''"-->
+    <!--         class="mb-4">-->
 
-<!--      <p class="text-sm">Dodatkowe informacje</p>-->
-<!--      <p class="font-medium">{{selectedItem.additional_info}}</p>-->
+    <!--      <p class="text-sm">Dodatkowe informacje</p>-->
+    <!--      <p class="font-medium">{{selectedItem.additional_info}}</p>-->
 
-<!--    </div>-->
+    <!--    </div>-->
 
-<!--    <div *ngIf="selectedItem.links.length > 0 && (selectedItem.links[0].link !== '')"-->
-<!--         class="mb-4">-->
+    <!--    <div *ngIf="selectedItem.links.length > 0 && (selectedItem.links[0].link !== '')"-->
+    <!--         class="mb-4">-->
 
-<!--      <p class="text-sm">Linki</p>-->
-<!--      <div class="font-medium">-->
-<!--        <p *ngFor="let link of selectedItem?.links">-->
-<!--          <a [href]="link.link"-->
-<!--             class="duration-300 transition-colors hover:text-blue-500 underline"-->
-<!--             target="_blank">-->
-<!--            {{link.name}}-->
-<!--          </a>-->
-<!--        </p>-->
-<!--      </div>-->
+    <!--      <p class="text-sm">Linki</p>-->
+    <!--      <div class="font-medium">-->
+    <!--        <p *ngFor="let link of selectedItem?.links">-->
+    <!--          <a [href]="link.link"-->
+    <!--             class="duration-300 transition-colors hover:text-blue-500 underline"-->
+    <!--             target="_blank">-->
+    <!--            {{link.name}}-->
+    <!--          </a>-->
+    <!--        </p>-->
+    <!--      </div>-->
 
-<!--    </div>-->
+    <!--    </div>-->
 
   </div>
 

@@ -1,43 +1,46 @@
-import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { ModalService } from "../../../../shared/modules/modal/services/modal.service";
 import { LessonService } from "../../../../shared/services/lesson/lesson.service";
-import { Observable } from "rxjs";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styles: []
 })
-export class SettingsComponent implements AfterViewInit {
-  @ViewChild('selectGroupTemplate') templateRef!: TemplateRef<any>;
+export class SettingsComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('appSettingsTemplate') formTemplate!: TemplateRef<any>;
+
+  public form = this.fb.group({
+    group: [this.lessonService.preferences.selectedGroup],
+    optionalClasses: [this.lessonService.preferences.selectedOptionalClasses],
+    languageClass: [this.lessonService.preferences.selectedLanguageClass],
+    theme: [],
+    weekendBehavior: []
+  })
+
+  private formChangeSubscription = this.form.valueChanges.subscribe(formValue => {
+    this.lessonService.preferences = {
+      selectedGroup: formValue.group,
+      selectedOptionalClasses: formValue.optionalClasses,
+      selectedLanguageClass: formValue.languageClass
+    };
+  })
 
   constructor(
     private modalService: ModalService,
-    public lessonService: LessonService
+    public lessonService: LessonService,
+    private fb: FormBuilder
   ) {
   }
 
-  selectedGroup: string = this.lessonService.preferences.selectedGroup;
-  selectedOptionalClasses: string[] = this.lessonService.preferences.selectedOptionalClasses;
-  selectedLanguageClass: string = this.lessonService.preferences.selectedLanguageClass;
-
-  groups$: Observable<string[]> = this.lessonService.getGroups();
-  optionalClasses$: Observable<string[]> = this.lessonService.getOptionalClasses();
-  languageClasses$: Observable<string[]> = this.lessonService.getLanguagesClasses();
-
-
-  savePreferences(): void {
-    this.lessonService.savePreferencesInStorage();
-    this.modalService.closeNewest();
+  ngOnDestroy(): void {
+    this.formChangeSubscription.unsubscribe();
   }
 
-  onChange(): void {
-    this.lessonService.preferences = {
-      selectedGroup: this.selectedGroup,
-      selectedOptionalClasses: this.selectedOptionalClasses,
-      selectedLanguageClass: this.selectedLanguageClass
-    };
-  }
+  groups$ = this.lessonService.getGroups();
+  optionalClasses$ = this.lessonService.getOptionalClasses();
+  languageClasses$ = this.lessonService.getLanguagesClasses();
 
 
   ngAfterViewInit(): void {
@@ -46,17 +49,12 @@ export class SettingsComponent implements AfterViewInit {
     }
   }
 
-  changeWeek($e: { preventDefault: () => void; } | null = null) {
-    if ($e != null) {
-      $e.preventDefault();
-    }
-    this.lessonService.isWeekEven = !this.lessonService.isWeekEven;
+  openSettingsModal() {
+    this.modalService.open(this.formTemplate);
   }
 
-  openSettingsModal($event: { preventDefault: () => void; } | null = null) {
-    if ($event) {
-      $event.preventDefault();
-    }
-    this.modalService.open(this.templateRef);
+  submit() {
+    this.lessonService.savePreferencesInStorage();
+    this.modalService.closeNewest();
   }
 }

@@ -8,4 +8,10 @@
     <app-settings class="absolute right-0 top-0 bottom-0"></app-settings>
   </h1>
 
+  <p class="text-center text-sm select-none cursor-pointer hover:text-blue-500 duration-300 transition-colors">
+    <span>Tydzień {{isWeekEven ? 'parzysty' : 'nieparzysty'}} {{isSelectedWeekSameAsCurrentWeek ? '(aktualny)' : '(nieaktualny)'}}</span>
+<!--    <span></span>-->
+<!--    <span> - mamy tydzień {{isWeekEven ? 'nieparzysty' : 'parzysty'}}</span>-->
+  </p>
+
 </header>
