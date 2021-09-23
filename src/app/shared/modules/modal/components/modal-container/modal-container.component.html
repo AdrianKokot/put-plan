@@ -1,13 +1,20 @@
 <section class="fixed top-0 left-0 w-full bg-black/30 md:pb-24 flex items-end md:block pt-24 h-full"
          *ngFor="let m of (modals$ | async); trackBy: trackById"
-         [ngClass]="{'z-20': m.lvl === 0, 'z-30': m.lvl === 1, 'z-40': m.lvl === 2, 'z-50': m.lvl === 3}"
+         [ngClass]="{'z-20': m.lvl === 0, 'z-30': m.lvl === 1, 'z-40': m.lvl === 2, 'z-50': m.lvl === 3, '!pt-0': isModalContainerExtended}"
          (click)="$event.target === modalsSection ? close(m.id) : null"
          #modalsSection
          [@containerAnimation]>
 
-  <div
-    class="bg-gray-50 p-6 pb-12 md:mb-6 rounded-xl rounded-b-none md:rounded-b-xl max-h-full md:max-w-2xl w-full mx-auto overflow-y-auto"
-    [@modalAnimation]>
+  <div class="bg-gray-50 p-6 pb-12 md:mb-6 rounded-xl rounded-b-none md:rounded-b-xl max-h-full md:max-w-2xl w-full mx-auto overflow-y-auto duration-300"
+  style="transition: height .3s, border-radius .3s 0s"
+       [@modalAnimation]="isModalContainerExtended ? 'extended' : 'open'"
+       [ngClass]="{'rounded-t-none': isModalContainerExtended}"
+
+       (panUp)="pan($event)"
+       (panDown)="pan($event)"
+       (swipeUp)="swipe($event)"
+       (swipeDown)="swipe($event)"
+       >
 
     <ng-template *ngTemplateOutlet="m.template; context: {$implicit: {close: close.bind(this, m.id), id: m.id}}">
     </ng-template>
