@@ -1,7 +1,7 @@
-import { Component, HostListener } from '@angular/core';
-import { ModalService } from "../../services/modal.service";
-import { tap } from "rxjs/operators";
 import { animate, animateChild, group, query, style, transition, trigger } from "@angular/animations";
+import { Component, HostListener } from '@angular/core';
+import { tap } from "rxjs/operators";
+import { ModalService } from "../../services/modal.service";
 
 @Component({
   selector: 'app-modal-container',

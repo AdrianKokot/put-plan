@@ -1,12 +1,12 @@
+import { DOCUMENT } from "@angular/common";
 import {
   Component,
   EventEmitter, HostListener, Inject,
   Input, Output
 } from '@angular/core';
 import { Lesson } from "../../../../../shared/models/lesson";
-import { Timetable } from "../../../timetable";
 import { LessonService } from "../../../../../shared/services/lesson/lesson.service";
-import { DOCUMENT } from "@angular/common";
+import { Timetable } from "../../../timetable";
 
 @Component({
   selector: 'app-timetable-body',
@@ -62,4 +62,23 @@ export class TimetableBodyComponent {
     return res;
   }
 
+  public swipe(e: Event) {
+    if (e.type === 'swipeleft') {
+      this.nextDay();
+    } else {
+      this.previousDay();
+    }
+  }
+
+  private nextDay(): void {
+    if (this.selectedWeekDayIndex + 1 < Timetable.WeekDays.length) {
+      this.selectedWeekDayIndexChange.emit(this.selectedWeekDayIndex + 1);
+    }
+  }
+
+  private previousDay(): void {
+    if (this.selectedWeekDayIndex > 0) {
+      this.selectedWeekDayIndexChange.emit(this.selectedWeekDayIndex - 1);
+    }
+  }
 }

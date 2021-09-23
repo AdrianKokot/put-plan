@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from "@angular/fire/compat/database";
 import { BehaviorSubject, Observable } from 'rxjs';
 // @ts-ignore
 import hours from 'src/assets/hours.json';
-import { AngularFireDatabase } from "@angular/fire/compat/database";
-import { Preferences } from "../../models/preferences";
-import { Lesson } from "../../models/lesson";
 import { Timetable } from "../../../modules/timetable/timetable";
+import { Lesson } from "../../models/lesson";
+import { Preferences } from "../../models/preferences";
 
 
 @Injectable({
