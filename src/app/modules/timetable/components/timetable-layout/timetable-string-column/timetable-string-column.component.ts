@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { trackByIndex } from "../../../../../shared/functions/track-by";
 
 @Component({
   selector: 'app-timetable-column[string]',
@@ -7,4 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class TimetableStringColumnComponent {
   @Input() items: string[] = [];
+  public trackBy = trackByIndex;
 }

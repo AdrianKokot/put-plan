@@ -1,8 +1,10 @@
 import { DOCUMENT } from "@angular/common";
-import { Component, EventEmitter, HostListener, Inject, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Inject, Input, Output } from '@angular/core';
 import { Lesson } from "../../../../../shared/models/lesson";
 import { LessonService } from "../../../../../shared/services/lesson/lesson.service";
 import { Timetable } from "../../../timetable";
+import { fromEvent } from "rxjs";
+import { elementAt, filter, switchMap, tap } from "rxjs/operators";
 
 @Component({
   selector: 'app-timetable-body',
@@ -11,7 +13,6 @@ import { Timetable } from "../../../timetable";
     #timetableColumnsContainer {
       transform: translateX(calc(var(--selected-weekday-index, 0) / 5 * -100%));
       transition: transform calc(var(--weekday-transition-multiplier, 0) * 0.35s) ease-in-out;
-      touch-action: pan-y !important;
     }`]
 })
 export class TimetableBodyComponent {
@@ -46,7 +47,33 @@ export class TimetableBodyComponent {
 
   constructor(
     private lessonService: LessonService,
-    @Inject(DOCUMENT) private document: Document) {
+    @Inject(DOCUMENT) private document: Document,
+    elementRef: ElementRef) {
+
+    const hammerPan = new Hammer(elementRef.nativeElement, {recognizers: [[Hammer.Pan, {direction: Hammer.DIRECTION_ALL}]]});
+
+    // @ts-ignore
+    const pan = fromEvent<HammerInput>(hammerPan, 'panleft panright');
+
+    // @ts-ignore
+    fromEvent<HammerInput>(hammerPan, 'panstart')
+      .pipe(
+        switchMap(() => pan
+          .pipe(
+            filter((e: any) => Math.abs(e.deltaX) / window.innerWidth > .1),
+            elementAt(1),
+            tap((e: HammerInput) => {
+
+              if (e.direction === Hammer.DIRECTION_LEFT) {
+                this.nextDay();
+              } else {
+                this.previousDay();
+              }
+
+            })
+          ))
+      )
+      .subscribe();
   }
 
   public getClassesForWeekDay(weekDayIndex: number): Lesson[] {
@@ -57,14 +84,6 @@ export class TimetableBodyComponent {
     }
 
     return res;
-  }
-
-  public swipe(e: Event) {
-    if (e.type === 'swipeleft') {
-      this.nextDay();
-    } else {
-      this.previousDay();
-    }
   }
 
   private nextDay(): void {

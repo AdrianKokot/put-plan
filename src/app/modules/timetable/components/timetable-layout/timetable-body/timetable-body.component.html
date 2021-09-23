@@ -1,15 +1,13 @@
-<div class="px-6 py-2 md:px-0 select-none grid grid-cols-5 md:grid-cols-6">
+<div class="px-6 py-2 md:px-0 grid grid-cols-5 md:grid-cols-6">
 
   <app-timetable-column string
                         [items]="hours">
   </app-timetable-column>
 
-  <div class="overflow-x-hidden col-span-4 md:col-span-5">
+  <div class="overflow-x-hidden col-span-4 md:col-span-5 touch-pan-y" >
 
     <div class="grid grid-cols-5 md:!translate-x-0 w-[500%] md:w-full md:!transition-none"
-         id="timetableColumnsContainer"
-         (swipeleft)="swipe($event)"
-         (swiperight)="swipe($event)">
+         id="timetableColumnsContainer">
 
       <app-timetable-column *ngFor="let weekDayIndex of [0,1,2,3,4]"
                             class="w-full"

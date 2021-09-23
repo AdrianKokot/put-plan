@@ -5,3 +5,7 @@ export const trackByField = function (fieldName: string) {
 }
 
 export const trackById = trackByField('id');
+
+export const trackByIndex = function (index: any, item: any): any {
+  return index;
+}

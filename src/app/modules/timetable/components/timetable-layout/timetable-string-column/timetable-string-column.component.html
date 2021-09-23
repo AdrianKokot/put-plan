@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 items-center gap-y-2">
 
-  <ng-container *ngFor="let item of items;">
+  <ng-container *ngFor="let item of items; trackBy: trackBy">
 
     <div class="flex flex-col md:flex-row md:space-x-1 space-y-4 md:space-y-0 items-center text-center mx-2 justify-center font-medium h-[4.75rem] text-sm md:text-base">
 
