@@ -6,35 +6,48 @@ import { ModalService } from "../../services/modal.service";
 @Component({
   selector: 'app-modal-container',
   templateUrl: './modal-container.component.html',
-  styles: [],
+  styles: [`
+
+    section {
+      transition: padding 0s calc((1 - var(--is-modal-extended, 0)) * 1s);
+
+      & > div {
+        transition: height .3s, border-radius .3s calc(var(--is-modal-extended, 0) * .25s);
+      }
+    }
+
+  `],
   animations: [
     trigger('containerAnimation', [
+      state('void', style({opacity: 0})),
+
       transition('* => void', [
         group([
           query("@modalAnimation", animateChild()),
-          animate('.3s ease', style({ opacity: 0 })),
+          animate('.3s ease'),
         ])
       ]),
       transition('void => *', [
-        style({ opacity: '0' }),
         group([
           query("@modalAnimation", animateChild()),
-          animate('.3s ease', style({ opacity: 1 }))
+          animate('.3s ease', style({opacity: 1}))
         ])
       ])
     ]),
+
     trigger('modalAnimation', [
-      state('extended', style({ height: '100%' })),
+      state('extended', style({height: '100%'})),
+      state('void', style({opacity: 0, transform: 'translateY(80%)'})),
+
       transition('extended <=> *', [
         animate('.5s ease-in-out')
       ]),
       transition('* => void', [
-        animate('.3s ease', style({ opacity: 0, transform: 'translateY(80%)' })),
+        animate('.4s ease'),
       ]),
       transition('void => *', [
-        style({ opacity: 0, transform: 'translateY(80%)' }),
         group([
-          animate('.3s ease', style({ opacity: 1, transform: 'translateY(0)' }))
+          animate('.4s ease', style({opacity: 1, transform: 'translateY(0)'}))
         ])
       ])
     ])
@@ -58,7 +71,8 @@ export class ModalContainerComponent {
       })
     )
 
-  constructor(private modalService: ModalService) { }
+  constructor(private modalService: ModalService) {
+  }
 
   public close(id: number): void {
     this.isModalContainerExtended || this.modalService.close(id);
@@ -74,43 +88,24 @@ export class ModalContainerComponent {
 
   public isModalContainerExtended = false;
 
-  public pan(e: any): void {
-    e.preventDefault();
-    // e.stopPropagation();
-
+  public swipe(e: any): void {
     if (window.innerWidth >= 768)
       return;
 
-    if (Math.abs(e.deltaY) / window.innerHeight > 0.1) {
-      if (e.type === 'panup') {
-        this.isModalContainerExtended || (this.isModalContainerExtended = true);
-      } else {
-        this.isModalContainerExtended && (this.isModalContainerExtended = false);
-      }
-
-      console.log('pan!');
-    }
-
-  }
-
-  public swipe(e: Event): void {
     e.preventDefault();
 
-    if (e.type === 'swipedown') {
-      this.isModalContainerExtended ? (this.isModalContainerExtended = false) : (this.closeNewest());
+    if (e.direction === Hammer.DIRECTION_UP) {
+      this.isModalContainerExtended = true;
+      window.document.body.style.setProperty('--is-modal-extended', '1');
     } else {
-      this.isModalContainerExtended || (this.isModalContainerExtended = true);
+      if (this.isModalContainerExtended) {
+        this.isModalContainerExtended = false;
+        window.document.body.style.setProperty('--is-modal-extended', '0');
+      } else {
+        this.closeNewest();
+      }
     }
 
-    console.log('swipe');
   }
 
-  public reactOnVerticalTouch(e: { type: string, deltaY?: number, preventDefault: () => void }): void {
-    if (window.innerWidth >= 768) return;
-
-    e.preventDefault();
-
-    const isUp = e.type.includes('up');
-
-  }
 }

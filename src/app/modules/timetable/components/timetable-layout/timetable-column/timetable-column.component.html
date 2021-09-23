@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 gap-y-2">
 
-  <ng-container *ngFor="let item of items; let i = index">
+  <ng-container *ngFor="let item of items; let i = index; trackBy: trackBy">
 
     <div class="p-4 text-center mx-1 h-[4.75rem]"
          [ngClass]="{'cursor-pointer': item.name}"

@@ -5,16 +5,12 @@
          #modalsSection
          [@containerAnimation]>
 
-  <div class="bg-gray-50 p-6 pb-12 md:mb-6 rounded-xl rounded-b-none md:rounded-b-xl max-h-full md:max-w-2xl w-full mx-auto overflow-y-auto duration-300"
-  style="transition: height .3s, border-radius .3s 0s"
-       [@modalAnimation]="isModalContainerExtended ? 'extended' : 'open'"
-       [ngClass]="{'rounded-t-none': isModalContainerExtended}"
-
-       (panUp)="pan($event)"
-       (panDown)="pan($event)"
-       (swipeUp)="swipe($event)"
-       (swipeDown)="swipe($event)"
-       >
+  <div
+    class="bg-gray-50 p-6 pb-12 md:mb-6 rounded-xl rounded-b-none md:rounded-b-xl max-h-full md:max-w-2xl w-full mx-auto overflow-y-auto duration-300"
+    [@modalAnimation]="isModalContainerExtended ? 'extended' : 'opened'"
+    [ngClass]="{'rounded-t-none': isModalContainerExtended}"
+    (swipeup)="swipe($event)"
+    (swipedown)="swipe($event)">
 
     <ng-template *ngTemplateOutlet="m.template; context: {$implicit: {close: close.bind(this, m.id), id: m.id}}">
     </ng-template>

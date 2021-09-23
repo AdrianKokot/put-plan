@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Timetable } from "../../../timetable";
-import { LessonService } from "../../../../../shared/services/lesson/lesson.service";
 
 @Component({
   selector: 'app-timetable-header',

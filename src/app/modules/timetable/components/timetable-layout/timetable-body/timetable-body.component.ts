@@ -1,9 +1,5 @@
 import { DOCUMENT } from "@angular/common";
-import {
-  Component,
-  EventEmitter, HostListener, Inject,
-  Input, Output
-} from '@angular/core';
+import { Component, EventEmitter, HostListener, Inject, Input, Output } from '@angular/core';
 import { Lesson } from "../../../../../shared/models/lesson";
 import { LessonService } from "../../../../../shared/services/lesson/lesson.service";
 import { Timetable } from "../../../timetable";
@@ -15,6 +11,7 @@ import { Timetable } from "../../../timetable";
     #timetableColumnsContainer {
       transform: translateX(calc(var(--selected-weekday-index, 0) / 5 * -100%));
       transition: transform calc(var(--weekday-transition-multiplier, 0) * 0.35s) ease-in-out;
+      touch-action: pan-y !important;
     }`]
 })
 export class TimetableBodyComponent {
