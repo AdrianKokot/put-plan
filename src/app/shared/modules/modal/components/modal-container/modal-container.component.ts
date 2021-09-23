@@ -58,6 +58,7 @@ export class ModalContainerComponent {
   @HostListener('document:keydown.escape')
   onBackButton(): void {
     if (this.modalService.modals$.value.length > 0) {
+      this.isModalContainerExtended = false;
       this.closeNewest();
     }
   }
