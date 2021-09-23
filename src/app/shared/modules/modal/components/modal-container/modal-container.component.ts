@@ -79,6 +79,11 @@ export class ModalContainerComponent {
     this.isModalContainerExtended || this.modalService.close(id);
   }
 
+  public forceClose(id:number): void {
+    this.isModalContainerExtended = false;
+    this.modalService.close(id);
+  }
+
   public closeNewest(): void {
     this.isModalContainerExtended || this.modalService.closeNewest();
   }
@@ -89,6 +94,8 @@ export class ModalContainerComponent {
 
   public isModalContainerExtended = false;
 
+  @HostListener('swipeup', ['$event'])
+  @HostListener('swipedown', ['$event'])
   public swipe(e: any): void {
     if (window.innerWidth >= 768)
       return;

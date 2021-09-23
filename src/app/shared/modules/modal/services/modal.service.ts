@@ -19,7 +19,7 @@ export class ModalService {
     });
   }
 
-  public open(template: TemplateRef<any>): number {
+  public open(template: TemplateRef<any>, options: { full: boolean } = {full: false}): number {
     const id = this.currId++;
     const lvl = this.currLvl++;
 
@@ -27,9 +27,9 @@ export class ModalService {
     this.pushStateCount++;
 
     this.modals$.next(
-      [...this.modals$.value, {
-        id, template, lvl
-      }]
+      this.modals$.value.concat({
+        id, template, lvl, ...options
+      })
     );
 
     return id;

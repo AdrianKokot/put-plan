@@ -50,7 +50,7 @@ export class SettingsComponent implements AfterViewInit, OnDestroy {
   }
 
   openSettingsModal() {
-    this.modalService.open(this.formTemplate);
+    this.modalService.open(this.formTemplate, {full: true});
   }
 
   submit() {

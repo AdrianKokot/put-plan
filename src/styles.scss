@@ -56,6 +56,12 @@
   .touch-pan-y {
     touch-action: pan-y;
   }
+  .touch-pan-x {
+    touch-action: pan-x;
+  }
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
 }
 
 // ng-select
