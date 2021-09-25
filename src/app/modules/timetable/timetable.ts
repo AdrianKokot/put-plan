@@ -67,11 +67,24 @@ export class Timetable {
     "20:10 - 21:40"
   ]
 
-  public static getCurrentDayIndex(): number {
+  private static getCurrentDayIndex(): number {
     return (((new Date()).getDay() || 7) - 1);
   }
 
-  public static isCurrentWeekEven = (getWeekNumber() % 2 === 0) === !isWeekParityReversed;
+  private static getCurrentWeekDayIndex(): number {
+    // TODO checking app settings to set weekend behavior
+    const currentDayIndex = Timetable.getCurrentDayIndex();
+    return currentDayIndex < 5 ? currentDayIndex : 4;
+  }
+
+  private static getIsCurrentWeekEven(): boolean {
+    // TODO checking app settings to set weekend behavior
+    return (getWeekNumber() % 2 === 0) === !isWeekParityReversed;
+  }
+
+  public static currentDayIndex: number = Timetable.getCurrentDayIndex();
+  public static currentWeekDayIndex: number = Timetable.getCurrentWeekDayIndex();
+  public static isCurrentWeekEven: boolean = Timetable.getIsCurrentWeekEven();
 }
 
 

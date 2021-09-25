@@ -16,12 +16,12 @@ import { elementAt, filter, switchMap, tap } from "rxjs/operators";
     }`]
 })
 export class TimetableBodyComponent {
-  private currentDayIndex = Timetable.getCurrentDayIndex();
+  private currentWeekDayIndex = Timetable.currentWeekDayIndex;
 
   @HostListener('window:resize')
   onWindowResize(): void {
-    if (window.innerWidth > 768 && this.currentDayIndex !== this.selectedWeekDayIndex) {
-      this.selectedWeekDayIndexChange.emit(this.currentDayIndex);
+    if (window.innerWidth > 768 && this.currentWeekDayIndex !== this.selectedWeekDayIndex) {
+      this.selectedWeekDayIndexChange.emit(this.currentWeekDayIndex);
     }
   }
 

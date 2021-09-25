@@ -7,7 +7,7 @@ import { Timetable } from "./timetable";
   styles: []
 })
 export class TimetableComponent {
-  private _selectedWeekDayIndex: number = Timetable.getCurrentDayIndex();
+  private _selectedWeekDayIndex: number = Timetable.currentWeekDayIndex;
 
   public get selectedWeekDayIndex(): number {
     return this._selectedWeekDayIndex;
@@ -16,5 +16,4 @@ export class TimetableComponent {
   public set selectedWeekDayIndex(index: number) {
     this._selectedWeekDayIndex = index;
   }
-
 }
