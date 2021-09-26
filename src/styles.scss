@@ -56,9 +56,11 @@
   .touch-pan-y {
     touch-action: pan-y;
   }
+
   .touch-pan-x {
     touch-action: pan-x;
   }
+
   .touch-manipulation {
     touch-action: manipulation;
   }
@@ -364,5 +366,13 @@ app-modal-template {
       @apply transition-colors;
       @apply duration-300;
     }
+  }
+
+  a {
+    @apply underline;
+    @apply hover:text-blue-500;
+    @apply dark:hover:text-blue-400;
+    @apply duration-300;
+    @apply transition-colors;
   }
 }

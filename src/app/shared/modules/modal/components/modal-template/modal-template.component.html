@@ -1,7 +1,7 @@
-<div class="border-b-2 border-gray-200 text-center mb-6 relative">
+<div class="border-b-2 border-gray-200 dark:border-gray-600 text-center mb-6 relative">
 
   <h2
-    class="mb-[-2px] inline-block font-semibold md:font-medium text-lg sm:text-xl pb-2 border-b-2 text-blue-500 px-2 md:px-4 border-blue-500">
+    class="mb-[-2px] inline-block font-semibold md:font-medium text-lg sm:text-xl pb-2 border-b-2 text-blue-500 dark:text-blue-400 dark:border-blue-400 px-2 md:px-4 border-blue-500">
     {{title}}
   </h2>
 
@@ -14,13 +14,13 @@
 
 </div>
 
-<div class="px-2 md:px-4">
+<div class="px-2 md:px-4 select-text">
 
   <ng-content></ng-content>
 
 </div>
 
-<div class="border-t-2 border-gray-200 px-2 md:px-4 mt-6 pt-4 text-right space-y-2 md:space-x-2 md:space-y-0">
+<div class="border-t-2 border-gray-200 dark:border-gray-600 px-2 md:px-4 mt-6 pt-4 text-right space-y-2 md:space-x-2 md:space-y-0" *ngIf="hasFooter">
 
   <ng-content select="[modal-buttons]"></ng-content>
 

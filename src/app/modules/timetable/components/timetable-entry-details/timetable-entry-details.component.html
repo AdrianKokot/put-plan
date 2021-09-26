@@ -1,105 +1,16 @@
-<ng-template #detailsTemplate let-modal>
+<ng-template #detailsTemplate>
 
-  <div class="border-b-2 border-gray-200 text-center mb-6 relative">
-
-    <h2
-      class="mb-[-2px] inline-block font-semibold md:font-medium text-lg sm:text-xl pb-2 border-b-2 text-blue-500 px-2 md:px-4 border-blue-500">
-      {{selectedItem.name}}
-    </h2>
-
-    <div
-      (click)="modal.close()"
-      title="Zamknij"
-      class="hidden md:flex absolute right-4 top-0 bottom-2 items-center cursor-pointer duration-300 transition-color hover:text-blue-500">
-      <app-icon icon="close"></app-icon>
-    </div>
-
-  </div>
-
-  <div class="px-2 md:px-4">
+  <app-modal-template [title]="selectedItem.name">
 
     <ng-container *ngFor="let detail of itemDetails">
 
       <div *ngIf="selectedItem[detail.key]" class="mb-6 md:mb-4">
-        <p class="text-sm text-gray-500 mb-0.5">{{detail.label}}</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{{detail.label}}</p>
         <p class="text-base">{{selectedItem[detail.key]}}</p>
       </div>
 
     </ng-container>
 
-    <!--    <div *ngIf="selectedItem.lecturer"-->
-    <!--         class="mb-4">-->
-
-    <!--      <p class="text-xs font-medium">Prowadzący</p>-->
-    <!--      <p>{{selectedItem.lecturer}}</p>-->
-
-    <!--    </div>-->
-
-    <!--    <div *ngIf="selectedItem.place"-->
-    <!--         class="mb-4">-->
-
-    <!--      <p class="text-sm">Sala</p>-->
-    <!--      <p class="font-medium">{{selectedItem.place}}</p>-->
-
-    <!--    </div>-->
-
-    <!--    <div *ngIf="selectedItem.info"-->
-    <!--         class="mb-4">-->
-
-    <!--      <p class="text-sm">Typ zajęć</p>-->
-    <!--      <p class="font-medium">{{selectedItem.info}}</p>-->
-
-    <!--    </div>-->
-
-    <!--    <div *ngIf="selectedItem?.groups"-->
-    <!--         class="mb-4">-->
-
-    <!--      <p class="text-sm">Grupy mające te zajęcia w tym czasie</p>-->
-    <!--      <p class="font-medium uppercase">{{selectedItem?.groups?.join(', ')}}</p>-->
-
-    <!--    </div>-->
-
-    <!--    <div *ngIf="selectedItem.isOptional"-->
-    <!--         class="mb-4">-->
-
-    <!--      <p>Ten przedmiot jest obieralny</p>-->
-
-    <!--    </div>-->
-
-    <!--    <div *ngIf="selectedItem?.additional_info !== ''"-->
-    <!--         class="mb-4">-->
-
-    <!--      <p class="text-sm">Dodatkowe informacje</p>-->
-    <!--      <p class="font-medium">{{selectedItem.additional_info}}</p>-->
-
-    <!--    </div>-->
-
-    <!--    <div *ngIf="selectedItem.links.length > 0 && (selectedItem.links[0].link !== '')"-->
-    <!--         class="mb-4">-->
-
-    <!--      <p class="text-sm">Linki</p>-->
-    <!--      <div class="font-medium">-->
-    <!--        <p *ngFor="let link of selectedItem?.links">-->
-    <!--          <a [href]="link.link"-->
-    <!--             class="duration-300 transition-colors hover:text-blue-500 underline"-->
-    <!--             target="_blank">-->
-    <!--            {{link.name}}-->
-    <!--          </a>-->
-    <!--        </p>-->
-    <!--      </div>-->
-
-    <!--    </div>-->
-
-  </div>
-
-  <!--  <div-->
-  <!--    class="border-t-2 border-gray-200 px-2 md:px-4 mt-6 pt-4 text-right space-y-2 md:space-x-2 md:space-y-0">-->
-
-  <!--    <button (click)="modal.close()"-->
-  <!--            class="inline-block w-full md:w-auto px-4 py-2 rounded-md transition-colors duration-300 border-2 border-gray-300 hover:bg-gray-100">-->
-  <!--      Zamknij-->
-  <!--    </button>-->
-
-  <!--  </div>-->
+  </app-modal-template>
 
 </ng-template>
