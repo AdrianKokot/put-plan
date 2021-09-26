@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnDestroy, TemplateRef, ViewChild } from '@an
 import { ModalService } from "../../../../shared/modules/modal/services/modal.service";
 import { LessonService } from "../../../../shared/services/lesson/lesson.service";
 import { FormBuilder } from "@angular/forms";
+import { appThemes } from "../../../../shared/types/app-theme";
+import { AppSettingsService } from "../../../../shared/services/app-settings/app-settings.service";
 
 @Component({
   selector: 'app-settings',
@@ -15,11 +17,15 @@ export class SettingsComponent implements AfterViewInit, OnDestroy {
     group: [this.lessonService.preferences.selectedGroup],
     optionalClasses: [this.lessonService.preferences.selectedOptionalClasses],
     languageClass: [this.lessonService.preferences.selectedLanguageClass],
-    theme: [],
+    theme: [this.settingsService.settings.theme],
     weekendBehavior: []
   })
 
   private formChangeSubscription = this.form.valueChanges.subscribe(formValue => {
+    this.settingsService.settings = {
+      theme: formValue.theme
+    };
+
     this.lessonService.preferences = {
       selectedGroup: formValue.group,
       selectedOptionalClasses: formValue.optionalClasses,
@@ -30,7 +36,8 @@ export class SettingsComponent implements AfterViewInit, OnDestroy {
   constructor(
     private modalService: ModalService,
     public lessonService: LessonService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private settingsService: AppSettingsService
   ) {
   }
 
@@ -38,9 +45,10 @@ export class SettingsComponent implements AfterViewInit, OnDestroy {
     this.formChangeSubscription.unsubscribe();
   }
 
-  groups$ = this.lessonService.getGroups();
-  optionalClasses$ = this.lessonService.getOptionalClasses();
-  languageClasses$ = this.lessonService.getLanguagesClasses();
+  public appThemes = appThemes;
+  public groups$ = this.lessonService.getGroups();
+  public optionalClasses$ = this.lessonService.getOptionalClasses();
+  public languageClasses$ = this.lessonService.getLanguagesClasses();
 
 
   ngAfterViewInit(): void {
@@ -54,6 +62,7 @@ export class SettingsComponent implements AfterViewInit, OnDestroy {
   }
 
   submit() {
+    this.settingsService.save();
     this.lessonService.savePreferencesInStorage();
     this.modalService.closeNewest();
   }

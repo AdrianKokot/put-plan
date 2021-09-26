@@ -40,19 +40,21 @@
 
       <label class="block mb-6">
         <span class="text-sm mb-2 block">Motyw aplikacji</span>
-        <ng-select [items]="(languageClasses$ | async) || []"
-                   formControlName="languageClass"
+        <ng-select [items]="appThemes"
+                   formControlName="theme"
+                   bindLabel="label"
+                   bindValue="key"
                    notFoundText="Nie znaleziono">
         </ng-select>
       </label>
 
-      <label class="block mb-6">
-        <span class="text-sm mb-2 block">Zachowanie planu w weekend</span>
-        <ng-select [items]="(languageClasses$ | async) || []"
-                   formControlName="languageClass"
-                   notFoundText="Nie znaleziono">
-        </ng-select>
-      </label>
+<!--      <label class="block mb-6">-->
+<!--        <span class="text-sm mb-2 block">Zachowanie planu w weekend</span>-->
+<!--        <ng-select [items]="(languageClasses$ | async) || []"-->
+<!--                   formControlName="languageClass"-->
+<!--                   notFoundText="Nie znaleziono">-->
+<!--        </ng-select>-->
+<!--      </label>-->
 
       <ng-container ngProjectAs="[modal-buttons]">
 
