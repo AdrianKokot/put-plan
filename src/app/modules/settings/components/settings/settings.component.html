@@ -16,7 +16,8 @@
         <span class="text-sm mb-2 block">Grupa dziekańska</span>
         <ng-select [items]="(groups$ | async) || []"
                    formControlName="group"
-                   notFoundText="Nie znaleziono">
+                   notFoundText="Nie znaleziono"
+                   placeholder="Grupa dziekańska">
         </ng-select>
       </label>
 
@@ -26,7 +27,8 @@
                    formControlName="optionalClasses"
                    [multiple]="true"
                    [hideSelected]="true"
-                   notFoundText="Nie znaleziono">
+                   notFoundText="Nie znaleziono"
+                   placeholder="Przedmioty obieralne">
         </ng-select>
       </label>
 
@@ -34,7 +36,8 @@
         <span class="text-sm mb-2 block">Język</span>
         <ng-select [items]="(languageClasses$ | async) || []"
                    formControlName="languageClass"
-                   notFoundText="Nie znaleziono">
+                   notFoundText="Nie znaleziono"
+                   placeholder="Język">
         </ng-select>
       </label>
 
