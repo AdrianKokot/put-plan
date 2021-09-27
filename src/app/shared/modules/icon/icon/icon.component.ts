@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 import { icons } from 'src/assets/icons';
 
@@ -13,6 +13,7 @@ import { icons } from 'src/assets/icons';
     </svg>
   `,
   styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconComponent {
   private selectedIcon = '';
