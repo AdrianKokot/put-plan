@@ -67,6 +67,8 @@ export class Timetable {
     "20:10 - 21:40"
   ]
 
+  public static Groups: string[] = ["i3.1", "i3.2"]
+
   private static getCurrentDayIndex(): number {
     return (((new Date()).getDay() || 7) - 1);
   }

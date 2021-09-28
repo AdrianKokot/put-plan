@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { trackByField } from "../../../../../shared/functions/track-by";
+import { trackByField} from "../../../../../shared/functions/track-by";
 import { TimetableEntry } from "../../../../../shared/models/timetable-entry";
 
 @Component({
@@ -8,7 +8,7 @@ import { TimetableEntry } from "../../../../../shared/models/timetable-entry";
   styles: []
 })
 export class TimetableColumnComponent {
-  @Input() items: (TimetableEntry | null)[] = [];
+  @Input() items: (TimetableEntry | null)[] | null = [];
   @Output() showModelDetails: EventEmitter<TimetableEntry> = new EventEmitter<TimetableEntry>();
   trackBy = trackByField('name');
 

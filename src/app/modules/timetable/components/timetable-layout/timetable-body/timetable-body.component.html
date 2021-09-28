@@ -9,11 +9,15 @@
     <div class="grid grid-cols-5 md:!translate-x-0 w-[500%] md:w-full md:!transition-none"
          id="timetableColumnsContainer">
 
-      <app-timetable-column *ngFor="let weekDayIndex of [0,1,2,3,4]"
-                            class="w-full"
-                            [items]="timetableEntryService.get(weekDayIndex)"
-                            (showModelDetails)="showDetails($event)">
-      </app-timetable-column>
+      <ng-container *ngFor="let weekDayIndex of [0,1,2,3,4]; trackBy: trackByIndex">
+
+        <app-timetable-column
+          class="w-full"
+          [items]="timetable.get(weekDayIndex) | async"
+          (showModelDetails)="showDetails($event)">
+        </app-timetable-column>
+
+      </ng-container>
 
     </div>
 

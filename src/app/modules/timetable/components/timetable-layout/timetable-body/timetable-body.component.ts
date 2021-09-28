@@ -1,5 +1,6 @@
 import { DOCUMENT } from "@angular/common";
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -13,9 +14,10 @@ import {
 import { Timetable } from "../../../timetable";
 import { fromEvent } from "rxjs";
 import { elementAt, filter, switchMap, tap } from "rxjs/operators";
-import { TimetableEntryService } from "../../../../../shared/services/timetable-entry/timetable-entry.service";
-import { TimetableEntry } from "../../../../../shared/models/timetable-entry";
-import { ModalService } from "../../../../../shared/modules/modal/services/modal.service";
+import { TimetableEntry } from "src/app/shared/models/timetable-entry";
+import { ModalService } from "src/app/shared/modules/modal/services/modal.service";
+import { trackByIndex } from "src/app/shared/functions/track-by";
+import { TimetableService } from "src/app/shared/services/timetable/timetable.service";
 
 @Component({
   selector: 'app-timetable-body',
@@ -24,7 +26,8 @@ import { ModalService } from "../../../../../shared/modules/modal/services/modal
     #timetableColumnsContainer {
       transform: translateX(calc(var(--selected-weekday-index, 0) / 5 * -100%));
       transition: transform calc(var(--weekday-transition-multiplier, 0) * 0.35s) ease-in-out;
-    }`]
+    }`],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimetableBodyComponent {
   private currentWeekDayIndex = Timetable.currentWeekDayIndex;
@@ -58,8 +61,10 @@ export class TimetableBodyComponent {
 
   @ViewChild("detailsTemplate") detailsModalTemplate!: TemplateRef<any>;
 
+  trackByIndex = trackByIndex;
+
   constructor(
-    public timetableEntryService: TimetableEntryService,
+    public timetable: TimetableService,
     private modalService: ModalService,
     @Inject(DOCUMENT) private document: Document,
     elementRef: ElementRef) {

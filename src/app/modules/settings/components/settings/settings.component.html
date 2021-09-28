@@ -14,28 +14,34 @@
 
       <label class="block mb-6">
         <span class="text-sm mb-2 block">Grupa dziekańska</span>
-        <ng-select [items]="(groups$ | async) || []"
+        <ng-select [items]="(timetableService.groups$ | async) || []"
                    formControlName="group"
                    notFoundText="Nie znaleziono"
+                   bindLabel="label"
+                   bindValue="key"
                    placeholder="Grupa dziekańska">
         </ng-select>
       </label>
 
       <label class="block mb-6">
         <span class="text-sm mb-2 block">Przedmioty obieralne</span>
-        <ng-select [items]="(optionalClasses$ | async) || []"
+        <ng-select [items]="(timetableService.optionalClasses$ | async) || []"
                    formControlName="optionalClasses"
                    [multiple]="true"
                    [hideSelected]="true"
                    notFoundText="Nie znaleziono"
+                   bindLabel="label"
+                   bindValue="key"
                    placeholder="Przedmioty obieralne">
         </ng-select>
       </label>
 
       <label class="block mb-6">
         <span class="text-sm mb-2 block">Język</span>
-        <ng-select [items]="(languageClasses$ | async) || []"
+        <ng-select [items]="(timetableService.languageClasses$ | async) || []"
                    formControlName="languageClass"
+                   bindLabel="label"
+                   bindValue="key"
                    notFoundText="Nie znaleziono"
                    placeholder="Język">
         </ng-select>
