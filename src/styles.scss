@@ -340,7 +340,7 @@ $ng-select-value-font-size: theme('fontSize.sm') !default;
 // modal
 
 app-modal-template {
-  .border-t-2 {
+  div:last-of-type {
     button {
       @apply inline-block;
       @apply w-full;

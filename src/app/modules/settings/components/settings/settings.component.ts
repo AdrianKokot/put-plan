@@ -38,9 +38,7 @@ export class SettingsComponent implements AfterViewInit, OnDestroy {
     public timetableService: TimetableService,
     private fb: FormBuilder,
     private settingsService: AppSettingsService
-  ) {
-    console.log(this.timetableService.preferences);
-  }
+  ) {}
 
   ngOnDestroy(): void {
     this.formChangeSubscription.unsubscribe();

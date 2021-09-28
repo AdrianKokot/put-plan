@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from "./core/core.module";
 import { TimetableModule } from "./modules/timetable/timetable.module";
 import { SharedModule } from "./shared/shared.module";
+import { PwaAppModule } from "./modules/pwa-app/pwa-app.module";
 
 
 @Injectable()
@@ -46,7 +47,8 @@ class HammerConfig extends HammerGestureConfig {
       registrationStrategy: 'registerWhenStable:30000'
     }),
 
-    HammerModule
+    HammerModule,
+    PwaAppModule
   ],
   providers: [
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig }
