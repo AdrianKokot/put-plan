@@ -1,6 +1,5 @@
-import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
-import { Lesson } from "../../../../shared/models/lesson";
-import { ModalService } from "../../../../shared/modules/modal/services/modal.service";
+import { Component, Input } from '@angular/core';
+import { TimetableEntry } from "../../../../shared/models/timetable-entry";
 
 @Component({
   selector: 'app-timetable-entry-details',
@@ -8,34 +7,41 @@ import { ModalService } from "../../../../shared/modules/modal/services/modal.se
   styles: []
 })
 export class TimetableEntryDetailsComponent {
-  @ViewChild("detailsTemplate") detailsTemplate!: TemplateRef<any>;
-
-  private _selectedItem!: Lesson;
-
   @Input()
-  set selectedItem(value: Lesson) {
+  set selectedItem(value: TimetableEntry | null) {
     this._selectedItem = value;
 
-    if (Object.keys(this._selectedItem).length > 0) {
-      this.modalService.open(this.detailsTemplate);
+    if (value !== null) {
+      this.mappedObject = this.mapTimetableEntry(value);
     }
   }
 
-  get selectedItem(): Lesson {
+  get selectedItem(): TimetableEntry | null {
     return this._selectedItem;
   }
 
-  public itemDetails: { key: 'lecturer' | 'place' | 'info' | 'groups' | 'additional_info', label: string }[] = [
-    {key: 'lecturer', label: 'Prowadzący'},
-    {key: 'place', label: 'Sala'},
-    {key: 'info', label: 'Typ zajęć'},
-    {key: 'groups', label: 'Grupy mające te zajęcia w tym czasie'},
-    {key: 'additional_info', label: 'Dodatkowe informacje'}
-  ]
+  private _selectedItem: TimetableEntry | null = null;
 
-  constructor(
-    private modalService: ModalService
-  ) {
+
+  public mappedObject: { [key: string]: string } = {};
+
+  public get mappedObjectKeys(): string[] {
+    return Object.keys(this.mappedObject);
   }
 
+  private mapTimetableEntry(entry: TimetableEntry): { [key: string]: string } {
+    const result: { [key: string]: any } = {
+      'Prowadzący': entry.lecturer?.name && entry.lecturer?.url ? (`<a href="${entry.lecturer.url}" target="_blank">${entry.lecturer.name}</a>`) : null,
+      'Typ zajęć': entry.classType,
+      'Grupy mające te zajęcia w tym czasie': entry.groups
+    };
+
+    return Object.keys(result)
+      .reduce((obj, key) => {
+        if (result[key]) {
+          obj[key] = result[key]
+        }
+        return obj;
+      }, {} as { [key: string]: any });
+  }
 }

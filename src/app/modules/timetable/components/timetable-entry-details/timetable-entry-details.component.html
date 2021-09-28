@@ -1,16 +1,13 @@
-<ng-template #detailsTemplate>
+<app-modal-template [title]="selectedItem ? selectedItem.name : ''">
 
-  <app-modal-template [title]="selectedItem.name">
+  <ng-container *ngFor="let key of mappedObjectKeys">
 
-    <ng-container *ngFor="let detail of itemDetails">
+    <div class="mb-6 md:mb-4">
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{{key}}</p>
+      <p class="text-base" [innerHTML]="mappedObject[key]"></p>
+    </div>
 
-      <div *ngIf="selectedItem[detail.key]" class="mb-6 md:mb-4">
-        <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{{detail.label}}</p>
-        <p class="text-base">{{selectedItem[detail.key]}}</p>
-      </div>
+  </ng-container>
 
-    </ng-container>
+</app-modal-template>
 
-  </app-modal-template>
-
-</ng-template>

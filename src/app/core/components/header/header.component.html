@@ -9,8 +9,8 @@
   </h1>
 
   <div class="text-center text-sm select-none">
-    <span (click)="changeWeek()" class="cursor-pointer duration-300 transition-colors">
-      Tydzień {{isWeekEven ? 'parzysty' : 'nieparzysty'}} {{isSelectedWeekSameAsCurrentWeek ? '(aktualny)' : '(nieaktualny)'}}
+    <span (click)="timetable.changeWeek()" class="cursor-pointer duration-300 transition-colors">
+      Tydzień {{timetable.isSelectedWeekEven ? 'parzysty' : 'nieparzysty'}} {{timetable.isSelectedWeekSameAsCurrentWeek ? '(aktualny)' : '(nieaktualny)'}}
     </span>
   </div>
 

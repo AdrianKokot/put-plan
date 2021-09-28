@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { LessonService } from "../../../shared/services/lesson/lesson.service";
-import { Timetable } from "../../../modules/timetable/timetable";
+import { TimetableService } from "../../../shared/services/timetable/timetable.service";
 
 @Component({
   selector: 'app-header',
@@ -10,18 +9,6 @@ import { Timetable } from "../../../modules/timetable/timetable";
 export class HeaderComponent {
   public headerTitle: string = 'Politechnika Poznańska';
 
-  constructor(private lessonService: LessonService) {
-  }
-
-  public get isWeekEven(): boolean {
-    return this.lessonService.isWeekEven
-  }
-
-  public get isSelectedWeekSameAsCurrentWeek() {
-    return this.lessonService.isWeekEven === Timetable.isCurrentWeekEven;
-  }
-
-  public changeWeek() {
-    this.lessonService.isWeekEven = !this.lessonService.isWeekEven;
+  constructor(public timetable: TimetableService) {
   }
 }

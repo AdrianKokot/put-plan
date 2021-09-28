@@ -1,10 +1,21 @@
 import { DOCUMENT } from "@angular/common";
-import { Component, ElementRef, EventEmitter, HostListener, Inject, Input, Output } from '@angular/core';
-import { Lesson } from "../../../../../shared/models/lesson";
-import { LessonService } from "../../../../../shared/services/lesson/lesson.service";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Inject,
+  Input,
+  Output,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import { Timetable } from "../../../timetable";
 import { fromEvent } from "rxjs";
 import { elementAt, filter, switchMap, tap } from "rxjs/operators";
+import { TimetableEntryService } from "../../../../../shared/services/timetable-entry/timetable-entry.service";
+import { TimetableEntry } from "../../../../../shared/models/timetable-entry";
+import { ModalService } from "../../../../../shared/modules/modal/services/modal.service";
 
 @Component({
   selector: 'app-timetable-body',
@@ -42,11 +53,14 @@ export class TimetableBodyComponent {
 
   @Output() public selectedWeekDayIndexChange = new EventEmitter<number>();
 
-  public selectedItem: Lesson = {} as Lesson;
+  public selectedItem: TimetableEntry | null = null;
   public hours = Timetable.ClassesHours;
 
+  @ViewChild("detailsTemplate") detailsModalTemplate!: TemplateRef<any>;
+
   constructor(
-    private lessonService: LessonService,
+    public timetableEntryService: TimetableEntryService,
+    private modalService: ModalService,
     @Inject(DOCUMENT) private document: Document,
     elementRef: ElementRef) {
 
@@ -76,16 +90,6 @@ export class TimetableBodyComponent {
       .subscribe();
   }
 
-  public getClassesForWeekDay(weekDayIndex: number): Lesson[] {
-    let res = [];
-
-    for (let lesson_number = 1; lesson_number <= this.hours.length; lesson_number++) {
-      res.push(this.lessonService.getLesson(weekDayIndex + 1, lesson_number))
-    }
-
-    return res;
-  }
-
   private nextDay(): void {
     if (this.selectedWeekDayIndex + 1 < Timetable.WeekDays.length) {
       this.selectedWeekDayIndexChange.emit(this.selectedWeekDayIndex + 1);
@@ -95,6 +99,13 @@ export class TimetableBodyComponent {
   private previousDay(): void {
     if (this.selectedWeekDayIndex > 0) {
       this.selectedWeekDayIndexChange.emit(this.selectedWeekDayIndex - 1);
+    }
+  }
+
+  showDetails(entry: TimetableEntry) {
+    this.selectedItem = entry;
+    if (this.detailsModalTemplate) {
+      this.modalService.open(this.detailsModalTemplate);
     }
   }
 }
