@@ -33,8 +33,8 @@ export class TimetableEntryDetailsComponent {
     const result: { [key: string]: string|null } = {
       'Typ zajęć': entry.classType,
       'Prowadzący': entry.lecturer?.name && entry.lecturer?.url ? (`<a href="${entry.lecturer.url}" target="_blank" rel="noreferrer">${entry.lecturer.name}</a>`) : null,
-      'Miejsce': entry?.location?.shortName || null,
-      'Dodatkowe informacje': entry.additionalInfo,
+      'Sala': entry?.location?.shortName || null,
+      'Dodatkowe informacje': entry.additionalInfo && entry.additionalInfo.length > 0 ? entry.additionalInfo : null,
       'Grupy mające te zajęcia w tym czasie': entry.groups,
       'Linki': entry.links && entry.links.length > 0 ? entry.links.map(l => `<a href="${l.key}" target="_blank" rel="noreferrer">${l.label}</a>`).join('<br>') : null
     };
