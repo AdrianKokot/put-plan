@@ -121,6 +121,8 @@ export class TimetableService implements OnDestroy {
   }
 
   public checkForDbUpdate(): void {
+    this.database.goOnline();
+
     this.database.ref('version').get().then(x => {
       const dbVersion = x.val();
       const clientVersion = this.data$.value?.version || null;
