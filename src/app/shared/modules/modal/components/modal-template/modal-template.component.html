@@ -1,0 +1,27 @@
+<div class="border-b-2 border-gray-200 dark:border-gray-600 text-center mb-6 relative">
+
+  <h2
+    class="mb-[-2px] inline-block font-semibold md:font-medium text-lg sm:text-xl pb-2 border-b-2 text-blue-500 dark:text-blue-400 dark:border-blue-400 px-2 md:px-4 border-blue-500">
+    {{title}}
+  </h2>
+
+  <div
+    (click)="modal.close()"
+    title="Zamknij"
+    class="hidden md:flex absolute right-4 top-0 bottom-2 items-center cursor-pointer duration-300 transition-color hover:text-blue-500">
+    <app-icon icon="close"></app-icon>
+  </div>
+
+</div>
+
+<div class="px-2 md:px-4 select-text">
+
+  <ng-content></ng-content>
+
+</div>
+
+<div class="md:border-t-2 border-gray-200 dark:border-gray-600 px-2 md:px-4 mt-6 pt-4 flex flex-col-reverse md:flex-row gap-2 md:justify-end" *ngIf="hasFooter">
+
+  <ng-content select="[modal-buttons]"></ng-content>
+
+</div>

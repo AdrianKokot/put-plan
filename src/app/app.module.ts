@@ -1,41 +1,49 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { TimetableComponent } from './components/timetable/timetable.component';
-import { ModalComponent } from './components/modal/modal.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { HttpClientModule } from '@angular/common/http';
-import { firebaseConfig } from 'src/environments/firebase';
-import { LessonDetailsComponent } from './components/lesson-details/lesson-details.component';
-import { PreferencesFormComponent } from './components/preferences-form/preferences-form.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { FooterComponent } from './components/footer/footer.component';
+import { Injectable, NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
-import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import {
+  BrowserModule,
+  HammerGestureConfig,
+  HammerModule,
+  HAMMER_GESTURE_CONFIG
+} from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { firebaseConfig } from 'src/environments/firebase';
+import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { PwaAppModule } from './modules/pwa-app/pwa-app.module';
+import { TimetableModule } from './modules/timetable/timetable.module';
+import { SharedModule } from './shared/shared.module';
+import 'hammerjs';
+
+@Injectable()
+class HammerConfig extends HammerGestureConfig {
+  overrides = <any>{
+    swipe: {enabled: true, direction: Hammer.DIRECTION_ALL},
+    pan: {enabled: true},
+    rotate: {enabled: false},
+    pinch: {enabled: false},
+    tap: {enabled: false},
+    press: {enabled: false}
+  }
+}
 
 @NgModule({
   declarations: [
     AppComponent,
-    TimetableComponent,
-    ModalComponent,
-    LessonDetailsComponent,
-    PreferencesFormComponent,
-    HeaderComponent,
-    FooterComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
+    CoreModule,
+    TimetableModule,
+
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAnalyticsModule,
+    // AngularFireAnalyticsModule,
     AngularFireDatabaseModule,
-    FormsModule,
-    NgSelectModule,
-    HttpClientModule,
+
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js',
       {
@@ -46,9 +54,14 @@ import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+
+    HammerModule,
+    PwaAppModule
   ],
-  providers: [],
+  providers: [
+    {provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

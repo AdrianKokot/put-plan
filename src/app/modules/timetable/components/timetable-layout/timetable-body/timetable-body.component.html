@@ -1,0 +1,32 @@
+<div class="px-6 py-2 md:px-0 grid grid-cols-5 md:grid-cols-6">
+
+  <app-timetable-column string
+                        [items]="hours">
+  </app-timetable-column>
+
+  <div class="overflow-x-hidden col-span-4 md:col-span-5 touch-pan-y">
+
+    <div class="grid grid-cols-5 md:!translate-x-0 w-[500%] md:w-full md:!transition-none"
+         id="timetableColumnsContainer">
+
+      <ng-container *ngFor="let weekDayIndex of [0,1,2,3,4]; trackBy: trackByIndex">
+
+        <app-timetable-column
+          class="w-full"
+          [items]="timetable.get(weekDayIndex) | async"
+          (showModelDetails)="showDetails($event)">
+        </app-timetable-column>
+
+      </ng-container>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+<ng-template #detailsTemplate>
+  <app-timetable-entry-details [selectedItem]="selectedItem">
+  </app-timetable-entry-details>
+</ng-template>

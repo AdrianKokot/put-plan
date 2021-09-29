@@ -1,0 +1,17 @@
+<header class="px-4 py-6 text-center">
+
+  <h1 class="font-semibold text-lg sm:text-2xl relative">
+    <span>
+      {{ headerTitle }}
+    </span>
+
+    <app-settings class="absolute right-0 top-0 bottom-0"></app-settings>
+  </h1>
+
+  <div class="text-center text-sm select-none">
+    <span (click)="timetable.changeWeek()" class="cursor-pointer duration-300 transition-colors">
+      Tydzień {{timetable.isSelectedWeekEven ? 'parzysty' : 'nieparzysty'}} {{timetable.isSelectedWeekSameAsCurrentWeek ? '(aktualny)' : '(nieaktualny)'}}
+    </span>
+  </div>
+
+</header>

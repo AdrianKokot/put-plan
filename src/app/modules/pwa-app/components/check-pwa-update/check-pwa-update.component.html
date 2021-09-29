@@ -1,0 +1,27 @@
+<ng-template #appSettingsTemplate
+             let-modal>
+
+
+  <app-modal-template [modal]="modal" title="Aktualizacja" [hasFooter]="true">
+
+    <p>Dostępna jest nowa wersja aplikacji.</p>
+
+    <ng-container ngProjectAs="[modal-buttons]">
+
+      <button (click)="modal.close()" type="button"
+              class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600">
+        Zamknij
+      </button>
+
+      <button type="submit"
+              class="text-gray-100 bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600"
+              (click)="performUpdate()">
+        Aktualizuj
+      </button>
+
+    </ng-container>
+
+  </app-modal-template>
+
+
+</ng-template>

@@ -1,0 +1,13 @@
+<app-modal-template [title]="selectedItem ? selectedItem.name : ''">
+
+  <ng-container *ngFor="let key of mappedObjectKeys">
+
+    <div class="mb-6 md:mb-4">
+      <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{{key}}</p>
+      <p class="text-base" [innerHTML]="mappedObject[key]"></p>
+    </div>
+
+  </ng-container>
+
+</app-modal-template>
+

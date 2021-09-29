@@ -1,0 +1,86 @@
+<div
+  (click)="openSettingsModal()"
+  title="Zmień ustawienia"
+  class="flex items-center h-full cursor-pointer duration-300 transition-color hover:text-blue-500 dark:hover:text-blue-400">
+  <app-icon icon="settings"></app-icon>
+</div>
+
+<ng-template #appSettingsTemplate
+             let-modal>
+
+  <form (submit)="submit()" [formGroup]="form">
+
+    <app-modal-template [modal]="modal" title="Ustawienia" [hasFooter]="true">
+
+      <label class="block mb-6">
+        <span class="text-sm mb-2 block">Grupa dziekańska</span>
+        <ng-select [items]="(timetableService.groups$ | async) || []"
+                   formControlName="group"
+                   notFoundText="Nie znaleziono"
+                   bindLabel="label"
+                   bindValue="key"
+                   placeholder="Grupa dziekańska">
+        </ng-select>
+      </label>
+
+      <label class="block mb-6">
+        <span class="text-sm mb-2 block">Przedmioty obieralne</span>
+        <ng-select [items]="(timetableService.optionalClasses$ | async) || []"
+                   formControlName="optionalClasses"
+                   [multiple]="true"
+                   [hideSelected]="true"
+                   notFoundText="Nie znaleziono"
+                   bindLabel="label"
+                   bindValue="key"
+                   placeholder="Przedmioty obieralne">
+        </ng-select>
+      </label>
+
+      <label class="block mb-6">
+        <span class="text-sm mb-2 block">Język</span>
+        <ng-select [items]="(timetableService.languageClasses$ | async) || []"
+                   formControlName="languageClass"
+                   bindLabel="label"
+                   bindValue="key"
+                   notFoundText="Nie znaleziono"
+                   placeholder="Język">
+        </ng-select>
+      </label>
+
+      <label class="block mb-6">
+        <span class="text-sm mb-2 block">Motyw aplikacji</span>
+        <ng-select [items]="appThemes"
+                   formControlName="theme"
+                   bindLabel="label"
+                   bindValue="key"
+                   notFoundText="Nie znaleziono">
+        </ng-select>
+      </label>
+
+      <!--      <label class="block mb-6">-->
+      <!--        <span class="text-sm mb-2 block">Zachowanie planu w weekend</span>-->
+      <!--        <ng-select [items]="(languageClasses$ | async) || []"-->
+      <!--                   formControlName="languageClass"-->
+      <!--                   notFoundText="Nie znaleziono">-->
+      <!--        </ng-select>-->
+      <!--      </label>-->
+
+      <ng-container ngProjectAs="[modal-buttons]">
+
+        <button (click)="modal.close()" type="button"
+                class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600">
+          Zamknij
+        </button>
+
+        <button type="submit"
+                class="text-gray-100 bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600">
+          Zapisz
+        </button>
+
+      </ng-container>
+
+    </app-modal-template>
+
+  </form>
+
+</ng-template>

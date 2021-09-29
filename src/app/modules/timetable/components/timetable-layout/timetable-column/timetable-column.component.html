@@ -1,0 +1,32 @@
+<div class="grid grid-cols-1 gap-y-2">
+
+  <ng-container *ngFor="let item of items; let i = index; trackBy: trackBy">
+
+    <div *ngIf="item !== null; else emptyItem"
+         class="p-4 text-center mx-1 h-[4.75rem] text-white"
+         [ngClass]="{'cursor-pointer': item.name}"
+         [class]="item.class || ''"
+         [title]="item.name || ''"
+         (click)="openClassDetails(item)">
+
+      <div class="text-sm font-medium mb-2">
+        {{ item.shortName ? item.shortName : (item.name || '') }}
+      </div>
+
+      <div class="text-xs font-medium">
+        {{ item.classType || '' }}
+      </div>
+
+    </div>
+
+    <ng-template #emptyItem>
+      <div
+        class="p-4 text-center mx-1 h-[4.75rem]">
+      </div>
+    </ng-template>
+
+    <hr class="border-t-2 border-gray-200 dark:border-gray-700">
+
+  </ng-container>
+
+</div>
