@@ -139,7 +139,6 @@ export class TimetableService implements OnDestroy {
     this.database.ref()
       .get()
       .then(x => {
-        console.log('update db data');
         this.data$.next(x.val() as TimetableData);
         TimetableStorage.saveDbDataToStorage(this.data$.value);
         this.database.goOffline();

@@ -7,7 +7,7 @@ import { TimetableService } from '../../../shared/services/timetable/timetable.s
   styles: []
 })
 export class HeaderComponent {
-  public headerTitle: string = 'Politechnika Poznańska';
+  public headerTitle = 'Politechnika Poznańska';
 
   constructor(public timetable: TimetableService) {
   }

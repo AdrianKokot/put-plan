@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class ModalTemplateComponent {
   @Input() public modal!: { close: () => void };
-  @Input() public title: string = '';
-  @Input() public hasFooter: boolean = false;
+  @Input() public title = '';
+  @Input() public hasFooter = false;
 }

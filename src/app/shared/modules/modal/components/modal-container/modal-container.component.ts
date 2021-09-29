@@ -2,6 +2,7 @@ import { animate, animateChild, group, query, state, style, transition, trigger 
 import { Component, HostListener } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { ModalService } from '../../services/modal.service';
+import { trackById } from '../../../../functions/track-by';
 
 @Component({
   selector: 'app-modal-container',
@@ -88,15 +89,13 @@ export class ModalContainerComponent {
     this.isModalContainerExtended || this.modalService.closeNewest();
   }
 
-  public trackById(index: any, item: { id: any }): any {
-    return item ? item.id : undefined;
-  }
+  public trackById = trackById;
 
   public isModalContainerExtended = false;
 
   @HostListener('swipeup', ['$event'])
   @HostListener('swipedown', ['$event'])
-  public swipe(e: any): void {
+  public swipe(e: HammerInput): void {
     if (window.innerWidth >= 768)
       return;
 

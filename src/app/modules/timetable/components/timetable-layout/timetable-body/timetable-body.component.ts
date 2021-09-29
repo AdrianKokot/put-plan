@@ -43,11 +43,11 @@ export class TimetableBodyComponent {
 
   @Input()
   public set selectedWeekDayIndex(index: number) {
-    this.document.body.style.setProperty('--weekday-transition-multiplier', '' + Math.log2(Math.abs(this.selectedWeekDayIndex - index) + 1));
+    this.document.body.style.setProperty('--weekday-transition-multiplier', Math.log2(Math.abs(this.selectedWeekDayIndex - index) + 1).toString());
 
     this._selectedWeekDayIndex = index;
 
-    this.document.body.style.setProperty('--selected-weekday-index', '' + this.selectedWeekDayIndex);
+    this.document.body.style.setProperty('--selected-weekday-index', this.selectedWeekDayIndex.toString());
   }
 
   public get selectedWeekDayIndex(): number {
@@ -79,7 +79,7 @@ export class TimetableBodyComponent {
       .pipe(
         switchMap(() => pan
           .pipe(
-            filter((e: any) => Math.abs(e.deltaX) / window.innerWidth > .1),
+            filter(e => Math.abs(e.deltaX) / window.innerWidth > .1),
             elementAt(1),
             tap((e: HammerInput) => {
 
@@ -107,7 +107,7 @@ export class TimetableBodyComponent {
     }
   }
 
-  showDetails(entry: TimetableEntry) {
+  showDetails(entry: TimetableEntry): void {
     this.selectedItem = entry;
     if (this.detailsModalTemplate) {
       this.modalService.open(this.detailsModalTemplate);

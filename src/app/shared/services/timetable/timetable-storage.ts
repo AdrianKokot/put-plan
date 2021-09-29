@@ -4,7 +4,7 @@ import { LabeledProperty } from '../../types/labeled-property';
 export class TimetableStorage {
   private static appStorageKey = 'app.timetablestorage';
 
-  public static saveDbDataToStorage(data: any): void {
+  public static saveDbDataToStorage(data: TimetableData | null): void {
     localStorage.setItem(this.appStorageKey, JSON.stringify(data));
   }
 
