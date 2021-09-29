@@ -43,11 +43,11 @@ export class TimetableBodyComponent {
 
   @Input()
   public set selectedWeekDayIndex(index: number) {
-    this.document.body.style.setProperty('--weekday-transition-multiplier', '' + Math.log2(Math.abs(this.selectedWeekDayIndex - index) + 1));
+    this.document.body.style.setProperty('--weekday-transition-multiplier', Math.log2(Math.abs(this.selectedWeekDayIndex - index) + 1).toString());
 
     this._selectedWeekDayIndex = index;
 
-    this.document.body.style.setProperty('--selected-weekday-index', '' + this.selectedWeekDayIndex);
+    this.document.body.style.setProperty('--selected-weekday-index', this.selectedWeekDayIndex.toString());
   }
 
   public get selectedWeekDayIndex(): number {

@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { ModalService } from '../../../../shared/modules/modal/services/modal.service';
+import { ModalService } from 'src/app/shared/modules/modal/services/modal.service';
 import { FormBuilder } from '@angular/forms';
-import { appThemes } from '../../../../shared/types/app-theme';
-import { AppSettingsService } from '../../../../shared/services/app-settings/app-settings.service';
-import { TimetableService } from '../../../../shared/services/timetable/timetable.service';
+import { TimetableService } from 'src/app/shared/services/timetable/timetable.service';
+import { AppSettingsService } from 'src/app/shared/services/app-settings/app-settings.service';
+import { appThemes } from 'src/app/shared/types/app-theme';
 
 @Component({
   selector: 'app-settings',
