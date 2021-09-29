@@ -77,16 +77,20 @@ export class ModalContainerComponent {
   }
 
   public close(id: number): void {
-    this.isModalContainerExtended || this.modalService.close(id);
+    if (!this.isModalContainerExtended) {
+      this.modalService.close(id);
+    }
   }
 
-  public forceClose(id:number): void {
+  public forceClose(id: number): void {
     this.isModalContainerExtended = false;
     this.modalService.close(id);
   }
 
   public closeNewest(): void {
-    this.isModalContainerExtended || this.modalService.closeNewest();
+    if (!this.isModalContainerExtended) {
+      this.modalService.closeNewest();
+    }
   }
 
   public trackById = trackById;
