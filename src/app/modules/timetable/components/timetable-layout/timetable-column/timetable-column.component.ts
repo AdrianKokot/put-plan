@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { trackByField} from '../../../../../shared/functions/track-by';
-import { TimetableEntry } from '../../../../../shared/models/timetable-entry';
+import { TimetableEntry } from 'src/app/shared/models/timetable-entry';
 
 @Component({
   selector: 'app-timetable-column:not([string])',
@@ -10,7 +9,10 @@ import { TimetableEntry } from '../../../../../shared/models/timetable-entry';
 export class TimetableColumnComponent {
   @Input() items: (TimetableEntry | null)[] | null = [];
   @Output() showModelDetails: EventEmitter<TimetableEntry> = new EventEmitter<TimetableEntry>();
-  trackBy = trackByField('name');
+
+  trackBy(index: number, item: TimetableEntry | null): string|undefined {
+    return item ? (item.name || undefined) : undefined;
+  }
 
   public openClassDetails(item: TimetableEntry | null): void {
     if (item !== null) {

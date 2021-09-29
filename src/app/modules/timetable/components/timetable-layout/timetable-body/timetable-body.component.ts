@@ -79,7 +79,7 @@ export class TimetableBodyComponent {
       .pipe(
         switchMap(() => pan
           .pipe(
-            filter((e: any) => Math.abs(e.deltaX) / window.innerWidth > .1),
+            filter(e => Math.abs(e.deltaX) / window.innerWidth > .1),
             elementAt(1),
             tap((e: HammerInput) => {
 
