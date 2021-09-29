@@ -1,7 +1,3 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ModalTemplateComponent } from './modal-template.component';
-
 // describe('ModalTemplateComponent', () => {
 //   let component: ModalTemplateComponent;
 //   let fixture: ComponentFixture<ModalTemplateComponent>;
