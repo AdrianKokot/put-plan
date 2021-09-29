@@ -1,4 +1,4 @@
-export const trackByIndex = function (index: number): any {
+export const trackByIndex = function (index: number): number {
   return index;
 }
 
