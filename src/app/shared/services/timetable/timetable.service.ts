@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import firebase from 'firebase/compat';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -11,72 +11,76 @@ import { TimetableData, TimetableStorage } from './timetable-storage';
 @Injectable({
   providedIn: 'root'
 })
-export class TimetableService {
-  set preferences(value: Partial<Preferences>) {
-    Object.assign(this._preferences, value);
-  }
+export class TimetableService implements OnDestroy {
+  private database: firebase.database.Database;
+  private preferencesStorageKey = 'preferences';
 
-  get preferences(): Preferences {
+  private _preferences: Preferences = JSON.parse(localStorage.getItem(this.preferencesStorageKey) || '{}') as Preferences;
+  public set preferences(value: Partial<Preferences>) {
+    Object.assign(this._preferences, value);
+    this.data$.next(this.data$.value);
+  }
+  public get preferences(): Preferences {
     return this._preferences;
   }
 
   private _isSelectedWeekEven = Timetable.isCurrentWeekEven;
-
   public get isSelectedWeekEven(): boolean {
     return this._isSelectedWeekEven;
   }
-
   public get isSelectedWeekSameAsCurrentWeek(): boolean {
     return this._isSelectedWeekEven === Timetable.isCurrentWeekEven;
   }
 
-  public changeWeek(): void {
-    this._isSelectedWeekEven = !this._isSelectedWeekEven;
-  }
-
-  private preferencesStorageKey = 'preferences';
-
-  private _preferences: Preferences = JSON.parse(localStorage.getItem(this.preferencesStorageKey) || '{}') as Preferences;
-
-  public savePreferences(): void {
-    localStorage.setItem(this.preferencesStorageKey, JSON.stringify(this._preferences));
-  }
-
-  private database: firebase.database.Database;
-
   private data$: BehaviorSubject<TimetableData | null> = new BehaviorSubject<TimetableData | null>(TimetableStorage.getDbDataFromStorage());
+  private selectedGroupData$ = new BehaviorSubject<TimetableEntry[]>([]);
+  public optionalClasses$ = this.data$.pipe(map(d => d?.optionalClasses || []));
+  public languageClasses$ = this.data$.pipe(map(d => d?.languageClasses || []));
+  public groups$ = this.data$.pipe(map(d => d?.groups || []));
+  public version$ = this.data$.pipe(map(d => d?.version || ''));
 
-  private selectedGroupData$ = this.data$
+  private selectedGroupDataSubscription = this.data$
     .pipe(
       map(data => {
-        //TODO adjust accordingly to timetable settings
-        const selectedGroupRegex = /i3([^.]|\.2)/;
+        if(!this.preferences.selectedGroup){
+          return [];
+        }
+
+        const groupParts = this.preferences.selectedGroup.split('.');
+        const langClass = this.preferences.selectedLanguageClass ? '|' + this.preferences.selectedLanguageClass : '';
+        const optionalClasses = this.preferences.selectedOptionalClasses || [];
+
+        const selectedGroupRegex = new RegExp(`(${groupParts[0]}([^.]|$|\.${groupParts[1]}))${langClass}`);
 
         return (data?.classes || [])
-          .map(
-            x => ({
-              ...x,
-              occurrences: x.occurrences
-                ? x.occurrences.filter((y: any) => y.groups.match(selectedGroupRegex))
+          .map(dataClass => {
+
+            const shouldAttend = dataClass.occurrences && (!dataClass.isOptional || optionalClasses.includes(dataClass.shortName));
+
+            return {
+              ...dataClass,
+              occurrences: shouldAttend
+                ? dataClass.occurrences.filter(occurrence => occurrence.groups.match(selectedGroupRegex))
                 : []
-            })
-          )
-          .flatMap(x => {
-              return x.occurrences ? x.occurrences.map(
-                o => ({
-                  isOptional: x.isOptional,
-                  name: x.name,
-                  shortName: x.shortName,
-                  class: x.class,
-                  ...o,
-                  lecturer: data?.lecturers[o.lecturer],
-                  location: data?.locations[o.location]
-                } as TimetableEntry)
-              ) : []
-            }
-          );
+            };
+          })
+          .flatMap(dataClass => {
+            return dataClass.occurrences.map(o => {
+              return {
+                isOptional: dataClass.isOptional,
+                name: dataClass.name,
+                shortName: dataClass.shortName,
+                class: dataClass.class,
+                ...o,
+                lecturer: data?.lecturers[o.lecturer],
+                location: data?.locations[o.location]
+              } as TimetableEntry;
+            });
+          });
       })
-    )
+    ).subscribe(entries => {
+      this.selectedGroupData$.next(entries);
+    });
 
   constructor(
     fireDatabase: AngularFireDatabase
@@ -85,9 +89,14 @@ export class TimetableService {
     this.checkForDbUpdate();
   }
 
-  public optionalClasses$ = this.data$.pipe(map(d => d?.optionalClasses || []));
-  public languageClasses$ = this.data$.pipe(map(d => d?.languageClasses || []));
-  public groups$ = of(Timetable.Groups);
+  public changeWeek(): void {
+    this._isSelectedWeekEven = !this._isSelectedWeekEven;
+    this.selectedGroupData$.next(this.selectedGroupData$.value);
+  }
+
+  public savePreferences(): void {
+    localStorage.setItem(this.preferencesStorageKey, JSON.stringify(this._preferences));
+  }
 
   public get(weekDayIndex: number): Observable<(TimetableEntry | null)[]> {
     return this.selectedGroupData$
@@ -111,7 +120,7 @@ export class TimetableService {
       );
   }
 
-  private checkForDbUpdate(): void {
+  public checkForDbUpdate(): void {
     this.database.ref('version').get().then(x => {
       const dbVersion = x.val();
       const clientVersion = this.data$.value?.version || null;
@@ -128,9 +137,14 @@ export class TimetableService {
     this.database.ref()
       .get()
       .then(x => {
+        console.log('update db data');
         this.data$.next(x.val() as TimetableData);
         TimetableStorage.saveDbDataToStorage(this.data$.value);
         this.database.goOffline();
       });
+  }
+
+  public ngOnDestroy(): void {
+    this.selectedGroupDataSubscription.unsubscribe();
   }
 }
