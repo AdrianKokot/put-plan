@@ -1,7 +1,3 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TimetableStringColumnComponent } from './timetable-string-column.component';
-
 // describe('TimetableStringColumnComponent', () => {
 //   let component: TimetableStringColumnComponent;
 //   let fixture: ComponentFixture<TimetableStringColumnComponent>;

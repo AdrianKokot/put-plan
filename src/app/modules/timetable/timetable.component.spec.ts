@@ -1,6 +1,3 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TimetableComponent } from './timetable.component';
-
 //
 // describe('TimetableComponent', () => {
 //   let component: TimetableComponent;

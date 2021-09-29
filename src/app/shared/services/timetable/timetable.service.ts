@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import firebase from 'firebase/compat';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Timetable } from '../../../modules/timetable/timetable';
 import { Preferences } from '../../models/preferences';

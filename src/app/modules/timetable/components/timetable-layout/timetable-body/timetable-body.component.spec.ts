@@ -1,7 +1,3 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TimetableBodyComponent } from './timetable-body.component';
-
 // describe('TimetableBodyComponent', () => {
 //   let component: TimetableBodyComponent;
 //   let fixture: ComponentFixture<TimetableBodyComponent>;

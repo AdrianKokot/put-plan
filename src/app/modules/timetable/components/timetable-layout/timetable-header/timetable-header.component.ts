@@ -42,6 +42,8 @@ export class TimetableHeaderComponent implements AfterViewInit {
   }
 
   private updateContainerPosition(): void {
-    this.buttons && this.buttons.item(this.selectedWeekDayIndex).scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (this.buttons) {
+      this.buttons.item(this.selectedWeekDayIndex).scrollIntoView({block: 'nearest', behavior: 'smooth'});
+    }
   }
 }

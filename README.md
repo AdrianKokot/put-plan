@@ -23,6 +23,6 @@ Besides the purpose, at first, I created this project to train my angular skills
 
 Probably many things could be done better, but there are the results:
 
-[![CodeFactor](https://www.codefactor.io/repository/github/adriankokot/put-plan/badge)](https://www.codefactor.io/repository/github/adriankokot/put-plan)
+<a href="https://www.codefactor.io/repository/github/adriankokot/put-plan"><img src="https://www.codefactor.io/repository/github/adriankokot/put-plan/badge" alt="CodeFactor" /></a>
 [![DeepSource](https://deepsource.io/gh/AdrianKokot/put-plan.svg/?label=active+issues&token=AQq73pPzNGGm4_MkmnBv1_5Q)](https://deepsource.io/gh/AdrianKokot/put-plan/?ref=repository-badge)
 [![DeepSource](https://deepsource.io/gh/AdrianKokot/put-plan.svg/?label=resolved+issues&token=AQq73pPzNGGm4_MkmnBv1_5Q)](https://deepsource.io/gh/AdrianKokot/put-plan/?ref=repository-badge)
