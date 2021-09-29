@@ -357,7 +357,7 @@ app-modal-template {
     @apply underline;
     @apply hover:text-blue-500;
     @apply dark:hover:text-blue-400;
-    @apply duration-300;
     @apply transition-colors;
+    @apply duration-300;
   }
 }

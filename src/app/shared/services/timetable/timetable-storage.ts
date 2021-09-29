@@ -23,4 +23,5 @@ export interface TimetableData {
   version: string;
   optionalClasses: LabeledProperty<string>[];
   languageClasses: LabeledProperty<string>[];
+  groups: string[];
 }

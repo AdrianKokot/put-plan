@@ -31,9 +31,12 @@ export class TimetableEntryDetailsComponent {
 
   private mapTimetableEntry(entry: TimetableEntry): { [key: string]: string } {
     const result: { [key: string]: any } = {
-      'Prowadzący': entry.lecturer?.name && entry.lecturer?.url ? (`<a href="${entry.lecturer.url}" target="_blank">${entry.lecturer.name}</a>`) : null,
       'Typ zajęć': entry.classType,
-      'Grupy mające te zajęcia w tym czasie': entry.groups
+      'Prowadzący': entry.lecturer?.name && entry.lecturer?.url ? (`<a href="${entry.lecturer.url}" target="_blank" rel="noreferrer">${entry.lecturer.name}</a>`) : null,
+      'Miejsce': entry?.location?.shortName || null,
+      'Dodatkowe informacje': entry.additionalInfo,
+      'Grupy mające te zajęcia w tym czasie': entry.groups,
+      'Linki': entry.links && entry.links.length > 0 ? entry.links.map(l => `<a href="${l.key}" target="_blank" rel="noreferrer">${l.label}</a>`).join('<br>') : null
     };
 
     return Object.keys(result)
