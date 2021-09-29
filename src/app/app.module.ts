@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import {
@@ -18,6 +18,7 @@ import 'hammerjs';
 import { PwaAppModule } from './modules/pwa-app/pwa-app.module';
 import { TimetableModule } from './modules/timetable/timetable.module';
 
+@Injectable({providedIn: 'root'})
 class HammerConfig extends HammerGestureConfig {
   overrides = <any>{
     swipe: {enabled: true, direction: Hammer.DIRECTION_ALL},
