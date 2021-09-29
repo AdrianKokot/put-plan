@@ -26,7 +26,7 @@
 
 </div>
 
-<ng-template #detailsTemplate>
-  <app-timetable-entry-details [selectedItem]="selectedItem">
+<ng-template #detailsTemplate let-modal>
+  <app-timetable-entry-details [selectedItem]="selectedItem" [modal]="modal">
   </app-timetable-entry-details>
 </ng-template>

@@ -7,6 +7,7 @@ import { TimetableEntry } from '../../../../shared/models/timetable-entry';
   styles: []
 })
 export class TimetableEntryDetailsComponent {
+  @Input() modal!: { close: () => void };
   @Input()
   set selectedItem(value: TimetableEntry | null) {
     this._selectedItem = value;
