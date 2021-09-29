@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TimetableService } from "../../../shared/services/timetable/timetable.service";
+import { TimetableService } from '../../../shared/services/timetable/timetable.service';
 
 @Component({
   selector: 'app-header',

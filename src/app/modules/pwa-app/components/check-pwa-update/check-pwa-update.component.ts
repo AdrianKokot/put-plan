@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { SwUpdate } from "@angular/service-worker";
-import { ModalService } from "../../../../shared/modules/modal/services/modal.service";
-import { of, Subscription } from "rxjs";
-import { delay} from "rxjs/operators";
+import { SwUpdate } from '@angular/service-worker';
+import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { ModalService } from '../../../../shared/modules/modal/services/modal.service';
 
 @Component({
   selector: 'app-check-pwa-update',

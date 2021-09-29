@@ -1,5 +1,5 @@
-import { TimetableEntryLecturer, TimetableEntryLocation } from "../../models/timetable-entry";
-import { LabeledProperty } from "../../types/labeled-property";
+import { TimetableEntryLecturer, TimetableEntryLocation } from '../../models/timetable-entry';
+import { LabeledProperty } from '../../types/labeled-property';
 
 export class TimetableStorage {
   private static appStorageKey = 'app.timetablestorage';
@@ -10,7 +10,7 @@ export class TimetableStorage {
 
   public static getDbDataFromStorage(): TimetableData | null {
     if (Object.keys(localStorage).includes(this.appStorageKey)) {
-      return JSON.parse(localStorage.getItem(this.appStorageKey) || "{}") as TimetableData;
+      return JSON.parse(localStorage.getItem(this.appStorageKey) || '{}') as TimetableData;
     }
     return null;
   }

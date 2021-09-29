@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Timetable } from "../../../modules/timetable/timetable";
-import { Preferences } from "../../models/preferences";
-import firebase from "firebase/compat";
-import { BehaviorSubject, Observable, of } from "rxjs";
-import { TimetableData, TimetableStorage } from "./timetable-storage";
-import { map } from "rxjs/operators";
-import { TimetableEntry } from "../../models/timetable-entry";
-import { AngularFireDatabase } from "@angular/fire/compat/database";
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import firebase from 'firebase/compat';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Timetable } from '../../../modules/timetable/timetable';
+import { Preferences } from '../../models/preferences';
+import { TimetableEntry } from '../../models/timetable-entry';
+import { TimetableData, TimetableStorage } from './timetable-storage';
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +34,9 @@ export class TimetableService {
     this._isSelectedWeekEven = !this._isSelectedWeekEven;
   }
 
-  private preferencesStorageKey = "preferences";
+  private preferencesStorageKey = 'preferences';
 
-  private _preferences: Preferences = JSON.parse(localStorage.getItem(this.preferencesStorageKey) || "{}") as Preferences;
+  private _preferences: Preferences = JSON.parse(localStorage.getItem(this.preferencesStorageKey) || '{}') as Preferences;
 
   public savePreferences(): void {
     localStorage.setItem(this.preferencesStorageKey, JSON.stringify(this._preferences));
@@ -94,7 +94,7 @@ export class TimetableService {
       .pipe(
         map(groupData => {
           const occurrences: (TimetableEntry | null)[] = [];
-          const weekTypes = ["both", this.isSelectedWeekEven ? "even" : "odd"];
+          const weekTypes = ['both', this.isSelectedWeekEven ? 'even' : 'odd'];
 
           for (let hourIndex = 0; hourIndex < Timetable.ClassesHours.length; hourIndex++) {
             const foundClass = groupData

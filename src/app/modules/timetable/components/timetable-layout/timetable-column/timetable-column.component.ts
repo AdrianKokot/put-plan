@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { trackByField} from "../../../../../shared/functions/track-by";
-import { TimetableEntry } from "../../../../../shared/models/timetable-entry";
+import { trackByField} from '../../../../../shared/functions/track-by';
+import { TimetableEntry } from '../../../../../shared/models/timetable-entry';
 
 @Component({
   selector: 'app-timetable-column:not([string])',

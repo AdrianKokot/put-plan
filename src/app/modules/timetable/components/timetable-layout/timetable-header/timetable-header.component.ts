@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-import { Timetable } from "../../../timetable";
+import { Timetable } from '../../../timetable';
 
 @Component({
   selector: 'app-timetable-header',

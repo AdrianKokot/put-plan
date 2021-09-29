@@ -1,7 +1,7 @@
-import { animate, animateChild, group, query, state, style, transition, trigger } from "@angular/animations";
+import { animate, animateChild, group, query, state, style, transition, trigger } from '@angular/animations';
 import { Component, HostListener } from '@angular/core';
-import { tap } from "rxjs/operators";
-import { ModalService } from "../../services/modal.service";
+import { tap } from 'rxjs/operators';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-modal-container',
@@ -23,13 +23,13 @@ import { ModalService } from "../../services/modal.service";
 
       transition('* => void', [
         group([
-          query("@modalAnimation", animateChild()),
+          query('@modalAnimation', animateChild()),
           animate('.3s ease'),
         ])
       ]),
       transition('void => *', [
         group([
-          query("@modalAnimation", animateChild()),
+          query('@modalAnimation', animateChild()),
           animate('.3s ease', style({opacity: 1}))
         ])
       ])
@@ -54,7 +54,7 @@ import { ModalService } from "../../services/modal.service";
   ]
 })
 export class ModalContainerComponent {
-  @HostListener("window:popstate")
+  @HostListener('window:popstate')
   @HostListener('document:keydown.escape')
   onBackButton(): void {
     if (this.modalService.modals$.value.length > 0) {

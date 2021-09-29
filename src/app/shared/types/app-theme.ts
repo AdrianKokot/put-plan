@@ -1,4 +1,4 @@
-import { LabeledProperty } from "./labeled-property";
+import { LabeledProperty } from './labeled-property';
 
 export type AppTheme = 'dark' | 'light' | 'system';
 

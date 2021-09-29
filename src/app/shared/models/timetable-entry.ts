@@ -1,4 +1,4 @@
-import { LabeledProperty } from "../types/labeled-property";
+import { LabeledProperty } from '../types/labeled-property';
 
 export interface TimetableEntry {
   isOptional: boolean;

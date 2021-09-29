@@ -1,4 +1,4 @@
-import { DOCUMENT } from "@angular/common";
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,13 +11,13 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
-import { Timetable } from "../../../timetable";
-import { fromEvent } from "rxjs";
-import { elementAt, filter, switchMap, tap } from "rxjs/operators";
-import { TimetableEntry } from "src/app/shared/models/timetable-entry";
-import { ModalService } from "src/app/shared/modules/modal/services/modal.service";
-import { trackByIndex } from "src/app/shared/functions/track-by";
-import { TimetableService } from "src/app/shared/services/timetable/timetable.service";
+import { Timetable } from '../../../timetable';
+import { fromEvent } from 'rxjs';
+import { elementAt, filter, switchMap, tap } from 'rxjs/operators';
+import { TimetableEntry } from 'src/app/shared/models/timetable-entry';
+import { ModalService } from 'src/app/shared/modules/modal/services/modal.service';
+import { trackByIndex } from 'src/app/shared/functions/track-by';
+import { TimetableService } from 'src/app/shared/services/timetable/timetable.service';
 
 @Component({
   selector: 'app-timetable-body',
@@ -59,7 +59,7 @@ export class TimetableBodyComponent {
   public selectedItem: TimetableEntry | null = null;
   public hours = Timetable.ClassesHours;
 
-  @ViewChild("detailsTemplate") detailsModalTemplate!: TemplateRef<any>;
+  @ViewChild('detailsTemplate') detailsModalTemplate!: TemplateRef<any>;
 
   trackByIndex = trackByIndex;
 

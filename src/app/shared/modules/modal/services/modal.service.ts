@@ -1,6 +1,6 @@
 import { Injectable, TemplateRef } from '@angular/core';
-import { BehaviorSubject } from "rxjs";
-import { Modal } from "../../../models/modal";
+import { BehaviorSubject } from 'rxjs';
+import { Modal } from '../../../models/modal';
 
 @Injectable({
   providedIn: 'root'

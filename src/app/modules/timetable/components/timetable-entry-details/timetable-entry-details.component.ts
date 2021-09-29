@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TimetableEntry } from "../../../../shared/models/timetable-entry";
+import { TimetableEntry } from '../../../../shared/models/timetable-entry';
 
 @Component({
   selector: 'app-timetable-entry-details',

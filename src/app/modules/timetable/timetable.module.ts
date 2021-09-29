@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TimetableComponent } from './timetable.component';
-import { SharedModule } from "../../shared/shared.module";
+import { SharedModule } from '../../shared/shared.module';
 import { TimetableColumnComponent } from './components/timetable-layout/timetable-column/timetable-column.component';
 import { TimetableStringColumnComponent } from './components/timetable-layout/timetable-string-column/timetable-string-column.component';
 import { TimetableHeaderComponent } from './components/timetable-layout/timetable-header/timetable-header.component';
