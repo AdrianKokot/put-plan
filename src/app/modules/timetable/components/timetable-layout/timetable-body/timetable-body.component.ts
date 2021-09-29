@@ -107,7 +107,7 @@ export class TimetableBodyComponent {
     }
   }
 
-  showDetails(entry: TimetableEntry) {
+  showDetails(entry: TimetableEntry): void {
     this.selectedItem = entry;
     if (this.detailsModalTemplate) {
       this.modalService.open(this.detailsModalTemplate);

@@ -38,7 +38,8 @@ export class SettingsComponent implements AfterViewInit, OnDestroy {
     public timetableService: TimetableService,
     private fb: FormBuilder,
     private settingsService: AppSettingsService
-  ) {}
+  ) {
+  }
 
   ngOnDestroy(): void {
     this.formChangeSubscription.unsubscribe();
@@ -53,11 +54,11 @@ export class SettingsComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  openSettingsModal() {
+  openSettingsModal(): void {
     this.modalService.open(this.formTemplate, {full: true});
   }
 
-  submit() {
+  submit(): void {
     this.settingsService.save();
     this.timetableService.savePreferences();
     this.modalService.closeNewest();
