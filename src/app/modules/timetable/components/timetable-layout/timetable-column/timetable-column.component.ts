@@ -8,7 +8,7 @@ import { TimetableEntry } from 'src/app/shared/models/timetable-entry';
 })
 export class TimetableColumnComponent {
   @Input() items: (TimetableEntry | null)[] | null = [];
-  @Output() showModelDetails: EventEmitter<TimetableEntry> = new EventEmitter<TimetableEntry>();
+  @Output() public readonly showModelDetails: EventEmitter<TimetableEntry> = new EventEmitter<TimetableEntry>();
 
   trackBy(index: number, item: TimetableEntry | null): string|undefined {
     return item ? (item.name || undefined) : undefined;
