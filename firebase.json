@@ -19,10 +19,16 @@
         "value": "put-plan.web.app"
       }]
     }, {
-      "source": "**/*.@(jpg|jpeg|webp|gif|png|css|js|woff|woff2|ttf|ttc|eot|otf)",
+      "source": "**/*.@(jpg|jpeg|webp|gif|png|css|js|ico|ttf|ttc|eot|otf)",
       "headers": [{
         "key": "Cache-Control",
         "value": "max-age=31536000"
+      }]
+    }, {
+      "source": "**/*.@(woff|woff2)",
+      "headers": [{
+        "key": "Cache-Control",
+        "value": "immutable"
       }]
     }]
   }
