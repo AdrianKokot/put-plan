@@ -35,6 +35,16 @@
               "src/robots.txt",
               "src/sitemap.xml"
             ],
+            "optimization": {
+              "fonts": {
+                "inline": true
+              },
+              "styles": {
+                "minify": true,
+                "inlineCritical": false
+              },
+              "scripts": true
+            },
             "styles": [
               "src/styles.scss"
             ],
