@@ -82,10 +82,6 @@ $ng-select-value-padding-left: 10px !default;
 $ng-select-value-font-size: theme('fontSize.sm') !default;
 
 .ng-select {
-  //* {
-  //  @apply transition-colors;
-  //  @apply duration-300;
-  //}
 
   &.ng-select-opened {
     > .ng-select-container {
@@ -146,8 +142,7 @@ $ng-select-value-font-size: theme('fontSize.sm') !default;
       @apply pl-2;
 
       .ng-placeholder {
-        @apply text-gray-300;
-        @apply dark:text-gray-500;
+        @apply text-gray-400;
       }
     }
   }
