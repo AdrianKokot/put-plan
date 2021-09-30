@@ -11,13 +11,13 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
-import { Timetable } from '../../../timetable';
 import { fromEvent } from 'rxjs';
 import { elementAt, filter, switchMap, tap } from 'rxjs/operators';
+import { trackByIndex } from 'src/app/shared/functions/track-by';
 import { TimetableEntry } from 'src/app/shared/models/timetable-entry';
 import { ModalService } from 'src/app/shared/modules/modal/services/modal.service';
-import { trackByIndex } from 'src/app/shared/functions/track-by';
 import { TimetableService } from 'src/app/shared/services/timetable/timetable.service';
+import { Timetable } from '../../../timetable';
 
 @Component({
   selector: 'app-timetable-body',
@@ -54,7 +54,7 @@ export class TimetableBodyComponent {
     return this._selectedWeekDayIndex;
   }
 
-  @Output() public selectedWeekDayIndexChange = new EventEmitter<number>();
+  @Output() public readonly selectedWeekDayIndexChange = new EventEmitter<number>();
 
   public selectedItem: TimetableEntry | null = null;
   public hours = Timetable.ClassesHours;

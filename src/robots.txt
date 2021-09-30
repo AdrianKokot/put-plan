@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+Sitemap: https://put-plan.web.app/sitemap.xml

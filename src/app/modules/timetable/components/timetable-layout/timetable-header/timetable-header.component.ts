@@ -19,7 +19,7 @@ export class TimetableHeaderComponent implements AfterViewInit {
     this.updateContainerPosition();
   }
 
-  @Output() public selectedWeekDayIndexChange = new EventEmitter<number>();
+  @Output() public readonly selectedWeekDayIndexChange = new EventEmitter<number>();
 
   public weekDays = Timetable.WeekDays;
 

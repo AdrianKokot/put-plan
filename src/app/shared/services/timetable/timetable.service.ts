@@ -1,8 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import firebase from 'firebase/compat';
-import { BehaviorSubject, Observable} from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { firebaseConfig } from 'src/environments/firebase';
 import { Timetable } from '../../../modules/timetable/timetable';
 import { Preferences } from '../../models/preferences';
 import { TimetableEntry } from '../../models/timetable-entry';
@@ -12,7 +12,11 @@ import { TimetableData, TimetableStorage } from './timetable-storage';
   providedIn: 'root'
 })
 export class TimetableService implements OnDestroy {
-  private database: firebase.database.Database;
+  private apiEndpoints = {
+    version: firebaseConfig.databaseURL + '/version.json',
+    root: firebaseConfig.databaseURL + '/.json'
+  }
+
   private preferencesStorageKey = 'preferences';
 
   private _preferences: Preferences = JSON.parse(localStorage.getItem(this.preferencesStorageKey) || '{}') as Preferences;
@@ -42,7 +46,7 @@ export class TimetableService implements OnDestroy {
   private selectedGroupDataSubscription = this.data$
     .pipe(
       map(data => {
-        if(!this.preferences.selectedGroup){
+        if (!this.preferences.selectedGroup) {
           return [];
         }
 
@@ -83,9 +87,8 @@ export class TimetableService implements OnDestroy {
     });
 
   constructor(
-    fireDatabase: AngularFireDatabase
+    private http: HttpClient
   ) {
-    this.database = fireDatabase.database;
     this.checkForDbUpdate();
   }
 
@@ -121,27 +124,23 @@ export class TimetableService implements OnDestroy {
   }
 
   public checkForDbUpdate(): void {
-    this.database.goOnline();
+    this.http.get<string>(this.apiEndpoints.version)
+      .pipe(take(1))
+      .subscribe(dbVersion => {
+        const clientVersion = this.data$.value?.version || null;
 
-    this.database.ref('version').get().then(x => {
-      const dbVersion = x.val();
-      const clientVersion = this.data$.value?.version || null;
-
-      if (clientVersion !== dbVersion) {
-        this.updateDbData();
-      } else {
-        this.database.goOffline();
-      }
-    });
+        if (clientVersion !== dbVersion) {
+          this.updateDbData();
+        }
+      });
   }
 
   private updateDbData(): void {
-    this.database.ref()
-      .get()
-      .then(x => {
-        this.data$.next(x.val() as TimetableData);
+    this.http.get<TimetableData>(this.apiEndpoints.root)
+      .pipe(take(1))
+      .subscribe(data => {
+        this.data$.next(data);
         TimetableStorage.saveDbDataToStorage(this.data$.value);
-        this.database.goOffline();
       });
   }
 
