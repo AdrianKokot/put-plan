@@ -13,7 +13,7 @@ export class TimetableEntryDetailsComponent {
     this._selectedItem = value;
 
     if (value !== null) {
-      this.mappedObject = this.mapTimetableEntry(value);
+      this.mapTimetableEntry(value);
     }
   }
 
@@ -23,15 +23,11 @@ export class TimetableEntryDetailsComponent {
 
   private _selectedItem: TimetableEntry | null = null;
 
-
   public mappedObject: { [key: string]: string } = {};
 
-  public get mappedObjectKeys(): string[] {
-    return Object.keys(this.mappedObject);
-  }
+  private mapTimetableEntry(entry: TimetableEntry): void {
 
-  private mapTimetableEntry(entry: TimetableEntry): { [key: string]: string } {
-    const result: { [key: string]: string|null } = {
+    const entryDetails: { [key: string]: string | null } = {
       'Typ zajęć': entry.classType,
       'Prowadzący': entry.lecturer?.name && entry.lecturer?.url ? (`<a href="${entry.lecturer.url}" target="_blank" rel="noreferrer">${entry.lecturer.name}</a>`) : null,
       'Sala': entry?.location?.shortName || null,
@@ -40,12 +36,26 @@ export class TimetableEntryDetailsComponent {
       'Linki': entry.links && entry.links.length > 0 ? entry.links.map(l => `<a href="${l.key}" target="_blank" rel="noreferrer">${l.label}</a>`).join('<br>') : null
     };
 
-    return Object.keys(result)
+    this.mappedObject = Object.keys(entryDetails)
       .reduce((obj, key) => {
-        if (result[key] !== null) {
-          obj[key] = result[key] as string;
+        if (entryDetails[key] !== null) {
+          obj[key] = entryDetails[key] as string;
         }
         return obj;
       }, {} as { [key: string]: string });
+  }
+
+  public entryDetailsMode: 'location' | 'lecturer' | '' = '';
+
+  public showDetails(key: string): void {
+    if (key === 'Sala') {
+      this.entryDetailsMode = 'location';
+    } else if (key === 'Prowadzący') {
+      this.entryDetailsMode = 'lecturer';
+    }
+  }
+
+  public hideDetails(): void {
+    this.entryDetailsMode = '';
   }
 }

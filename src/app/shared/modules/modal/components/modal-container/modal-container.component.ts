@@ -1,8 +1,8 @@
 import { animate, animateChild, group, query, state, style, transition, trigger } from '@angular/animations';
 import { Component, HostListener } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { ModalService } from '../../services/modal.service';
 import { trackById } from '../../../../functions/track-by';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-modal-container',
@@ -68,6 +68,7 @@ export class ModalContainerComponent {
     .modals$
     .pipe(
       tap((modals) => {
+
         this.isModalContainerExtended = false;
         window.document.body.classList.toggle('overflow-y-hidden', modals.length > 0);
       })
@@ -77,6 +78,7 @@ export class ModalContainerComponent {
   }
 
   public close(id: number): void {
+    console.log('close', id);
     if (!this.isModalContainerExtended) {
       this.modalService.close(id);
     }
