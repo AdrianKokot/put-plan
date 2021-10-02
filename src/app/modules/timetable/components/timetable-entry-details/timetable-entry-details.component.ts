@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TimetableEntry } from '../../../../shared/models/timetable-entry';
+import { TimetableEntryDetailToDisplay } from './timetable-entry-detail-to-display';
+
 
 @Component({
   selector: 'app-timetable-entry-details',
@@ -8,6 +10,7 @@ import { TimetableEntry } from '../../../../shared/models/timetable-entry';
 })
 export class TimetableEntryDetailsComponent {
   @Input() modal!: { close: () => void };
+
   @Input()
   set selectedItem(value: TimetableEntry | null) {
     this._selectedItem = value;
@@ -23,39 +26,42 @@ export class TimetableEntryDetailsComponent {
 
   private _selectedItem: TimetableEntry | null = null;
 
-  public mappedObject: { [key: string]: string } = {};
+  public detailsToDisplay: TimetableEntryDetailToDisplay[] = [];
 
   private mapTimetableEntry(entry: TimetableEntry): void {
 
-    const entryDetails: { [key: string]: string | null } = {
-      'Typ zajęć': entry.classType,
-      'Prowadzący': entry.lecturer?.name && entry.lecturer?.url ? (`<a href="${entry.lecturer.url}" target="_blank" rel="noreferrer">${entry.lecturer.name}</a>`) : null,
-      'Sala': entry?.location?.shortName || null,
-      'Dodatkowe informacje': entry.additionalInfo && entry.additionalInfo.length > 0 ? entry.additionalInfo : null,
-      'Grupy mające te zajęcia w tym czasie': entry.groups,
-      'Linki': entry.links && entry.links.length > 0 ? entry.links.map(l => `<a href="${l.key}" target="_blank" rel="noreferrer">${l.label}</a>`).join('<br>') : null
-    };
+    this.detailsToDisplay = [
+      {label: 'Typ zajęć', value: entry.classType},
+      {
+        label: 'Prowadzący',
+        value: entry.lecturer?.name || null,
+        click: () => this.showExtendedDetails('lecturer')
+      },
+      {
+        label: 'Sala',
+        value: entry.location?.shortName || null,
+        click: () => this.showExtendedDetails('location')
+      },
+      {label: 'Dodatkowe informacje', value: entry.additionalInfo.length > 0 ? entry.additionalInfo : null},
+      {label: 'Grupy mające te zajęcia w tym czasie', value: entry.groups},
+      {
+        label: 'Linki',
+        value: entry.links && entry.links.length > 0 ? entry.links.map(l => `<a href='${l.key}' target='_blank' rel='noreferrer'>${l.label}</a>`).join('<br>') : null
+      }
+    ].filter(x => x.value !== null) as TimetableEntryDetailToDisplay[];
 
-    this.mappedObject = Object.keys(entryDetails)
-      .reduce((obj, key) => {
-        if (entryDetails[key] !== null) {
-          obj[key] = entryDetails[key] as string;
-        }
-        return obj;
-      }, {} as { [key: string]: string });
   }
+
+  private showExtendedDetails(key: 'location' | 'lecturer'): void {
+    this.entryDetailsMode = key;
+    this.areDetailsExtended = true;
+  }
+
+  public areDetailsExtended = false;
 
   public entryDetailsMode: 'location' | 'lecturer' | '' = '';
 
-  public showDetails(key: string): void {
-    if (key === 'Sala') {
-      this.entryDetailsMode = 'location';
-    } else if (key === 'Prowadzący') {
-      this.entryDetailsMode = 'lecturer';
-    }
-  }
-
   public hideDetails(): void {
-    this.entryDetailsMode = '';
+    this.areDetailsExtended = false;
   }
 }

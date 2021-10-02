@@ -1,21 +1,19 @@
 <app-modal-template [title]="selectedItem.name"
                     [modal]="modal"
-                    *ngIf="selectedItem">
+                    *ngIf="selectedItem as item">
 
   <section class="overflow-x-hidden">
 
     <section class="flex transform duration-300 transition-transform translate-x-0"
-             [ngClass]="{'-translate-x-full': entryDetailsMode !== ''}">
+             [ngClass]="{'-translate-x-full': areDetailsExtended}">
 
       <div class="w-full flex-shrink-0">
 
-        <ng-container *ngFor="let item of mappedObject | keyvalue">
+        <ng-container *ngFor="let details of detailsToDisplay">
 
-          <div class="mb-6 md:mb-4"
-               (click)="showDetails(item.key)">
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{{item.key}}</p>
-            <p class="text-base"
-               [innerHTML]="item.value">
+          <div class="mb-6 md:mb-4" (click)="details.click ? details.click() : null">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{{details.label}}</p>
+            <p class="text-base" [innerHTML]="details.value">
             </p>
           </div>
 
@@ -25,7 +23,10 @@
 
       <div class="w-full flex-shrink-0">
         <div class="mb-6 md:mb-4">
-          <span (click)="hideDetails()">&lt; Powrót</span>
+          <span (click)="hideDetails()"
+                class="hover:text-blue-500 transition-colors duration-300 cursor-pointer dark:hover:text-blue-400">
+            &lt; Wróć do przedmiotu
+          </span>
         </div>
 
         <ng-container *ngIf="entryDetailsMode === 'location'; else lecturerDetails">
@@ -35,7 +36,7 @@
           </div>
 
           <div class="mb-6 md:mb-4"
-               *ngIf="selectedItem.location.address">
+               *ngIf="selectedItem.location?.address">
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Adres</p>
             <p class="text-base">{{selectedItem.location.address}}</p>
           </div>
@@ -44,13 +45,29 @@
         <ng-template #lecturerDetails>
           <div class="mb-6 md:mb-4">
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Prowadzący</p>
-            <p class="text-base">{{selectedItem.lecturer.name}}</p>
+            <p class="text-base">
+              <a *ngIf="selectedItem.lecturer?.url; else noLink"
+                 [href]="selectedItem.lecturer.url" target='_blank' rel='noreferrer'>
+                {{selectedItem.lecturer.name}}
+              </a>
+              <ng-template #noLink>{{selectedItem.lecturer.name}}</ng-template>
+            </p>
           </div>
 
           <div class="mb-6 md:mb-4"
-               *ngIf="selectedItem.location.address">
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Strona prowadzącego</p>
-            <p class="text-base">{{selectedItem.lecturer.url}}</p>
+               *ngIf="selectedItem.lecturer?.emails && selectedItem.lecturer.emails.length > 0">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Email prowadzącego</p>
+            <p class="text-base">
+
+              <ng-container *ngFor="let email of selectedItem.lecturer.emails">
+                <a
+                  [href]="'mailto:' + email" target='_blank' rel='noreferrer'>
+                  {{email}}
+                </a>
+                <br>
+              </ng-container>
+
+            </p>
           </div>
         </ng-template>
 

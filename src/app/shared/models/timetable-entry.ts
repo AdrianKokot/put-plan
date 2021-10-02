@@ -23,6 +23,7 @@ export interface TimetableEntryLocation {
 }
 
 export interface TimetableEntryLecturer {
+  emails: string[];
   name: string;
   url: string;
 }
