@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { Timetable } from '../../../timetable';
 
 @Component({
@@ -20,6 +20,8 @@ export class TimetableHeaderComponent implements AfterViewInit {
   }
 
   @Output() public readonly selectedWeekDayIndexChange = new EventEmitter<number>();
+
+  @HostBinding() class = 'sticky top-0 left-0 right-0 block z-10';
 
   public weekDays = Timetable.WeekDays;
 

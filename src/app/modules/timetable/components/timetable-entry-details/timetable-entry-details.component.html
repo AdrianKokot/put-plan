@@ -11,8 +11,13 @@
 
         <ng-container *ngFor="let details of detailsToDisplay">
 
-          <div class="mb-6 md:mb-4" (click)="details.click ? details.click() : null">
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{{details.label}}</p>
+          <div class="mb-6" (click)="details.click ? details.click() : null"
+               [ngClass]="{'cursor-pointer': details.click}">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5 flex items-center">
+              <span>{{details.label}}</span>
+              <app-icon icon="help" *ngIf="details.click" class="h-3 w-3 ml-1 text-current"
+                        title="Kliknij aby dowiedzieć się więcej"></app-icon>
+            </p>
             <p class="text-base" [innerHTML]="details.value">
             </p>
           </div>
@@ -30,7 +35,7 @@
         </div>
 
         <ng-container *ngIf="entryDetailsMode === 'location'; else lecturerDetails">
-          <div class="mb-6 md:mb-4">
+          <div class="mb-6 md:mb-4" *ngIf="selectedItem.location?.name">
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Nazwa sali</p>
             <p class="text-base">{{selectedItem.location.name}}</p>
           </div>
