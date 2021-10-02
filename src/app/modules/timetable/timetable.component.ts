@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { Timetable } from './timetable';
 
 @Component({
@@ -16,4 +16,6 @@ export class TimetableComponent {
   public set selectedWeekDayIndex(index: number) {
     this._selectedWeekDayIndex = index;
   }
+
+  @HostBinding() class = 'block';
 }

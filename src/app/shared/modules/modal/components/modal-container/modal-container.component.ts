@@ -1,23 +1,23 @@
 import { animate, animateChild, group, query, state, style, transition, trigger } from '@angular/animations';
 import { Component, HostListener } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { ModalService } from '../../services/modal.service';
 import { trackById } from '../../../../functions/track-by';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-modal-container',
   templateUrl: './modal-container.component.html',
-  styles: [`
-
-    section {
-      transition: padding 0s calc((1 - var(--is-modal-extended, 0)) * 1s);
-
-      & > div {
-        transition: height .3s, border-radius .3s calc(var(--is-modal-extended, 0) * .25s);
-      }
-    }
-
-  `],
+  // styles: [`
+  //
+  //   section {
+  //     transition: padding 0s calc((1 - var(--is-modal-extended, 0)) * 1s);
+  //
+  //     & > div {
+  //       transition: height .3s, border-radius .3s calc(var(--is-modal-extended, 0) * .25s);
+  //     }
+  //   }
+  //
+  // `],
   animations: [
     trigger('containerAnimation', [
       state('void', style({opacity: 0})),
@@ -68,6 +68,7 @@ export class ModalContainerComponent {
     .modals$
     .pipe(
       tap((modals) => {
+
         this.isModalContainerExtended = false;
         window.document.body.classList.toggle('overflow-y-hidden', modals.length > 0);
       })
@@ -97,26 +98,26 @@ export class ModalContainerComponent {
 
   public isModalContainerExtended = false;
 
-  @HostListener('swipeup', ['$event'])
-  @HostListener('swipedown', ['$event'])
-  public swipe(e: HammerInput): void {
-    if (window.innerWidth >= 768)
-      return;
-
-    e.preventDefault();
-
-    if (e.direction === Hammer.DIRECTION_UP) {
-      this.isModalContainerExtended = true;
-      window.document.body.style.setProperty('--is-modal-extended', '1');
-    } else {
-      if (this.isModalContainerExtended) {
-        this.isModalContainerExtended = false;
-        window.document.body.style.setProperty('--is-modal-extended', '0');
-      } else {
-        this.closeNewest();
-      }
-    }
-
-  }
+  // @HostListener('swipeup', ['$event'])
+  // @HostListener('swipedown', ['$event'])
+  // public swipe(e: HammerInput): void {
+  //   if (window.innerWidth >= 768)
+  //     return;
+  //
+  //   e.preventDefault();
+  //
+  //   if (e.direction === Hammer.DIRECTION_UP) {
+  //     this.isModalContainerExtended = true;
+  //     window.document.body.style.setProperty('--is-modal-extended', '1');
+  //   } else {
+  //     if (this.isModalContainerExtended) {
+  //       this.isModalContainerExtended = false;
+  //       window.document.body.style.setProperty('--is-modal-extended', '0');
+  //     } else {
+  //       this.closeNewest();
+  //     }
+  //   }
+  //
+  // }
 
 }

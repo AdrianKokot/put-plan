@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TimetableEntry } from '../../../../shared/models/timetable-entry';
+import { TimetableEntryDetailToDisplay } from './timetable-entry-detail-to-display';
+
 
 @Component({
   selector: 'app-timetable-entry-details',
@@ -8,12 +10,13 @@ import { TimetableEntry } from '../../../../shared/models/timetable-entry';
 })
 export class TimetableEntryDetailsComponent {
   @Input() modal!: { close: () => void };
+
   @Input()
   set selectedItem(value: TimetableEntry | null) {
     this._selectedItem = value;
 
     if (value !== null) {
-      this.mappedObject = this.mapTimetableEntry(value);
+      this.mapTimetableEntry(value);
     }
   }
 
@@ -23,29 +26,42 @@ export class TimetableEntryDetailsComponent {
 
   private _selectedItem: TimetableEntry | null = null;
 
+  public detailsToDisplay: TimetableEntryDetailToDisplay[] = [];
 
-  public mappedObject: { [key: string]: string } = {};
+  private mapTimetableEntry(entry: TimetableEntry): void {
 
-  public get mappedObjectKeys(): string[] {
-    return Object.keys(this.mappedObject);
+    this.detailsToDisplay = [
+      {label: 'Typ zajęć', value: entry.classType},
+      {
+        label: 'Prowadzący',
+        value: entry.lecturer?.name || null,
+        click: () => this.showExtendedDetails('lecturer')
+      },
+      {
+        label: 'Sala',
+        value: entry.location?.shortName || null,
+        click: () => this.showExtendedDetails('location')
+      },
+      {label: 'Dodatkowe informacje', value: entry.additionalInfo.length > 0 ? entry.additionalInfo : null},
+      {label: 'Grupy mające te zajęcia w tym czasie', value: entry.groups},
+      {
+        label: 'Linki',
+        value: entry.links && entry.links.length > 0 ? entry.links.map(l => `<a href='${l.key}' target='_blank' rel='noreferrer'>${l.label}</a>`).join('<br>') : null
+      }
+    ].filter(x => x.value !== null) as TimetableEntryDetailToDisplay[];
+
   }
 
-  private mapTimetableEntry(entry: TimetableEntry): { [key: string]: string } {
-    const result: { [key: string]: string|null } = {
-      'Typ zajęć': entry.classType,
-      'Prowadzący': entry.lecturer?.name && entry.lecturer?.url ? (`<a href="${entry.lecturer.url}" target="_blank" rel="noreferrer">${entry.lecturer.name}</a>`) : null,
-      'Sala': entry?.location?.shortName || null,
-      'Dodatkowe informacje': entry.additionalInfo && entry.additionalInfo.length > 0 ? entry.additionalInfo : null,
-      'Grupy mające te zajęcia w tym czasie': entry.groups,
-      'Linki': entry.links && entry.links.length > 0 ? entry.links.map(l => `<a href="${l.key}" target="_blank" rel="noreferrer">${l.label}</a>`).join('<br>') : null
-    };
+  private showExtendedDetails(key: 'location' | 'lecturer'): void {
+    this.entryDetailsMode = key;
+    this.areDetailsExtended = true;
+  }
 
-    return Object.keys(result)
-      .reduce((obj, key) => {
-        if (result[key] !== null) {
-          obj[key] = result[key] as string;
-        }
-        return obj;
-      }, {} as { [key: string]: string });
+  public areDetailsExtended = false;
+
+  public entryDetailsMode: 'location' | 'lecturer' | '' = '';
+
+  public hideDetails(): void {
+    this.areDetailsExtended = false;
   }
 }

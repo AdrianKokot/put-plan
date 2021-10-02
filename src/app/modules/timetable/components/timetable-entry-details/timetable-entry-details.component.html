@@ -1,13 +1,85 @@
-<app-modal-template [title]="selectedItem ? selectedItem.name : ''" [modal]="modal">
+<app-modal-template [title]="selectedItem.name"
+                    [modal]="modal"
+                    *ngIf="selectedItem as item">
 
-  <ng-container *ngFor="let key of mappedObjectKeys">
+  <section class="overflow-x-hidden">
 
-    <div class="mb-6 md:mb-4">
-      <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{{key}}</p>
-      <p class="text-base" [innerHTML]="mappedObject[key]"></p>
-    </div>
+    <section class="flex transform duration-300 transition-transform translate-x-0"
+             [ngClass]="{'-translate-x-full': areDetailsExtended}">
 
-  </ng-container>
+      <div class="w-full flex-shrink-0">
+
+        <ng-container *ngFor="let details of detailsToDisplay">
+
+          <div class="mb-6" (click)="details.click ? details.click() : null"
+               [ngClass]="{'cursor-pointer': details.click}">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5 flex items-center">
+              <span>{{details.label}}</span>
+              <app-icon icon="help" *ngIf="details.click" class="h-3 w-3 ml-1 text-current"
+                        title="Kliknij aby dowiedzieć się więcej"></app-icon>
+            </p>
+            <p class="text-base" [innerHTML]="details.value">
+            </p>
+          </div>
+
+        </ng-container>
+
+      </div>
+
+      <div class="w-full flex-shrink-0">
+        <div class="mb-6 md:mb-4">
+          <span (click)="hideDetails()"
+                class="hover:text-blue-500 transition-colors duration-300 cursor-pointer dark:hover:text-blue-400">
+            &lt; Wróć do przedmiotu
+          </span>
+        </div>
+
+        <ng-container *ngIf="entryDetailsMode === 'location'; else lecturerDetails">
+          <div class="mb-6 md:mb-4" *ngIf="selectedItem.location?.name">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Nazwa sali</p>
+            <p class="text-base">{{selectedItem.location.name}}</p>
+          </div>
+
+          <div class="mb-6 md:mb-4"
+               *ngIf="selectedItem.location?.address">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Adres</p>
+            <p class="text-base">{{selectedItem.location.address}}</p>
+          </div>
+        </ng-container>
+
+        <ng-template #lecturerDetails>
+          <div class="mb-6 md:mb-4">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Prowadzący</p>
+            <p class="text-base">
+              <a *ngIf="selectedItem.lecturer?.url; else noLink"
+                 [href]="selectedItem.lecturer.url" target='_blank' rel='noreferrer'>
+                {{selectedItem.lecturer.name}}
+              </a>
+              <ng-template #noLink>{{selectedItem.lecturer.name}}</ng-template>
+            </p>
+          </div>
+
+          <div class="mb-6 md:mb-4"
+               *ngIf="selectedItem.lecturer?.emails && selectedItem.lecturer.emails.length > 0">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Email prowadzącego</p>
+            <p class="text-base">
+
+              <ng-container *ngFor="let email of selectedItem.lecturer.emails">
+                <a
+                  [href]="'mailto:' + email" target='_blank' rel='noreferrer'>
+                  {{email}}
+                </a>
+                <br>
+              </ng-container>
+
+            </p>
+          </div>
+        </ng-template>
+
+      </div>
+
+    </section>
+
+  </section>
 
 </app-modal-template>
-
