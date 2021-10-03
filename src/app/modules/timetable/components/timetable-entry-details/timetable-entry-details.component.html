@@ -35,45 +35,56 @@
         </div>
 
         <ng-container *ngIf="entryDetailsMode === 'location'; else lecturerDetails">
-          <div class="mb-6 md:mb-4" *ngIf="selectedItem.location?.name">
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Nazwa sali</p>
-            <p class="text-base">{{selectedItem.location.name}}</p>
-          </div>
 
-          <div class="mb-6 md:mb-4"
-               *ngIf="selectedItem.location?.address">
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Adres</p>
-            <p class="text-base">{{selectedItem.location.address}}</p>
-          </div>
+          <ng-container *ngIf="selectedItem?.location">
+
+            <div class="mb-6 md:mb-4" *ngIf="selectedItem.location?.name">
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Nazwa sali</p>
+              <p class="text-base">{{selectedItem.location.name}}</p>
+            </div>
+
+            <div class="mb-6 md:mb-4"
+                 *ngIf="selectedItem.location && selectedItem.location?.address">
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Adres</p>
+              <p class="text-base">{{selectedItem.location.address}}</p>
+            </div>
+
+          </ng-container>
+
         </ng-container>
 
         <ng-template #lecturerDetails>
-          <div class="mb-6 md:mb-4">
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Prowadzący</p>
-            <p class="text-base">
-              <a *ngIf="selectedItem.lecturer?.url; else noLink"
-                 [href]="selectedItem.lecturer.url" target='_blank' rel='noreferrer'>
-                {{selectedItem.lecturer.name}}
-              </a>
-              <ng-template #noLink>{{selectedItem.lecturer.name}}</ng-template>
-            </p>
-          </div>
+          <ng-container *ngIf="selectedItem.lecturer">
 
-          <div class="mb-6 md:mb-4"
-               *ngIf="selectedItem.lecturer?.emails && selectedItem.lecturer.emails.length > 0">
-            <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Email prowadzącego</p>
-            <p class="text-base">
-
-              <ng-container *ngFor="let email of selectedItem.lecturer.emails">
-                <a
-                  [href]="'mailto:' + email" target='_blank' rel='noreferrer'>
-                  {{email}}
+            <div class="mb-6 md:mb-4">
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Prowadzący</p>
+              <p class="text-base">
+                <a *ngIf="selectedItem.lecturer?.url; else noLink"
+                   [href]="selectedItem.lecturer.url" target='_blank' rel='noreferrer'>
+                  {{selectedItem.lecturer.name}}
                 </a>
-                <br>
-              </ng-container>
+                <ng-template #noLink>{{selectedItem.lecturer.name}}</ng-template>
+              </p>
+            </div>
 
-            </p>
-          </div>
+            <div class="mb-6 md:mb-4"
+                 *ngIf="selectedItem.lecturer?.emails && selectedItem.lecturer.emails.length > 0">
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Email prowadzącego</p>
+              <p class="text-base">
+
+                <ng-container *ngFor="let email of selectedItem.lecturer.emails">
+                  <a
+                    [href]="'mailto:' + email" target='_blank' rel='noreferrer'>
+                    {{email}}
+                  </a>
+                  <br>
+                </ng-container>
+
+              </p>
+            </div>
+
+          </ng-container>
+
         </ng-template>
 
       </div>
