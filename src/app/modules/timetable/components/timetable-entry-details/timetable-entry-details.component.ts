@@ -34,13 +34,13 @@ export class TimetableEntryDetailsComponent {
       {label: 'Typ zajęć', value: entry.classType},
       {
         label: 'Prowadzący',
-        value: entry.lecturer?.name || null,
-        click: () => this.showExtendedDetails('lecturer')
+        value: entry?.lecturer?.name || null,
+        click: entry?.location ? () => this.showExtendedDetails('lecturer') : null
       },
       {
         label: 'Sala',
-        value: entry.location?.shortName || null,
-        click: () => this.showExtendedDetails('location')
+        value: entry?.location?.shortName || null,
+        click: entry?.location ? () => this.showExtendedDetails('location') : null
       },
       {label: 'Dodatkowe informacje', value: entry.additionalInfo.length > 0 ? entry.additionalInfo : null},
       {label: 'Grupy mające te zajęcia w tym czasie', value: entry.groups},
