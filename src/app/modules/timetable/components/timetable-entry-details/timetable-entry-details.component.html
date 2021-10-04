@@ -43,11 +43,30 @@
               <p class="text-base">{{selectedItem.location.name}}</p>
             </div>
 
-            <div class="mb-6 md:mb-4"
-                 *ngIf="selectedItem.location && selectedItem.location?.address">
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Adres</p>
-              <p class="text-base">{{selectedItem.location.address}}</p>
-            </div>
+            <ng-container *ngIf="selectedItem.location && selectedItem.location?.address">
+
+              <div class="mb-6 md:mb-4">
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Adres</p>
+                <ng-container *ngIf="selectedItem.location?.gmaps; else noGmaps">
+                  <p class="text-base">
+                    <a [href]="selectedItem.location.gmaps" rel="noreferrer" target="_blank">
+                      {{selectedItem.location.address}}
+                    </a>
+                  </p>
+                </ng-container>
+                <ng-template #noGmaps>
+                  <p class="text-base">{{selectedItem.location.address}}</p>
+                </ng-template>
+              </div>
+
+              <div class="mb-6 md:mb-4">
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-0.5">Mapa obiektów</p>
+                <p class="text-base">
+                  <a href="/assets/piotrowo.png" target="_blank">Kampus piotrowo</a>
+                </p>
+              </div>
+
+            </ng-container>
 
           </ng-container>
 
