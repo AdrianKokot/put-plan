@@ -17,6 +17,7 @@ export interface TimetableEntry {
 }
 
 export interface TimetableEntryLocation {
+  gmaps: string;
   name: string;
   shortName: string;
   address: string;
