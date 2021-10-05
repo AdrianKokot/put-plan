@@ -129,7 +129,7 @@ $ng-select-value-font-size: theme('fontSize.sm') !default;
     @apply dark:border-gray-500;
 
     @apply items-center;
-    @apply text-sm;
+    //@apply text-sm;
 
     min-height: $ng-select-height;
 
@@ -275,7 +275,8 @@ $ng-select-value-font-size: theme('fontSize.sm') !default;
   @apply dark:border-gray-500;
 
   @apply left-0;
-  @apply text-sm;
+
+  //@apply text-sm;
 
   &.ng-select-bottom {
     @apply top-full;
