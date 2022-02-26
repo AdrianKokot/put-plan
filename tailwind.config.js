@@ -26,9 +26,9 @@ module.exports = {
 
       // 'bg-violet-600 dark:bg-violet-700',
       // 'bg-orange-600 dark:bg-orange-700',
-      // 'bg-fuchsia-600 dark:bg-fuchsia-700',
-      // 'bg-yellow-600 dark:bg-yellow-700',
-      // 'bg-red-600 dark:bg-red-700',
+      'bg-fuchsia-600 dark:bg-fuchsia-700',
+      'bg-yellow-600 dark:bg-yellow-700',
+      // 'bg-red-600 dark:bg-red-700'
     ]
   },
   darkMode: 'class',

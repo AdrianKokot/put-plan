@@ -1,1 +1,1 @@
-export const isWeekParityReversed = false;
+export const isWeekParityReversed = true;
