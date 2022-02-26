@@ -1,48 +1,3 @@
-// const getWeekDays = function (locale = 'pl-PL'): string[] {
-//   let weekDays = [];
-//
-//   const monday = new Date();
-//   monday.setHours(-24 * ((monday.getDay() || 7) - 1));
-//
-//   for (let i = 0; i < 5; i++) {
-//     weekDays.push(
-//       monday.toLocaleString(locale, {weekday: 'long'})
-//     );
-//     monday.setHours(+24);
-//   }
-//
-//   return weekDays;
-// }
-//
-// const getClassesHours = function (locale = 'pl-PL'): string[] {
-//   let hours: string[] = [];
-//
-//   const breaks = [15, 30, 15, 10, 10, 10, 10];
-//
-//   const date = new Date();
-//
-//   date.setHours(8, 0);
-//
-//   let i = 0;
-//
-//   do {
-//     let hourStr = date.toLocaleTimeString(locale, {minute: '2-digit', hour: 'numeric'});
-//     hourStr += ' - ';
-//
-//     date.setMinutes(date.getMinutes() + 90);
-//
-//     hourStr += date.toLocaleTimeString(locale, {minute: '2-digit', hour: 'numeric'});
-//
-//     hours.push(hourStr);
-//     date.setMinutes(date.getMinutes() + breaks[i]);
-//     i++;
-//   } while (i <= breaks.length)
-//
-//   hours.push();
-//
-//   return hours;
-// }
-
 import { isWeekParityReversed } from '../../../environments/timetable';
 
 function getWeekNumber(d: Date = new Date()): number {
@@ -74,13 +29,11 @@ export class Timetable {
   }
 
   private static getCurrentWeekDayIndex(): number {
-    // TODO checking app settings to set weekend behavior
     const currentDayIndex = Timetable.getCurrentDayIndex();
     return currentDayIndex < 5 ? currentDayIndex : 4;
   }
 
   private static getIsCurrentWeekEven(): boolean {
-    // TODO checking app settings to set weekend behavior
     return (getWeekNumber() % 2 === 0) === !isWeekParityReversed;
   }
 
@@ -88,5 +41,3 @@ export class Timetable {
   public static currentWeekDayIndex: number = Timetable.getCurrentWeekDayIndex();
   public static isCurrentWeekEven: boolean = Timetable.getIsCurrentWeekEven();
 }
-
-
