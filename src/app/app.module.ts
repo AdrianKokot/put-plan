@@ -36,11 +36,6 @@ class HammerConfig extends HammerGestureConfig {
     BrowserModule,
     CoreModule,
     TimetableModule,
-
-    // AngularFireModule.initializeApp(firebaseConfig),
-    // AngularFireAnalyticsModule,
-    // AngularFireDatabaseModule,
-
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js',
       {
