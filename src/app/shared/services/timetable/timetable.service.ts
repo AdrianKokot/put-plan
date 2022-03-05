@@ -30,7 +30,7 @@ export class TimetableService implements OnDestroy {
     return this._preferences;
   }
 
-  private isCurrentWeekEven: boolean = true;
+  private isCurrentWeekEven = true;
   private _isSelectedWeekEven = this.isCurrentWeekEven;
   public get isSelectedWeekEven(): boolean {
     return this._isSelectedWeekEven;
