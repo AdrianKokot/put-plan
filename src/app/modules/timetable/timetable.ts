@@ -1,5 +1,3 @@
-import { isWeekParityReversed } from '../../../environments/timetable';
-
 function getWeekNumber(d: Date = new Date()): number {
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
   d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
@@ -9,6 +7,7 @@ function getWeekNumber(d: Date = new Date()): number {
 }
 
 export class Timetable {
+  public static readonly weekParityStorageKey = 'isweekparityreversed';
   public static WeekDays: string[] = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek'];
 
   public static ClassesHours: string[] = [
@@ -33,11 +32,10 @@ export class Timetable {
     return currentDayIndex < 5 ? currentDayIndex : 4;
   }
 
-  private static getIsCurrentWeekEven(): boolean {
+  public static isCurrentWeekEven(isWeekParityReversed:boolean): boolean {
     return (getWeekNumber() % 2 === 0) === !isWeekParityReversed;
   }
 
   public static currentDayIndex: number = Timetable.getCurrentDayIndex();
   public static currentWeekDayIndex: number = Timetable.getCurrentWeekDayIndex();
-  public static isCurrentWeekEven: boolean = Timetable.getIsCurrentWeekEven();
 }
