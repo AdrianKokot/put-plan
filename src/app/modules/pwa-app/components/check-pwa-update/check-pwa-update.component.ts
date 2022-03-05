@@ -3,11 +3,11 @@ import {
   Component,
   OnDestroy,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
 import { Subscription } from 'rxjs';
-import { delay, filter, map } from 'rxjs/operators';
+import { delay, filter } from 'rxjs/operators';
 import { ModalService } from '../../../../shared/modules/modal/services/modal.service';
 
 @Component({
@@ -37,7 +37,7 @@ export class CheckPwaUpdateComponent implements AfterViewInit, OnDestroy {
         filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'),
         delay(500)
       )
-      .subscribe((evt) => {
+      .subscribe(() => {
         this.modalService.open(this.updateTemplate);
       });
   }
