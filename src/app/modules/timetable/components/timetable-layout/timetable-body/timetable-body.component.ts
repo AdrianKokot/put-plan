@@ -70,11 +70,7 @@ export class TimetableBodyComponent {
     elementRef: ElementRef) {
 
     const hammerPan = new Hammer(elementRef.nativeElement, {recognizers: [[Hammer.Pan, {direction: Hammer.DIRECTION_ALL}]]});
-
-    // @ts-ignore
     const pan = fromEvent<HammerInput>(hammerPan, 'panleft panright');
-
-    // @ts-ignore
     fromEvent<HammerInput>(hammerPan, 'panstart')
       .pipe(
         switchMap(() => pan

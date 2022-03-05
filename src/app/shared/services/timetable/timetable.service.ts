@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, share, take, tap } from 'rxjs/operators';
 import { firebaseConfig } from 'src/environments/firebase';
 import { Timetable } from '../../../modules/timetable/timetable';
 import { Preferences } from '../../models/preferences';
@@ -9,17 +9,19 @@ import { TimetableEntry } from '../../models/timetable-entry';
 import { TimetableData, TimetableStorage } from './timetable-storage';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TimetableService implements OnDestroy {
   private apiEndpoints = {
     version: firebaseConfig.databaseURL + '/version.json',
-    root: firebaseConfig.databaseURL + '/.json'
-  }
+    root: firebaseConfig.databaseURL + '/.json',
+  };
 
   private preferencesStorageKey = 'preferences';
 
-  private _preferences: Preferences = JSON.parse(localStorage.getItem(this.preferencesStorageKey) || '{}') as Preferences;
+  private _preferences: Preferences = JSON.parse(
+    localStorage.getItem(this.preferencesStorageKey) || '{}'
+  ) as Preferences;
   public set preferences(value: Partial<Preferences>) {
     Object.assign(this._preferences, value);
     this.data$.next(this.data$.value);
@@ -28,48 +30,75 @@ export class TimetableService implements OnDestroy {
     return this._preferences;
   }
 
-  private _isSelectedWeekEven = Timetable.isCurrentWeekEven;
+  private isCurrentWeekEven = true;
+  private _isSelectedWeekEven = this.isCurrentWeekEven;
   public get isSelectedWeekEven(): boolean {
     return this._isSelectedWeekEven;
   }
   public get isSelectedWeekSameAsCurrentWeek(): boolean {
-    return this._isSelectedWeekEven === Timetable.isCurrentWeekEven;
+    return this._isSelectedWeekEven === this.isCurrentWeekEven;
   }
 
-  private data$: BehaviorSubject<TimetableData | null> = new BehaviorSubject<TimetableData | null>(TimetableStorage.getDbDataFromStorage());
+  private data$: BehaviorSubject<TimetableData | null> =
+    new BehaviorSubject<TimetableData | null>(
+      TimetableStorage.getDbDataFromStorage()
+    );
   private selectedGroupData$ = new BehaviorSubject<TimetableEntry[]>([]);
-  public optionalClasses$ = this.data$.pipe(map(d => d?.optionalClasses || []));
-  public languageClasses$ = this.data$.pipe(map(d => d?.languageClasses || []));
-  public groups$ = this.data$.pipe(map(d => d?.groups || []));
-  public version$ = this.data$.pipe(map(d => d?.version || ''));
+  public optionalClasses$ = this.data$.pipe(
+    map((d) => d?.optionalClasses || [])
+  );
+  public languageClasses$ = this.data$.pipe(
+    map((d) => d?.languageClasses || [])
+  );
+  public groups$ = this.data$.pipe(map((d) => d?.groups || []));
+  public version$ = this.data$.pipe(map((d) => d?.version || ''));
+  public isWeekParityReversed$ = this.data$.pipe(
+    map((d) => d?.isWeekParityReversed || false),
+    share()
+  );
 
   private selectedGroupDataSubscription = this.data$
     .pipe(
-      map(data => {
+      tap((data) => {
+        if(data !== null) {
+          const isCurrentWeekEven = Timetable.isCurrentWeekEven(data.isWeekParityReversed);
+          this.isCurrentWeekEven = isCurrentWeekEven;
+          this._isSelectedWeekEven = isCurrentWeekEven;
+        }
+      }),
+      map((data) => {
         if (!this.preferences.selectedGroup) {
           return [];
         }
 
         const groupParts = this.preferences.selectedGroup.split('.');
-        const langClass = this.preferences.selectedLanguageClass ? '|' + this.preferences.selectedLanguageClass : '';
+        const langClass = this.preferences.selectedLanguageClass
+          ? '|' + this.preferences.selectedLanguageClass
+          : '';
         const optionalClasses = this.preferences.selectedOptionalClasses || [];
 
-        const selectedGroupRegex = new RegExp(`(${groupParts[0]}([^.]|$|\.${groupParts[1]}))${langClass}`);
+        const selectedGroupRegex = new RegExp(
+          `(${groupParts[0]}([^.]|$|\.${groupParts[1]}))${langClass}`
+        );
 
         return (data?.classes || [])
-          .map(dataClass => {
-
-            const shouldAttend = dataClass.occurrences && (!dataClass.isOptional || optionalClasses.includes(dataClass.shortName));
+          .map((dataClass) => {
+            const shouldAttend =
+              dataClass.occurrences &&
+              (!dataClass.isOptional ||
+                optionalClasses.includes(dataClass.shortName));
 
             return {
               ...dataClass,
               occurrences: shouldAttend
-                ? dataClass.occurrences.filter(occurrence => occurrence.groups.match(selectedGroupRegex))
-                : []
+                ? dataClass.occurrences.filter((occurrence) =>
+                    occurrence.groups.match(selectedGroupRegex)
+                  )
+                : [],
             };
           })
-          .flatMap(dataClass => {
-            return dataClass.occurrences.map(o => {
+          .flatMap((dataClass) => {
+            return dataClass.occurrences.map((o) => {
               return {
                 isOptional: dataClass.isOptional,
                 name: dataClass.name,
@@ -77,18 +106,17 @@ export class TimetableService implements OnDestroy {
                 class: dataClass.class,
                 ...o,
                 lecturer: data?.lecturers[o.lecturer],
-                location: data?.locations[o.location]
+                location: data?.locations[o.location],
               } as TimetableEntry;
             });
           });
       })
-    ).subscribe(entries => {
+    )
+    .subscribe((entries) => {
       this.selectedGroupData$.next(entries);
     });
 
-  constructor(
-    private http: HttpClient
-  ) {
+  constructor(private http: HttpClient) {
     this.checkForDbUpdate();
   }
 
@@ -98,35 +126,44 @@ export class TimetableService implements OnDestroy {
   }
 
   public savePreferences(): void {
-    localStorage.setItem(this.preferencesStorageKey, JSON.stringify(this._preferences));
+    localStorage.setItem(
+      this.preferencesStorageKey,
+      JSON.stringify(this._preferences)
+    );
   }
 
   public get(weekDayIndex: number): Observable<(TimetableEntry | null)[]> {
-    return this.selectedGroupData$
-      .pipe(
-        map(groupData => {
-          const occurrences: (TimetableEntry | null)[] = [];
-          const weekTypes = ['both', this.isSelectedWeekEven ? 'even' : 'odd'];
+    return this.selectedGroupData$.pipe(
+      map((groupData) => {
+        const occurrences: (TimetableEntry | null)[] = [];
+        const weekTypes = ['both', this.isSelectedWeekEven ? 'even' : 'odd'];
 
-          for (let hourIndex = 0; hourIndex < Timetable.ClassesHours.length; hourIndex++) {
-            const foundClass = groupData
-              .find(e =>
-                e.weekdayIndex === weekDayIndex && e.hourIndex === hourIndex
-                && weekTypes.includes(e.weekType)
-              ) || null;
+        for (
+          let hourIndex = 0;
+          hourIndex < Timetable.ClassesHours.length;
+          hourIndex++
+        ) {
+          const foundClass =
+            groupData.find(
+              (e) =>
+                e.weekdayIndex === weekDayIndex &&
+                e.hourIndex === hourIndex &&
+                weekTypes.includes(e.weekType)
+            ) || null;
 
-            occurrences.push(foundClass);
-          }
+          occurrences.push(foundClass);
+        }
 
-          return occurrences;
-        })
-      );
+        return occurrences;
+      })
+    );
   }
 
   public checkForDbUpdate(): void {
-    this.http.get<string>(this.apiEndpoints.version)
+    this.http
+      .get<string>(this.apiEndpoints.version)
       .pipe(take(1))
-      .subscribe(dbVersion => {
+      .subscribe((dbVersion) => {
         const clientVersion = this.data$.value?.version || null;
 
         if (clientVersion !== dbVersion) {
@@ -136,9 +173,10 @@ export class TimetableService implements OnDestroy {
   }
 
   private updateDbData(): void {
-    this.http.get<TimetableData>(this.apiEndpoints.root)
+    this.http
+      .get<TimetableData>(this.apiEndpoints.root)
       .pipe(take(1))
-      .subscribe(data => {
+      .subscribe((data) => {
         this.data$.next(data);
         TimetableStorage.saveDbDataToStorage(this.data$.value);
       });

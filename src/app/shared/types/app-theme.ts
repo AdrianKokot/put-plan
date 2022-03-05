@@ -15,7 +15,6 @@ export class AppThemeManager {
     }
 
     window.document.querySelector('html')?.classList.toggle('dark', theme === 'dark');
-    // window.document.body.classList.toggle('dark', theme === 'dark');
   }
 
   public static getSystemTheme(): AppTheme {

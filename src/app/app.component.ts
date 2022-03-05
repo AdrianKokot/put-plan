@@ -16,7 +16,7 @@ declare global {
 export class AppComponent implements OnInit {
   ngOnInit(): void {
 
-    if (environment.production) {
+    if (environment.useGTag) {
       this.addGTag(firebaseConfig.measurementId);
     }
 

@@ -24,4 +24,5 @@ export interface TimetableData {
   optionalClasses: LabeledProperty<string>[];
   languageClasses: LabeledProperty<string>[];
   groups: string[];
+  isWeekParityReversed: boolean;
 }
