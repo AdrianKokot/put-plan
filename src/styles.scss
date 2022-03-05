@@ -175,17 +175,23 @@ $ng-select-value-font-size: theme('fontSize.sm') !default;
         @apply space-y-0.5;
         @apply py-1;
         @apply px-0;
+        max-width: calc(100% - 2.5rem);
 
         .ng-value {
           @apply bg-gray-300;
           @apply dark:bg-gray-700;
           @apply dark:text-gray-300;
           @apply rounded-sm;
+          @apply flex;
+          @apply items-center;
+          max-width: calc(100% - 1rem);
+
 
           .ng-value-label {
             @apply inline-block;
             @apply py-0.5;
             @apply px-2;
+            @apply truncate;
           }
 
           .ng-value-icon {
