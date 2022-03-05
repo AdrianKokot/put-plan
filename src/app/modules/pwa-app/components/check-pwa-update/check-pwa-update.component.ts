@@ -35,15 +35,9 @@ export class CheckPwaUpdateComponent implements AfterViewInit, OnDestroy {
     this.updateSubscription = this.updates.versionUpdates
       .pipe(
         filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'),
-        map((evt) => ({
-          type: 'UPDATE_AVAILABLE',
-          current: evt.currentVersion,
-          available: evt.latestVersion,
-        })),
         delay(500)
       )
       .subscribe((evt) => {
-        console.log(evt);
         this.modalService.open(this.updateTemplate);
       });
   }
