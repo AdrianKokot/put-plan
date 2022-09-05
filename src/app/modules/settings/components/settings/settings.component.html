@@ -12,40 +12,46 @@
 
     <app-modal-template [modal]="modal" title="Ustawienia" [hasFooter]="true">
 
-      <label class="block mb-6">
-        <span class="text-sm mb-2 block">Grupa dziekańska</span>
-        <ng-select [items]="(timetableService.groups$ | async) || []"
-                   formControlName="group"
-                   notFoundText="Nie znaleziono"
-                   bindLabel="label"
-                   bindValue="key"
-                   placeholder="Wybierz grupę dziekańską">
-        </ng-select>
-      </label>
+      <ng-container *ngIf="((timetableService.groups$ | async) || []) as groups">
+        <label class="block mb-6" *ngIf="groups.length > 0">
+          <span class="text-sm mb-2 block">Grupa dziekańska</span>
+          <ng-select [items]="groups"
+                     formControlName="group"
+                     notFoundText="Nie znaleziono"
+                     bindLabel="label"
+                     bindValue="key"
+                     placeholder="Wybierz grupę dziekańską">
+          </ng-select>
+        </label>
+      </ng-container>
 
-      <label class="block mb-6">
-        <span class="text-sm mb-2 block">Przedmioty obieralne</span>
-        <ng-select [items]="(timetableService.optionalClasses$ | async) || []"
-                   formControlName="optionalClasses"
-                   [multiple]="true"
-                   [hideSelected]="true"
-                   notFoundText="Nie znaleziono"
-                   bindLabel="label"
-                   bindValue="key"
-                   placeholder="Wybierz przedmioty obieralne">
-        </ng-select>
-      </label>
+      <ng-container *ngIf="((timetableService.optionalClasses$ | async) || []) as optionalClasses">
+        <label class="block mb-6" *ngIf="optionalClasses.length > 0">
+          <span class="text-sm mb-2 block">Przedmioty obieralne</span>
+          <ng-select [items]="optionalClasses"
+                     formControlName="optionalClasses"
+                     [multiple]="true"
+                     [hideSelected]="true"
+                     notFoundText="Nie znaleziono"
+                     bindLabel="label"
+                     bindValue="key"
+                     placeholder="Wybierz przedmioty obieralne">
+          </ng-select>
+        </label>
+      </ng-container>
 
-      <label class="block mb-6">
-        <span class="text-sm mb-2 block">Język</span>
-        <ng-select [items]="(timetableService.languageClasses$ | async) || []"
-                   formControlName="languageClass"
-                   bindLabel="label"
-                   bindValue="key"
-                   notFoundText="Nie znaleziono"
-                   placeholder="Wybierz godziny języka">
-        </ng-select>
-      </label>
+      <ng-container *ngIf="((timetableService.languageClasses$ | async) || []) as languageClasses">
+        <label class="block mb-6" *ngIf="languageClasses.length > 0">
+          <span class="text-sm mb-2 block">Język</span>
+          <ng-select [items]="languageClasses"
+                     formControlName="languageClass"
+                     bindLabel="label"
+                     bindValue="key"
+                     notFoundText="Nie znaleziono"
+                     placeholder="Wybierz godziny języka">
+          </ng-select>
+        </label>
+      </ng-container>
 
       <label class="block mb-6">
         <span class="text-sm mb-2 block">Motyw aplikacji</span>
@@ -56,14 +62,6 @@
                    notFoundText="Nie znaleziono">
         </ng-select>
       </label>
-
-      <!--      <label class="block mb-6">-->
-      <!--        <span class="text-sm mb-2 block">Zachowanie planu w weekend</span>-->
-      <!--        <ng-select [items]="(languageClasses$ | async) || []"-->
-      <!--                   formControlName="languageClass"-->
-      <!--                   notFoundText="Nie znaleziono">-->
-      <!--        </ng-select>-->
-      <!--      </label>-->
 
       <ng-container ngProjectAs="[modal-buttons]">
 

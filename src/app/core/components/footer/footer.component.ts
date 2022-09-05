@@ -3,10 +3,8 @@ import { TimetableService } from '../../../shared/services/timetable/timetable.s
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styles: []
+  templateUrl: './footer.component.html'
 })
 export class FooterComponent {
-  constructor(public timetable: TimetableService) {
-  }
+  constructor(public timetable: TimetableService) { }
 }

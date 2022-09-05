@@ -10,16 +10,13 @@ declare global {
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styles: []
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
   ngOnInit(): void {
-
     if (environment.useGTag) {
       this.addGTag(firebaseConfig.measurementId);
     }
-
   }
 
   private addGTag(gtagId: string): void {

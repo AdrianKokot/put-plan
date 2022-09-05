@@ -12,8 +12,7 @@ import { ModalService } from '../../../../shared/modules/modal/services/modal.se
 
 @Component({
   selector: 'app-check-pwa-update',
-  templateUrl: './check-pwa-update.component.html',
-  styles: [],
+  templateUrl: './check-pwa-update.component.html'
 })
 export class CheckPwaUpdateComponent implements AfterViewInit, OnDestroy {
   @ViewChild('appSettingsTemplate') updateTemplate!: TemplateRef<any>;

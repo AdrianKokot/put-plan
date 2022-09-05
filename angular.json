@@ -136,8 +136,9 @@
       }
     }
   },
-  "defaultProject": "put-plan",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
