@@ -63,8 +63,7 @@ export class ModalContainerComponent {
       })
     )
 
-  constructor(private modalService: ModalService) {
-  }
+  constructor(private modalService: ModalService) { }
 
   public close(id: number): void {
     if (!this.isModalContainerExtended) {

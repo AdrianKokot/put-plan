@@ -6,7 +6,6 @@ import { Modal } from '../../../models/modal';
   providedIn: 'root'
 })
 export class ModalService {
-
   public modals$ = new BehaviorSubject<Modal[]>([]);
 
   private currId = 0;
